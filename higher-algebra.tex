@@ -1,0 +1,314 @@
+\documentclass[12pt]{amsart}
+\usepackage[utf8]{inputenc}
+\input{commands.tex}
+\usepackage{custom-at,custom-cats,custom-ag}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{longtable}
+
+\usepackage{mdframed}
+\usepackage{float}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+\renewcommand{\P}{\mathbb{P}}
+\let\til\widetilde
+
+
+
+% Copied
+\usepackage{xcolor}
+\providecommand{\gray}[1]{\color{gray}#1 \color{black}}
+\definecolor{purple}{RGB}{128, 0, 255} 
+\renewcommand{\purple}[1]{\color{purple}#1 \color{black}}
+
+\definecolor{darkgreen}{rgb}{0,0.30,0}
+\renewcommand{\green}[1]{\color{darkgreen}#1 \color{black}}
+
+\definecolor{darkred}{rgb}{0.75,0,0}
+\newcommand{\darkred}[1]{\color{darkred}#1 \color{black}}
+
+\definecolor{darkblue}{rgb}{0,0,0.6} 
+\usepackage{amsthm,thmtools}
+\usepackage[pdfborder=0,pagebackref,colorlinks,citecolor=darkgreen,linkcolor=darkgreen,urlcolor=darkblue]{hyperref}
+\usepackage{cleveref}
+    \let\fullref\autoref
+%
+%  \autoref is very crude.  It uses counters to distinguish environments
+%  so that if say {lemma} uses the {theorem} counter, then autrorefs
+%  which should come out Lemma X.Y in fact come out Theorem X.Y.  To
+%  correct this give each its own counter eg:
+%                 \newtheorem{theorem}{Theorem}[section]
+%                 \newtheorem{lemma}{Lemma}[section]
+%  and then equate the counters by commands like:
+%                 \makeatletter
+%                   \let\c@lemma\c@theorem
+%                  \makeatother
+%
+%  To work correctly the environment name must have a corrresponding 
+%  \XXXautorefname defined.  The following command does the job:
+%
+\def\makeautorefname#1#2{\expandafter\def\csname#1autorefname\endcsname{#2}}
+%
+%  Some standard autorefnames.  If the environment name for an autoref 
+%  you need is not listed below, add a similar line to your TeX file:
+%  
+\makeautorefname{eqn}{Equation}%
+\makeautorefname{sec}{Section}%
+\makeautorefname{subsec}{Subsection}%
+\makeautorefname{footnote}{footnote}%
+\makeautorefname{item}{item}%
+\makeautorefname{figure}{Figure}%
+\makeautorefname{table}{Table}%
+\makeautorefname{part}{Part}%
+\makeautorefname{app}{Appendix}%
+\makeautorefname{cla}{claim}%
+\makeautorefname{conj}{conjecture}%
+\makeautorefname{cor}{corollary}%
+\makeautorefname{cex}{counterexample}%
+\makeautorefname{cexs}{counterexamples}%
+\makeautorefname{dig}{digression}%
+\makeautorefname{disc}{discussion}%
+\makeautorefname{def}{definition}%
+\makeautorefname{ex}{example}%
+\makeautorefname{exs}{examples}%
+\makeautorefname{fac}{fact}%
+\makeautorefname{intu}{intuition}%
+\makeautorefname{lem}{lemma}%
+\makeautorefname{meta}{metathm}%
+\makeautorefname{nota}{notation}%
+\makeautorefname{note}{note}%
+\makeautorefname{prop}{proposition}%
+\makeautorefname{rmk}{remark}%
+\makeautorefname{term}{terminology}%
+\makeautorefname{thm}{theorem}%
+\makeautorefname{upsh}{upshot}%
+%
+%                  *** End of hyperref stuff ***
+
+
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{counterexample}[theorem]{Counterexample}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{digression}[theorem]{Digression}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{examples}[theorem]{Examples}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{idea}[theorem]{Idea}
+\newtheorem{intuition}[theorem]{Intuition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{metathm}[theorem]{Meta-theorem}
+
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{note}[theorem]{Note}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{terminology}[theorem]{Terminology}
+\newtheorem{upshot}[theorem]{Upshot}
+
+
+
+%\newtheorem{warning}[theorem]{Warning}
+
+%%%% hack to get fullref working correctly
+\makeatletter
+\let\c@corollary=\c@theorem
+\let\c@proposition=\c@theorem
+\let\c@lemma=\c@theorem
+\let\c@conjecture=\c@theorem
+\let\c@definition=\c@theorem
+\let\c@example=\c@theorem
+\let\c@remark=\c@theorem
+\let\c@notation=\c@theorem
+\let\c@equation\c@theorem
+\makeatother
+
+\renewcommand*{\subsectionautorefname}{Subsection}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[color=lightblue,textsize=tiny]{todonotes}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+% \fancyhead[L]{\small\itshape\thespeaker}
+% \fancyhead[R]{\small\itshape\theday, \theyear}
+\fancyhead[C]{\small\itshape {\color{gray} Draft: \today}}
+\fancyfoot[C]{\small {\thepage}}
+
+
+
+\newcommand{\HZ}{H\widetilde{\mathbb{Z}}}
+
+\providecommand{\GOS}{G\mathcal{O}\mathcal{S}}
+\providecommand{\Pic}{\text{Pic}}
+\providecommand{\Perf}{\text{Perf}}
+
+\newcommand{\fiberq}[3]{\frac{#1}{#2}\hspace{-0.2em}{}_{#3}}
+
+\renewcommand{\O}{\mathcal{O}}
+\renewcommand{\Th}{\text{Th}}
+\providecommand{\m}{\mathfrak{m}}
+\providecommand{\MW}{\text{MW}}
+\providecommand{\KO}{\text{KO}}
+
+\let\del\partial
+\providecommand{\soc}{\text{soc}}
+\providecommand{\Sm}{\text{Sm}}
+\providecommand{\ind}{\text{ind}}
+\providecommand{\Vect}{\textit{Vect}}
+\providecommand{\Char}{\text{char}}
+\let\smashprod\wedge
+\providecommand{\Sp}{\texttt{Sp}}
+\providecommand{\TM}{\text{TM}}
+
+\providecommand{\pt}{\text{pt}}
+
+
+\title{Higher Algebra}
+
+\author{Maximilien P\'eroux}
+\date{\today}
+
+
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 1: Thursday, January 12th}
+
+Today: the \textbf{homotopy hypothesis}
+
+\textbf{Classical algebra}: sets, monoids, groups, abelian groups, rings. Each of these are built up on the other. In higher courses, we may see groupoids, which are types of categories. A category is a generalization of a monoid, in some sense. We also have monoidal categories, which in some sense are a generalization of rings.
+
+For higher algebra: spaces, $\mathbb{E}_1$-spaces, spectra, $\mathbf{E}_1$-ring spectra. Underlying this we have $\infty$-groupoids, $\infty$-categories, and monoidal $\infty$-categories.
+
+We study spaces, not up to homeomorphism, but up to \textit{weak homotopy equivalence}. We will study this in a minute. ``Spaces'' in this class will always mean the study of topological spaces up to weak homotopy equivalence.
+
+We'll give a synthetic definition of what an infinity category is, and circle back to a technical definition in about a month.
+
+\textbf{What is an $\infty$-category}?
+
+An $\infty$-category (or $(\infty,1)$-category) $\mathscr{C}$ should consist of:
+\begin{enumerate}
+    \item a class of objects
+    \item a class of morphisms so that $\Hom_\mathscr{C}(X,Y)$ is a space
+    \item $n$-morphisms for $n \ge 2$, where for instance 2-morphisms are between 1-morphisms, 3-morphisms between 2-morphisms, etc.
+    \item morphisms can be composed in a suitable way
+    \item $n$-morphisms for $n\ge 2$ are invertible in some sense.
+\end{enumerate}
+
+An $\infty$-groupoid (or $(\infty,0)$-category) should be an $\infty$-category where all the 1-morphisms are also invertible in some sense.
+
+\textbf{Why study spaces up to weak homotopy equivalence}?
+
+Recall by the Yoneda lemma, we have that
+\begin{align*}
+    X \cong Y \Leftrightarrow \Hom_\Top(A,X) \cong \Hom_\Top(A,Y)
+\end{align*}
+for all $A\in \Top$. Figuring out $\Hom(A,X)$ up to bijection for all $A$ is very difficult, so we prefer to study continuous maps up to homotopy. For $X$ and $Y$ nice enough, we say that $f\simeq g$ in $\Hom(X,Y)$ if there exists some path $I \to \Map(X,Y)$ so that $0 \mapsto f$ and $1 \mapsto g$. We define $[X,Y] = \Hom_\Top(X,Y)/\simeq$.
+
+We see then that $X \simeq Y$ if and only if $[A,X] \cong [A,Y]$ for all $A \in \Top$.
+
+We may ask when $[A,-] : \Top_\ast \to \Set$ factors through $\Grp$ or $\Ab$. We have that $[A,-]$ factors through $\Grp$ if and only if $A$ is a co-H-group in $\Top$. That is, we have maps
+\begin{align*}
+    A &\to A \vee A \\
+    A &\to \ast,
+\end{align*}
+which is coassociative, counital, coinvertible.
+
+\begin{example} $S^n$, when $n \ge 1$, is a co-H-space. The map $S^n \to S^n \vee S^n$ is the pinch map.
+\end{example}
+
+We say that $X$ is \textit{weakly homotopy equivalent} to $Y$, we write $X \sim Y$, if and only if there is a map $X \to Y$ inducing an isomorphism 
+\[
+\pi_n(X) = [S^n,X]_\ast \cong [S^n,Y]_\ast = \pi_n(Y),
+\]
+for all $n \ge 0$ (for $n \ge 1$ this is a group isomorphism).
+
+If $X \sim Y$, then $H_n(X) \cong H_n(Y)$ for any $n$.
+
+\begin{theorem} (Cellular approximation) For any $X$ in $\Top$, there exists $\til{X}$ a CW complex with a canonical map $\til{X} \xto{\sim} X$ that is a weak equivalence.
+\end{theorem}
+
+\begin{theorem} (Whitehead) If $X,Y$ are CW complexes, then $X \xto{\simeq} Y$ is a homotopy equivalence if and only if $X \xto{\sim} Y$ is a weak homotopy equivalence.
+\end{theorem}
+
+\begin{exercise} Find spaces $X$ and $Y$ which are weakly homotopy equivalent but not homotopy equivalent.
+\end{exercise}
+
+We denote by $\Delta$ the simplex category. Its objects are ordered sets of the form $[n] = \left\{ 0,1, \ldots, n \right\}$, and its morphisms are order-preserving maps. We have that $\Delta$ is generated by \textit{cofaces} and \textit{codegeneracies}. The cofaces are of the form
+\begin{align*}
+    d^0,d^1: [0] \to [1],
+\end{align*}
+skipping $0$ or $1$ in $[1]$, etc. The codegeneracies look like $s^0 : [1] \to [0]$ which ``repeat'' an element.
+
+The cofaces and codegeneracies satisfy certain \textit{cosimplicial identities}.
+
+If $\mathscr{C}$ is a category, we denote by $s \mathscr{C} = \mathscr{C}^{\Delta^\op}$ the simplicial objects in $\mathscr{C}$. If $\mathscr{C} = \Set$, we write $\sSet$ as the category of simplicial sets. A simplicial set $X_\bullet \in \sSet$ consists of sets $X_0, X_1, \ldots$ together with face and degeneracy maps satisfying the simplicial identities.
+
+\begin{example} The \textit{nerve of a small category}. Let $\mathscr{C} \in \Cat$ a small category. We denote by $N_\bullet \mathscr{C}$ the simplicial set with $N_0 \mathscr{C} = \ob \mathscr{C}$, $N_1 \mathscr{C} = \mor \mathscr{C}$, and $N_n \mathscr{C}$ the set of $n$ composable morphisms in $\mathscr{C}$. That is,
+\begin{align*}
+    N_n \mathscr{C} = N_1 \mathscr{C} \times_{N_0 \mathscr{C}} \cdots \times_{N_0 \mathscr{C}} N_1 \mathscr{C}.
+\end{align*}
+The face maps are source/target/composition. The degeneracies insert an identity morphism.
+\end{example}
+
+\begin{example} Via Yoneda, we get a functor
+\begin{align*}
+    \Delta^n := \Hom_\Delta(-,[n]) : \Delta^\op \to \Set.
+\end{align*}
+If $X_\bullet$ is a simplicial set, we get that the set of $n$-simplices $X_n$ is in bijection with $\Hom_\sSet(\Delta^n, X_\bullet)$.
+\end{example}
+
+\begin{example} (Dold--Kan) We have $\Ch_R^{\ge 0} \xto{\Gamma} s\Mod_R$ is an isomorphism, where $\Gamma_m C_\bullet  =\oplus_{[n] \tto [k]} C_k$, with faces and degeneracies left as an exercise.
+\end{example}
+
+\begin{example} Let $\Delta^n_\Top \subseteq \R^{n+1}$ be defined by
+\begin{align*}
+    \left\{ (t_0, \ldots, t_n) \in \R^{n+1} \colon 0 \le t_i \le 1,\ \sum t_i = 1 \right\}.
+\end{align*}
+We can view $[n] = \left\{ v_0, \ldots, v_n \right\}$, and $v_i = (0, \ldots, 0,1,0, \ldots, 0)$ with 1 at the $i$th place. Then if $\alpha : [m] \to [n]$ in $\Delta$, we can define $\alpha(v_i) =v_{\alpha(i)}$. Extend linearly to get $\alpha_\ast : \Delta^m_\Top \to \Delta^n_\Top$. We get then that $\Delta^\bullet_\Top$ is a cosimplicial topological space.
+\end{example}
+
+\begin{example} If $X \in \Top$, we have $\Sing_\bullet(X) \in \sSet$ defined by $\Sing_n(X) = \Hom_\Top \left( \Delta_\Top^n, X \right)$.
+\end{example}
+
+\begin{definition} If $X_\bullet \in \sSet$, we define its \textit{geometric realization} to be
+\begin{align*}
+    |X_\bullet| = \amalg_{n\ge 0} X_n \times \Delta^n_\Top / \sim,
+\end{align*}
+where $(x,s)\sim (y,t)$ if and only if there is some $\alpha : [m] \to [n]$ so that $\alpha^\ast y = x$ and $\alpha_\ast s = t$.
+\end{definition}
+
+
+\begin{example} $|\Delta^n_\bullet| \cong \Delta^n_\Top$.
+\end{example}
+
+\begin{exercise} $|X_\bullet|$ is always a CW complex for any $X_\bullet \in \sSet$.
+\end{exercise}
+
+\begin{exercise} We have an adjunction $|-| : \sSet \leftrightarrows \Top: \Sing(-)$
+\end{exercise}
+
+\begin{definition} $X_\bullet \to Y_\bullet$ is a \textit{weak homotopy equivalence} in $\sSet$ if $|X_\bullet| \xto{\sim} |Y_\bullet|$ is a weak homotopy equivalence of spaces.
+\end{definition}
+
+\begin{theorem} (Quillen) Simplicial sets up to weak equivalence is equivalent to topological spaces up to weak homotopy equivalence. Moreover, for any $X\in \Top$, we have that $|\Sing(X)|$ is weakly equivalent to $X$.
+\end{theorem}
+
+It is not true that $Y \sim \Sing(|Y|)$ for all $Y \in \sSet$. We need $Y$ to be a \textit{Kan complex}.
+
+
+
+\newpage
+\bibliographystyle{amsalpha}
+\bibliography{citations.bib}{}
+\end{document}

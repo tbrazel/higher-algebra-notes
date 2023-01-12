@@ -1,0 +1,149 @@
+% Packages
+\RequirePackage{amsmath,amssymb,amsthm}
+\RequirePackage{amsfonts}
+%\RequirePackage{geometry}
+\RequirePackage{color}
+\RequirePackage{mathtools}
+\RequirePackage{bbm}
+\RequirePackage{amsfonts}
+\RequirePackage{mathrsfs}
+\RequirePackage{tikz}
+\usepackage[shortlabels]{enumitem}
+\usetikzlibrary{shapes.geometric, arrows}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{cd}
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+% Arrows
+\providecommand{\po}{\arrow[ul,phantom,"\ulcorner" very near start]}
+\providecommand{\pb}{\arrow[dr,phantom,"\lrcorner" very near start]}
+\providecommand{\xto}[1]{\xrightarrow{#1}}
+\providecommand{\from}{\leftarrow}
+\providecommand{\xfrom}[1]{\overset{#1}{\leftarrow}}
+
+\providecommand{\mapsfrom}{\mathrel{\reflectbox{\ensuremath{\mapsto}}}}
+\providecommand{\longmapsfrom}{\mathrel{\reflectbox{\ensuremath{\longmapsto}}}}
+
+\providecommand{\hookto}{\xhookrightarrow{}}
+\providecommand{\xhookto}[1]{\overset{#1}{\hookrightarrow}}
+
+\providecommand{\hookfrom}{\xhookleftarrow{}}
+\providecommand{\xhookfrom}[1]{\xhookleftarrow{#1}}
+
+\providecommand{\tto}{\twoheadrightarrow}
+\providecommand{\xtto}[1]{\overset{#1}{\twoheadrightarrow}}
+\providecommand{\ffrom}{\twoheadleftarrow}
+\providecommand{\xffrom}[1]{\overset{#1}{\ffrom}}
+
+\providecommand{\ladjoint}[2]{ #1\rightleftarrows #2 }
+\makeatletter
+\providecommand{\superimpose}[2]{%
+  {\ooalign{$#1\@firstoftwo#2$\cr\hfil$#1\@secondoftwo#2$\hfil\cr}}}
+\makeatother
+\providecommand{\smallslash}{\mbox{\tiny/}}
+
+\providecommand{\clhookto}{\mathrel{\raisebox{0.1em}{$\mathrel{\mathpalette\superimpose{{\hspace{0.1cm}\vspace{0.1em}\smallslash}{\hookrightarrow}}}$}}}
+\providecommand{\xclhook}[1]{\overset{#1}{\clhook}}
+
+\providecommand{\clhookfrom}{\mathrel{\raisebox{0.1em}{$\mathrel{\mathpalette\superimpose{{\hspace{0.1cm}\vspace{0.1em}\smallslash}{\hookleftarrow}}}$}}}
+
+\providecommand{\ohookto}{\mathrel{\raisebox{0.03em}{$\mathrel{\mathpalette\superimpose{{\hspace{0.1cm}\vspace{0.03em}\mbox{\small$\circ$}}{\hookrightarrow}}}$}}}
+
+\providecommand{\ohookfrom}{\mathrel{\raisebox{0.03em}{$\mathrel{\mathpalette\superimpose{{\hspace{0.1cm}\vspace{0.03em}\mbox{\small$\circ$}}{\hookleftarrow}}}$}}}
+
+\providecommand{\cofto}{\rightarrowtail}
+\providecommand{\coffrom}{\leftarrowtail}
+\providecommand{\xcofto}[1]{\overset{#1}{\cofto}}
+\providecommand{\xcoffrom}[1]{\overset{#1}{\coffrom}}
+
+% Common Text Commands
+\providecommand{\ab}{\text{ab}}
+\providecommand{\ann}{\text{ann}}
+\providecommand{\Aut}{\text{Aut}}
+\providecommand{\char}{\text{char}}
+\providecommand{\cl}{\text{cl}}
+\providecommand{\codim}{\text{codim}}
+\providecommand{\coev}{\text{coev}}
+\providecommand{\colim}{\text{colim}}
+\providecommand{\conj}{\text{conj}}
+\providecommand{\const}{\text{const}}
+\providecommand{\Disc}{\text{Disc}}
+\providecommand{\End}{\text{End}}
+\providecommand{\EKL}{\text{EKL}}
+\providecommand{\ev}{\text{ev}}
+\providecommand{\Fix}{\text{Fix}}
+\providecommand{\Frac}{\text{Frac}}
+\providecommand{\Frob}{\text{Frob}}
+\providecommand{\Fun}{\text{Fun}}
+\providecommand{\Gal}{\text{Gal}}
+\providecommand{\GL}{\text{GL}}
+\providecommand{\gr}{\text{gr}}
+\newcommand{\GW}{\text{GW}}
+\providecommand{\Hom}{\text{Hom}}
+\providecommand{\id}{\text{id}}
+\providecommand{\im}{\text{im}}
+\renewcommand{\Im}{\text{Im}}
+\providecommand{\incl}{\text{incl}}
+\providecommand{\Ind}{\text{Ind}}
+\providecommand{\Inn}{\text{Inn}}
+\providecommand{\Jac}{\text{Jac}}
+\providecommand{\Map}{\text{Map}}
+\providecommand{\mult}{\text{mult}}
+\providecommand{\op}{\text{op}}
+\providecommand{\Orb}{\text{Orb}}
+\providecommand{\ord}{\text{ord}}
+\providecommand{\Out}{\text{Out}}
+\providecommand{\Perm}{\text{Perm}}
+\providecommand{\pr}{\text{pr}}
+\providecommand{\pre}{\text{pre}}
+\providecommand{\PSL}{\text{PSL}}
+\providecommand{\quot}{\text{quot}}
+\providecommand{\rank}{\text{rank}}
+\renewcommand{\Re}{\text{Re}}
+\providecommand{\Res}{\text{Res}}
+\providecommand{\sgn}{\text{sgn}}
+\providecommand{\sig}{\text{sig}}
+\providecommand{\SL}{\text{SL}}
+\providecommand{\soc}{\text{soc}}
+\providecommand{\spn}{\text{span}}
+\providecommand{\Spec}{\text{Spec}\hspace{0.1em}}
+\providecommand{\Stab}{\text{Stab}}
+\providecommand{\supp}{\text{supp}}
+\providecommand{\Syl}{\text{Syl}}
+\providecommand{\syl}{\text{syl}}
+\providecommand{\Sym}{\text{Sym}}
+\providecommand{\Tor}{\text{Tor}}
+\providecommand{\Tr}{\text{Tr}}
+
+% BB Sets
+\providecommand{\A}{\mathbb{A}}
+\providecommand{\C}{\mathbb{C}}
+\providecommand{\F}{\mathbb{F}}
+\providecommand{\N}{\mathbb{N}}
+\providecommand{\P}{\mathbb{P}}
+\providecommand{\Q}{\mathbb{Q}}
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\Z}{\mathbb{Z}}
+
+% Commands
+\providecommand{\lrangle}[1]{\left\langle #1 \right\rangle}
+\providecommand{\nsubgp}{\trianglelefteq}
+\providecommand{\p}{\mathfrak{p}}
+\renewcommand{\H}{\textbf{H}}
+\newcommand{\gw}[1]{\left\langle #1 \right\rangle}
+\newcommand{\ovl}[1]{\overline{#1}}
+
+\let\minus\smallsetminus
+\let\bar\overline
+\let\smsh\wedge
+
+\providecommand{\SH}{\mathcal{SH}}
+
+
+% Colors
+\providecommand{\green}[1]{\textcolor{green}{#1}}
+\providecommand{\red}[1]{\textcolor{red}{#1}}
+\providecommand{\orange}[1]{\textcolor{orange}{#1}}
+\providecommand{\green}[1]{\textcolor{green}{#1}}
+\providecommand{\blue}[1]{\textcolor{blue}{#1}}
+\providecommand{\purple}[1]{\textcolor{purple}{#1}}
