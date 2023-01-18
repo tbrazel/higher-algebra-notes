@@ -147,3 +147,317 @@
 \providecommand{\green}[1]{\textcolor{green}{#1}}
 \providecommand{\blue}[1]{\textcolor{blue}{#1}}
 \providecommand{\purple}[1]{\textcolor{purple}{#1}}
+
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{geometry}
+
+% AT commands
+\providecommand{\BG}{\text{BG}}
+\providecommand{\BO}{\text{BO}}
+\providecommand{\BP}{\text{BP}}
+\providecommand{\BU}{\text{BU}}
+\providecommand{\BSO}{\text{BSO}}
+\providecommand{\BSU}{\text{BSU}}
+\providecommand{\BGL}{\text{BGL}}
+\providecommand{\coeq}{\text{coeq}}
+\providecommand{\cof}{\text{cof}}
+\providecommand{\cone}{\text{cone}}
+\providecommand{\eq}{\text{eq}}
+\providecommand{\EU}{\text{EU}}
+\providecommand{\Ex}{\text{Ex}}
+\providecommand{\Ext}{\text{Ext}}
+\providecommand{\Gr}{\text{Gr}}
+\providecommand{\Ho}{\text{Ho}}
+\providecommand{\hocofib}{\text{hocofib}}
+\providecommand{\hocolim}{\text{hocolim}}
+\providecommand{\holim}{\text{holim}}
+\providecommand{\KGL}{\text{KGL}}
+\providecommand{\ko}{\text{ko}}
+\providecommand{\KO}{\text{KO}}
+\providecommand{\kq}{\text{kq}}
+\providecommand{\KQ}{\text{KQ}}
+\providecommand{\KR}{\text{KR}}
+\providecommand{\ku}{\text{ku}}
+\providecommand{\KU}{\text{KU}}
+\providecommand{\Lan}{\text{Lan}}
+\providecommand{\MGL}{\text{MGL}}
+\providecommand{\MO}{\text{MO}}
+\providecommand{\MSL}{\text{MSL}}
+\providecommand{\MSO}{\text{MSO}}
+\providecommand{\MSp}{\text{MSp}}
+\providecommand{\MU}{\text{MU}}
+\providecommand{\Out}{\text{Out}}
+\providecommand{\pre}{\text{pre}}
+\providecommand{\Ran}{\text{Ran}}
+\providecommand{\RO}{\text{RO}}
+\providecommand{\Sing}{\text{Sing}}
+\providecommand{\SO}{\text{SO}}
+\providecommand{\Spin}{\text{Spin}}
+\providecommand{\Sq}{\text{Sq}}
+\providecommand{\SU}{\text{SU}}
+\providecommand{\Sym}{\text{Sym}}
+\providecommand{\TC}{\text{TC}}
+\providecommand{\Th}{\text{Th}}
+\providecommand{\THH}{\text{THH}}
+\providecommand{\TP}{\text{TP}}
+\providecommand{\TR}{\text{TR}}
+\providecommand{\SH}{\mathcal{SH}}
+\providecommand{\Sp}{\textit{Sp}}
+
+% Chromatic
+\providecommand{\Prin}{\text{Prin}}
+\providecommand{\FGL}{\texttt{FGL}}
+\providecommand{\SI}{\texttt{SI}}
+\providecommand{\FG}{\text{FG}}
+\providecommand{\fg}{\text{fg}}
+
+
+
+
+% Spaces
+\providecommand{\CP}{\mathbb{C}\text{P}}
+\providecommand{\HP}{\mathbb{H}\text{P}}
+\providecommand{\RP}{\mathbb{R}\text{P}}
+
+% Other
+\providecommand{\Cech}{\check{C}}
+\let\adj\dashv
+\let\smashprod\wedge
+
+
+% Custom Arrows
+% 
+% (c) Thomas Brazelton
+%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN archives
+%% in directory macros/latex/base/lppl.txt.
+% 
+
+% Packages
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{amsfonts}
+\RequirePackage{geometry}
+%\RequirePackage{hyperref}
+\RequirePackage{color}
+\RequirePackage{mathtools}		% used for arrows
+%\RequirePackage{ bbold }
+\RequirePackage{bbm}
+\RequirePackage{amsfonts}
+\RequirePackage{mathrsfs}
+\RequirePackage{tikz}
+%\usepackage[shortlabels]{enumitem}
+\usetikzlibrary{shapes.geometric, arrows}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{cd}
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+
+% Arrows
+\providecommand{\po}{\arrow[ul,phantom,"\ulcorner" very near start]}
+\providecommand{\pb}{\arrow[dr,phantom,"\lrcorner" very near start]}
+\providecommand{\pol}{\arrow[ur,phantom,"\urcorner" very near start]}
+\providecommand{\pbr}{\arrow[dl,phantom,"\llcorner" very near start]}
+\providecommand{\xto}[1]{\xrightarrow{#1}}
+\providecommand{\from}{\leftarrow}
+\providecommand{\xfrom}[1]{\overset{#1}{\leftarrow}}
+
+\providecommand{\mapsfrom}{\mathrel{\reflectbox{\ensuremath{\mapsto}}}}
+\providecommand{\longmapsfrom}{\mathrel{\reflectbox{\ensuremath{\longmapsto}}}}
+
+\providecommand{\hookto}{\xhookrightarrow{}}
+\providecommand{\xhookto}[1]{\overset{#1}{\hookrightarrow}}
+
+\providecommand{\hookfrom}{\xhookleftarrow{}}
+\providecommand{\xhookfrom}[1]{\xhookleftarrow{#1}}
+
+\providecommand{\tto}{\twoheadrightarrow}
+\providecommand{\xtto}[1]{\overset{#1}{\twoheadrightarrow}}
+\providecommand{\ffrom}{\twoheadleftarrow}
+\providecommand{\xffrom}[1]{\overset{#1}{\ffrom}}
+
+\providecommand{\ladjoint}[2]{ #1\rightleftarrows #2 }
+\makeatletter
+\providecommand{\superimpose}[2]{%
+  {\ooalign{$#1\@firstoftwo#2$\cr\hfil$#1\@secondoftwo#2$\hfil\cr}}}
+\makeatother
+\providecommand{\smallslash}{\mbox{\tiny/}}
+
+\providecommand{\clhookto}{\mathrel{\raisebox{0.1em}{$\mathrel{\mathpalette\superimpose{{\hspace{0.1cm}\vspace{0.1em}\smallslash}{\hookrightarrow}}}$}}}
+\providecommand{\xclhook}[1]{\overset{#1}{\clhook}}
+
+\providecommand{\clhookfrom}{\mathrel{\raisebox{0.1em}{$\mathrel{\mathpalette\superimpose{{\hspace{0.1cm}\vspace{0.1em}\smallslash}{\hookleftarrow}}}$}}}
+
+\providecommand{\ohookto}{\mathrel{\raisebox{0.03em}{$\mathrel{\mathpalette\superimpose{{\hspace{0.1cm}\vspace{0.03em}\mbox{\small$\circ$}}{\hookrightarrow}}}$}}}
+
+\providecommand{\ohookfrom}{\mathrel{\raisebox{0.03em}{$\mathrel{\mathpalette\superimpose{{\hspace{0.1cm}\vspace{0.03em}\mbox{\small$\circ$}}{\hookleftarrow}}}$}}}
+
+\providecommand{\cofto}{\rightarrowtail}
+\providecommand{\coffrom}{\leftarrowtail}
+\providecommand{\xcofto}[1]{\overset{#1}{\cofto}}
+\providecommand{\xcoffrom}[1]{\overset{#1}{\coffrom}}
+
+\providecommand{\lllarrows}{\mathrel{\substack{\textstyle\leftarrow\\[-0.6ex] \textstyle\leftarrow \\[-0.6ex] \textstyle\leftarrow}}}
+
+
+
+\providecommand{\rrrarrows}{\mathrel{\substack{\textstyle\rightarrow\\[-0.6ex] \textstyle\rightarrow \\[-0.6ex] \textstyle\rightarrow}}}
+
+\providecommand{\rlrarrows}{\mathrel{\substack{\textstyle\rightarrow\\[-0.6ex] \textstyle\lefttarrow \\[-0.6ex] \textstyle\rightarrow}}}
+
+
+\RequirePackage{cust-package-free}
+
+
+
+
+
+
+% BB Sets
+\providecommand{\C}{\mathbb{C}}
+\providecommand{\F}{\mathbb{F}}
+\providecommand{\N}{\mathbb{N}}
+\providecommand{\Q}{\mathbb{Q}}
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\Z}{\mathbb{Z}}
+
+% Projective
+\providecommand{\CP}{\mathbb{C}\text{P}}
+\providecommand{\RP}{\mathbb{R}\text{P}}
+
+% Colors
+\providecommand{\green}[1]{\textcolor{green}{#1}}
+\providecommand{\red}[1]{\textcolor{red}{#1}}
+\providecommand{\orange}[1]{\textcolor{orange}{#1}}
+\providecommand{\green}[1]{\textcolor{green}{#1}}
+\providecommand{\blue}[1]{\textcolor{blue}{#1}}
+\providecommand{\purple}[1]{\textcolor{purple}{#1}}
+
+% Commands
+\providecommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\providecommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\providecommand{\lrangle}[1]{\left\langle #1 \right\rangle}
+\providecommand{\und}[1]{\underline{#1}}
+\renewcommand{\hat}{\widehat}
+\providecommand{\legendre}[2]{\left( \substack{#1 \\ #2} \right)}
+\providecommand{\trianglerightneq}{\mathrel{\ooalign{\raisebox{-0.5ex}{\reflectbox{\rotatebox{90}{$\nshortmid$}}}\cr$\triangleright$\cr}\mkern-3mu}}
+\providecommand{\triangleleftneq}{\mathrel{\reflectbox{$\trianglerightneq$}}}
+
+% Other
+\providecommand{\dot}{\bullet}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+\providecommand{\setminus}{\smallsetminus}
+\providecommand{\minus}{\smallsetminus}
+\let\bar\overline
+\let\tilde\widetilde
+\let\til\widetilde
+\let\nsubgp\trianglelefteq
+\let\del\partial
+\let\epsilon\varepsilon
+\providecommand{\bigast}{\mathop{\scalebox{1.5}{\raisebox{-0.2ex}{$\ast$}}}}
+\providecommand{\llangle}{\left\langle\hspace{-0.2em}\left\langle}
+\providecommand{\rrangle}{\right\rangle\hspace{-0.2em}\right\rangle}
+\providecommand{\Pfister}[1]{\llangle #1 \rrangle}
+
+
+% operp command for quadratic forms, from mathabx.sty
+% https://tex.stackexchange.com/a/61882/
+\DeclareFontFamily{U}{matha}{\hyphenchar\font45}
+\DeclareFontShape{U}{matha}{m}{n}{
+      <5> <6> <7> <8> <9> <10> gen * matha
+      <10.95> matha10 <12> <14.4> <17.28> <20.74> <24.88> matha12
+      }{}
+\DeclareSymbolFont{matha}{U}{matha}{m}{n}
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareMathSymbol{\operp}         {2}{matha}{"6B}
+\DeclareMathSymbol{\bigoperp}       {1}{mathx}{"CB}
+
+
+
+%%
+%% End of file `custom-arrows.sty'.
+
+\RequirePackage{amsmath,amssymb,amsfonts}
+\RequirePackage{bbm}
+
+
+% Categories
+\providecommand{\onecat}{\mathbbm{1}}
+\providecommand{\twocat}{\mathbbm{2}}
+\providecommand{\Alg}{\texttt{Alg}}
+\providecommand{\Ab}{\texttt{Ab}}
+\providecommand{\CAlg}{\texttt{CAlg}}
+\providecommand{\Cat}{\texttt{Cat}}
+\providecommand{\CDGA}{\texttt{CDGA}}
+\providecommand{\CG}{\texttt{CG}}
+\providecommand{\CGWH}{\texttt{CGWH}}
+\providecommand{\Ch}{\texttt{Ch}}
+\providecommand{\CAlg}{\texttt{CAlg}}
+\providecommand{\CMon}{\texttt{CMon}}
+\providecommand{\coAlg}{\texttt{coAlg}}
+\providecommand{\coMod}{\texttt{coMod}}
+\providecommand{\Coh}{\texttt{Coh}}
+\providecommand{\CommRing}{\texttt{CommRing}}
+\providecommand{\Corr}{\texttt{Corr}}
+\providecommand{\CRing}{\texttt{CRing}}
+\providecommand{\CW}{\texttt{CW}}
+\providecommand{\Field}{\texttt{Field}}
+\providecommand{\Fin}{\texttt{Fin}}
+\providecommand{\FinSet}{\texttt{FinSet}}
+\providecommand{\Grp}{\texttt{Grp}}
+\providecommand{\Grpd}{\texttt{Grpd}}
+\providecommand{\Grph}{\texttt{Grph}}
+\providecommand{\Kar}{\texttt{Kar}}
+\providecommand{\Kan}{\texttt{Kan}}
+\providecommand{\Mod}{\texttt{Mod}}
+\providecommand{\lmod}[1]{#1\text{-}\texttt{Mod}}
+\providecommand{\rmod}[1]{\texttt{Mod}\text{-}#1}
+\providecommand{\bimod}[2]{#1\text{-}\texttt{Mod}\text{-}#2}
+\providecommand{\Ouv}{\texttt{Ouv}}
+\providecommand{\Poset}{\texttt{Poset}}
+\providecommand{\PSh}{\texttt{PSh}}
+\providecommand{\PShv}{\texttt{PShv}}
+\providecommand{\qCat}{\texttt{qCat}}
+\providecommand{\QCoh}{\texttt{QCoh}}
+\providecommand{\Rep}{\texttt{Rep}}
+\providecommand{\Ring}{\texttt{Ring}}
+\providecommand{\Set}{\texttt{Set}}
+\providecommand{\SH}{\mathcal{SH}}
+\providecommand{\Sh}{\texttt{Sh}}
+\providecommand{\Shv}{\texttt{Shv}}
+\providecommand{\Spectra}{\texttt{Spectra}}
+\providecommand{\sAb}{\text{sAb}}
+\providecommand{\sSet}{\texttt{sSet}}
+\providecommand{\Stack}{\texttt{Stack}}
+\providecommand{\Top}{\texttt{Top}}
+\providecommand{\Ring}{\texttt{Ring}}
+\providecommand{\Vect}{\texttt{Vect}}
+
+% Other
+\providecommand{\cyc}{\text{cyc}}
+\providecommand{\dg}{\text{dg}}
+\providecommand{\gen}{\text{gen}}
+\providecommand{\inj}{\text{inj}}
+\providecommand{\mor}{\text{mor}}
+\providecommand{\Mor}{\text{Mor}}
+\providecommand{\ob}{\text{ob}}
+\providecommand{\obj}{\text{obj}}
+\providecommand{\proj}{\text{proj}}
+\providecommand{\Span}{\text{Span}}
+
+\newcommand{\DDelta}{\bm{\Delta}}
+
+
+% Limits
+\providecommand{\llim}{\varprojlim}
+\providecommand{\rlim}{\varinjlim}
+
+
+
