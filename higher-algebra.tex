@@ -138,7 +138,7 @@
 \fancyhf{}
 % \fancyhead[L]{\small\itshape\thespeaker}
 % \fancyhead[R]{\small\itshape\theday, \theyear}
-\fancyhead[C]{\small\itshape {\color{gray} Draft: \today}}
+\fancyhead[C]{\small\itshape {\color{gray} Last compiled: \today}}
 \fancyfoot[C]{\small {\thepage}}
 
 
@@ -169,6 +169,11 @@
 
 \providecommand{\pt}{\text{pt}}
 
+\providecommand{\Cof}{\text{Cof}}
+\providecommand{\Fib}{\text{Fib}}
+\providecommand{\LLP}{\text{LLP}}
+\providecommand{\RLP}{\text{RLP}}
+\let\emptyset\varnothing
 
 \title{Higher Algebra}
 
@@ -305,6 +310,172 @@ where $(x,s)\sim (y,t)$ if and only if there is some $\alpha : [m] \to [n]$ so t
 \end{theorem}
 
 It is not true that $Y \sim \Sing(|Y|)$ for all $Y \in \sSet$. We need $Y$ to be a \textit{Kan complex}.
+
+
+\section{Lecture 2: Tuesday, January 17th}
+
+\textbf{Today}: the homotopy hypothesis (continued).
+
+Recall we are interested in studying $\Top$ up to weak homotopy equivalences. Equivalently, we are interested in studying $\sSet$ up to weak equivalence, and the relationship between the two was given by the geometric realization / singular complex adjunction.
+
+Recall we've defined $\Delta^n = \Hom_\Delta(-,[n])$. We will define the $k$\textit{th horn} $\Lambda^n_k \subseteq \Delta^n$ as a coequalizer in $\sSet$
+\begin{align*}
+    \left(\coprod_{0 \le i < j \le n} \Delta^{n-2} \rightrightarrows \coprod_{i\ne k} \Delta^{n-1} \right) \to \Lambda^n_k,
+\end{align*}
+where the two maps are $\delta^{j-1}$ and $\delta^i$. The geometric realization of $\Lambda^n_k$ is the topological $n$-simplex, with the middle and the face opposite the $k$th edge removed.
+
+\begin{definition} We say that $Y\in \sSet$ is a \textit{Kan complex} if for all $k\le n$, and for every $\Lambda^n_k \to Y$, there exists a (not necessarily unique) lift:
+\[ \begin{tikzcd}
+    \Lambda^n_k\dar[hook]\rar & Y\\
+    \Delta^n\ar[ur,dashed] & 
+\end{tikzcd} \]
+\end{definition}
+
+\begin{exercise} $Y$ is a Kan complex if and only if for any $(n-1)$-simplices $y_1, \ldots, y_{k-1},y_{k+1}, \ldots, y_n$ such that $d_i y_j = d_{j-1} y_i$ for $i< j$, $i,j\ne k$, there exists an $n$-simplex $y$ such that $d_i y = y_i$ for all $i\ne k$.
+\end{exercise}
+
+\begin{exercise} We have that $\Sing(X)$ is always a Kan complex for any $X\in \Top$.
+\end{exercise}
+
+\begin{exercise} We have that $\Delta^n$ is not a Kan complex for $n \ge 1$.
+\end{exercise}
+
+\begin{exercise} If $X \in s\Grp$, then the underlying simplicial set of $X$ is always a Kan complex.
+\end{exercise}
+
+Up to weak homotopy equivalence, every simplicial set is a Kan complex (will see this later).
+
+Recall the Dold-Kan correspondence
+\begin{align*}
+    s\Mod_\Z \cong \Ch_\Z^{\ge 0},
+\end{align*}
+which sends weak homotopy equivalences to quasi-isomorphisms. Given a simplicial set $X_\ast$, we can take an associated simplicial abelian group $\Z[X_\ast]$ by taking the free group on $n$-simplices at level $n$. We can ask what $\Z[X_\ast]$ corresponds to as a chain complex. One answer is that
+\begin{align*}
+    \Z[\Sing(X_\ast)] \leftrightarrow C_\ast(X;\Z).
+\end{align*}
+This tells us that
+\begin{align*}
+    \pi_\ast \left( \Z \left[ \Sing(X) \right] \right) \cong H_\ast(X;\Z).
+\end{align*}
+In some sense we can view $\Z[\Sing(X)]$ as being (equivalent to) the \textit{free commutative monoid} on $X$. This is what is known as the \textit{Dold-Thom theorem}.
+
+\textbf{Homotopy hypothesis}: Spaces (up to weak equivalence) are $\infty$-groupoids. For us, spaces up to weak equivalences correspond to Kan complexes.
+
+Given $X\in \Kan$, we can call $X_0$ the objects, and $X_1$ the morphisms. The horn filling conditions on horns tell you that you can \textit{compose} and \textit{invert} morphisms in $X_1$, witnessed by simplices in $X_2$.
+
+\begin{definition} A \textit{quasi-category} (i.e. $\infty$-category) is a simplicial set with inner horn lifting property. That is, we can lift against horns $\Lambda^n_k$ for $0<k<n$.
+\end{definition}
+
+\begin{exercise} A quasi-category has unique horn filling if and only if it is isomorphic to the nerve of a 1-category.
+\end{exercise}
+
+\begin{center}
+\textbf{Model categories}
+\end{center}
+
+\textbf{Vista}: Every nice infinity category is equivalent in some sense to a model category. This will pretty much be the goal of this class.
+
+\begin{notation} Let $\mathcal{M}$ be a category, and $\chi \subseteq \mathcal{M}$ a class of morphisms. We define $\LLP(\chi)$ to be the class of morphisms in $\mathcal{M}$ so that $f$ has left lifting property with respect to all morphisms in $\chi$:
+\[\begin{tikzcd}
+    \cdot\rar\dar["f" left] & \cdot\dar["\in\ \chi" right]\\
+    \cdot\rar\ar[ur,dashed] & \cdot
+\end{tikzcd} \]
+\end{notation}
+
+Similarly we can define $f\in \RLP(\chi)$ by
+\[\begin{tikzcd}
+    \cdot\rar\dar["\chi\ \ni" left] & \cdot\dar["f" right]\\
+    \cdot\rar\ar[ur,dashed] & \cdot
+\end{tikzcd} \]
+
+\begin{definition} A \textit{weak factorization system} on a category $\mathcal{M}$ consists of a pair $(\mathscr{C}, \mathscr{F})$ of classes of morphisms such that
+\begin{enumerate}
+    \item Given any $f: X \to Y$ in $\mathcal{M}$, it factors (not necessarily uniquely) as
+\[ \begin{tikzcd}
+    X\ar[rr,"f" above]\ar[dr,"\mathscr{C}\ni" below left] &  & Y\\
+     & W\ar[ur,"\in \mathscr{F}" below right] &
+\end{tikzcd} \]
+
+    \item $\mathscr{C} = \LLP(\mathscr{F})$ and $\mathscr{F} = \RLP(\mathscr{C})$.
+\end{enumerate}
+\end{definition}
+
+\begin{example} In $\Set$, we have that mono and epimorphisms give a weak factorization system. A factorization is
+\[ \begin{tikzcd}
+    X\ar[rr,"f" above]\ar[dr,"\id_X \times f" below left] &  & Y\\
+     & X \times Y\ar[ur,"\pi_Y" below right] & 
+\end{tikzcd} \]
+% The lifting property
+% \[ \begin{tikzcd}
+%     A\rar\dar[hook] & X\dar[two heads]\\
+%     B\rar\ar[ur,dashed] & Y
+% \end{tikzcd} \]
+\end{example}
+
+\begin{definition} A \textit{model structure} on $\mathcal{M}$ consists of three classes of morphisms:
+\begin{center}
+    \begin{tabular}{l | l}
+    $W$ & weak equivalences \\
+    $\Cof$ & cofibrations \\
+    $\Fib$ & fibrations
+    \end{tabular}
+\end{center}
+We denote by $\widetilde{\Cof}:= \Cof \cap W$ and $\widetilde{\Fib} = \Fib \cap W$, and call these \textit{trivial cofibrations} (resp. \textit{trivial fibrations}). These are subject to the constraint that
+\begin{enumerate}
+    \item $\mathcal{M}$ is bicomplete (all limits and colimits)
+    \item $W$ contains identities and it satisfies 2-out-of-3 property\footnote{If $f$ and $g$ are composable, and any two of $f$, $g$, $gf$ are in $W$ then so is the third.}
+    \item $\left( \Cof, \til{\Fib} \right)$ and $\left( \widetilde{\Cof}, \Fib \right)$ are weak factorization systems.
+\end{enumerate}
+\end{definition}
+
+\begin{terminology} A category with a model structure is referred to as a \textit{model category}.
+\end{terminology}
+
+
+\begin{notation} We will decorate each class of morphisms as
+\begin{center}
+\begin{tabular}{l | l}
+    $W$ & $\xto{\sim}$ \\
+    $\Cof$ & $\hookto$ \\
+    $\Fib$ & $\tto$
+    \end{tabular}
+\end{center}
+\end{notation}
+
+
+\begin{exercise} $W$, $\Cof$, and $\Fib$ are closed under retracts: that is,
+\[ \begin{tikzcd}
+    \cdot\dar["f" left]\rar\ar[rr,equal,bend left=20] & \cdot\dar["g"]\rar & \cdot\dar["f"]\\
+    \cdot\rar\ar[rr,equal,bend right=20] & \cdot\rar & \cdot\\
+\end{tikzcd} \]
+then if $g\in W$ (resp. $\Cof$ or $\Fib$) then $f\in W$ (resp. $\Cof$ or $\Fib$).
+\end{exercise}
+
+\begin{definition} Let $\mathcal{M}$ be a model category, and let $\emptyset \in \mathcal{M}$ the initial object and $\ast\in \mathcal{M}$ the terminal object. 
+
+\begin{itemize}
+    \item We say that $X\in \mathcal{M}$ is \textit{cofibrant} if the unique map $\emptyset \to X$ is a cofibration. 
+    \item We say that $X\in \mathcal{M}$ is \textit{fibrant} if the unique map $X \to \ast$ is a fibration.
+    \item We say that $\til{X}$ is a \textit{cofibrant replacement} of $X$ if
+\[ \begin{tikzcd}
+    \emptyset\ar[rr]\ar[dr,hook] &  & X\\
+     & \til{X}\ar[ur,two heads,"\sim" below right] & 
+\end{tikzcd} \]
+    \item We say that $\til{X}$ is a \textit{fibrant replacement} of $X$ if
+\[ \begin{tikzcd}
+    X\ar[rr]\ar[dr,hook,"\sim" below left] &  & \ast\\
+     & \til{X}\ar[ur,two heads] & 
+\end{tikzcd} \]
+\end{itemize}
+\end{definition}
+
+\begin{example} $\mathcal{M} = \Top$, $W=$ weak homotopy equivalences, $\Cof=$ relative CW complexes\footnote{$A\hookto X$ is a \textit{relative CW complex} if $X$ is built out of $A$ by attaching cells.} The fibrations are determined by $\Fib = \RLP(\widetilde{\Cof})$. The fibrations are equivalently $\RLP(D^n \to D^n \times I)$. Every object here is fibrant, and the cofibrant objects are precisely the CW complexes. Cofibrant replacement is cellular approximation.
+\end{example}
+
+
+
+
+
 
 
 
