@@ -3,7 +3,7 @@
 \input{commands.tex}
 \usepackage{caption}
 \usepackage{longtable}
-
+\usepackage{quiver}
 \usepackage{mdframed}
 \usepackage{float}
 \setlength{\parindent}{0em}
@@ -170,6 +170,7 @@
 \providecommand{\LLP}{\text{LLP}}
 \providecommand{\RLP}{\text{RLP}}
 \let\emptyset\varnothing
+\providecommand{\Cyl}{\text{Cyl}}
 
 \title{Higher Algebra}
 
@@ -182,6 +183,14 @@
 \begin{document}
 
 \maketitle
+
+\begin{figure}[h]
+  \includegraphics[width=0.5\linewidth]{pics/ha.jpg}
+  \centering
+  % \caption{}
+  % \label{fig:}
+\end{figure}
+
 
 \section{Lecture 1: Thursday, January 12th}
 
@@ -305,7 +314,11 @@ where $(x,s)\sim (y,t)$ if and only if there is some $\alpha : [m] \to [n]$ so t
 \begin{theorem} (Quillen) Simplicial sets up to weak equivalence is equivalent to topological spaces up to weak homotopy equivalence. Moreover, for any $X\in \Top$, we have that $|\Sing(X)|$ is weakly equivalent to $X$.
 \end{theorem}
 
-It is not true that $Y \sim \Sing(|Y|)$ for all $Y \in \sSet$. We need $Y$ to be a \textit{Kan complex}.
+\begin{figure}[h]
+  \includegraphics[width=0.5\linewidth]{pics/sset.jpg}
+  \centering
+ \end{figure}
+
 
 
 \section{Lecture 2: Tuesday, January 17th}
@@ -384,6 +397,12 @@ Similarly we can define $f\in \RLP(\chi)$ by
     \cdot\rar\ar[ur,dashed] & \cdot
 \end{tikzcd} \]
 
+\begin{figure}[h]
+  \includegraphics[width=0.5\linewidth]{pics/rlp.jpg}
+  \centering
+\end{figure}
+
+
 \begin{definition} A \textit{weak factorization system} on a category $\mathcal{M}$ consists of a pair $(\mathscr{C}, \mathscr{F})$ of classes of morphisms such that
 \begin{enumerate}
     \item Given any $f: X \to Y$ in $\mathcal{M}$, it factors (not necessarily uniquely) as
@@ -418,14 +437,20 @@ Similarly we can define $f\in \RLP(\chi)$ by
 \end{center}
 We denote by $\widetilde{\Cof}:= \Cof \cap W$ and $\widetilde{\Fib} = \Fib \cap W$, and call these \textit{trivial cofibrations} (resp. \textit{trivial fibrations}). These are subject to the constraint that
 \begin{enumerate}
-    \item $\mathcal{M}$ is bicomplete (all limits and colimits)
-    \item $W$ contains identities and it satisfies 2-out-of-3 property\footnote{If $f$ and $g$ are composable, and any two of $f$, $g$, $gf$ are in $W$ then so is the third.}
+    \item $\mathcal{M}$ is bicomplete (all limits and colimits)\footnote{We might also require \textit{finitely} bicomplete.}
+    \item $W$ satisfies 2-out-of-3 property\footnote{If $f$ and $g$ are composable, and any two of $f$, $g$, $gf$ are in $W$ then so is the third.}
     \item $\left( \Cof, \til{\Fib} \right)$ and $\left( \widetilde{\Cof}, \Fib \right)$ are weak factorization systems.
 \end{enumerate}
 \end{definition}
 
 \begin{terminology} A category with a model structure is referred to as a \textit{model category}.
 \end{terminology}
+
+\begin{figure}[h]
+  \includegraphics[width=0.5\linewidth]{pics/model-cats.jpg}
+  \centering
+
+\end{figure}
 
 
 \begin{notation} We will decorate each class of morphisms as
@@ -468,11 +493,416 @@ then if $g\in W$ (resp. $\Cof$ or $\Fib$) then $f\in W$ (resp. $\Cof$ or $\Fib$)
 \begin{example} $\mathcal{M} = \Top$, $W=$ weak homotopy equivalences, $\Cof=$ relative CW complexes\footnote{$A\hookto X$ is a \textit{relative CW complex} if $X$ is built out of $A$ by attaching cells.} The fibrations are determined by $\Fib = \RLP(\widetilde{\Cof})$. The fibrations are equivalently $\RLP(D^n \to D^n \times I)$. Every object here is fibrant, and the cofibrant objects are precisely the CW complexes. Cofibrant replacement is cellular approximation.
 \end{example}
 
+\section{Lecture 3: Thursday, January 19th}
+
+\begin{proposition}\label{prop:labelname} Identities and isomorphisms are weak equivalences in a model category.
+\end{proposition}
+\begin{proof} For any $X \in \mathcal{M}$, we can fibrantly replace it to get $X \xhookto{\sim} \til{X}$. Consider the commutative diagram
+\[ \begin{tikzcd}
+    X\ar[rr,"\id"]\ar[dr,hook,"\sim" below left] &  & X\ar[dl,"\sim" below right]\\
+     & \til{X}. & 
+\end{tikzcd} \]
+By 2-out-of-3, we have that $\id:X \to X$ is also a weak equivalence.
+
+More generally if $f:X \to Y$ is an isomorphism in $\mathcal{M}$, then by the diagram
+\[ \begin{tikzcd}
+    X\dar["f" left]\rar["f" above]\ar[rr,equal,bend left=20] & Y\dar[equal]\rar["f^{-1}"] & X\dar["f" right]\\
+    Y\rar[equal] & Y\rar[equal] & Y,
+\end{tikzcd} \]
+we see that $f$ is contained in $W$.
+\end{proof}
+
+If $\left( \mathscr{C},\mathscr{F} \right)$ is a weak factorization system, then both $\mathscr{C}$ and $\mathscr{F}$ are closed under retracts. Hence $\Cof, \til{\Cof}, \Fib, \til{\Fib}$ are closed under retracts. $W$ is also closed under retracts (exercise).
+
+\begin{exercise} We have that $\mathcal{M}$ is a model category if and only if $\mathcal{M}^\op$ is a model category.
+\end{exercise}
+
+\begin{theorem} Cofibrations are closed under pushouts and coproducts.
+\end{theorem}
+\begin{proof} Given any test square, we can try to lift:
+\[\begin{tikzcd}
+    X\rar\dar[hook] & Y\rar\dar & A\dar[two heads,"\sim" right]\\
+    Z\rar\ar[urr,dashed] & P\rar\po & B.
+\end{tikzcd} \]
+This map is constructed by universal property of the pushout:
+\[ \begin{tikzcd}
+    X\rar\dar[hook] & Y\dar\ar[ddr,bend left=10] & \\
+    Z\rar\ar[drr,bend right=10,dashed] & P\po\ar[dr,dashed,"\exists!" above right] & \\
+     &  & A.
+\end{tikzcd} \]
+For coproducts, we can take $X_i \hookto Y_i$ for $i\in J$. Let's try to lift:
+\[ \begin{tikzcd}
+    X_i\dar[hook]\rar & \amalg_i X_i\dar\rar & A\dar[two heads,"\sim" right]\\
+    Y_i\rar\ar[urr,dashed] & \amalg_i Y_i\rar & B.
+\end{tikzcd} \]
+We know that each $X_i\hookto Y_i$ is a cofibration hence it lifts against the big square. By universal property a map $\amalg_i Y_i \to A$ exists.
+\end{proof}
 
 
+\begin{example} If $\mathscr{C}$ is a bicomplete category, then $\mathscr{C}$ has a model structure where $W$ is the isomorphisms, and $\Cof = \Fib = \mor \mathscr{C}$.
+\end{example}
+
+\begin{example} If $\mathcal{M} = \Top$, we have the \textit{Quillen model structure}, with
+\begin{itemize}
+    \item $W=$ weak homotopy equivalences
+    \item $\Cof=$ retracts of relative CW complexes
+    \item $\Fib=$ Serre fibrations ($\RLP(D^n \hookto D^n \times I)$).
+\end{itemize}
+\end{example}
 
 
+\begin{example} The Str{\o}m (or Hurewicz) model structure on $\Top$:
+\begin{itemize}
+    \item $W=$ homotopy equivalences
+    \item $\Fib=$ Hurewicz fibrations ($\RLP(A \to A \times I)$ for all $A \in \Top$)
+    \item $\Cof=$ closed cofibrations in $\Top$.
+\end{itemize}
+Fibrant replacement in the Str{\o}m model structure looks like
+\[ \begin{tikzcd}
+    X\ar[rr,"f"]\ar[dr,hook] &  & Y\\
+     & M_f\ar[ur,two heads,"\simeq" below right] &
+\end{tikzcd} \]
+Where $M_f = (X \times I)\cup_X Y$ is the mapping cylinder.
+\end{example}
 
+\begin{example} The \textit{Kan model structure} on $\sSet$ with
+\begin{itemize}
+    \item $W=$ weak homotopy equivalences
+    \item $\Cof=$ monomorphisms (levelwise injections)
+    \item $\Fib=$ Kan fibrations ($\RLP(\Lambda_k^n \to \Delta^n)$ for all $0\le k\le n$).
+\end{itemize}
+Everything is cofibrant here (since the empty simplicial set injects into everything). Fibrant things are Kan complexes. This tells us that every simplicial set is weakly equivalent to a Kan complex!
+\end{example}
+
+\begin{theorem} (Milnor) The natural map $X \to \Sing(|X|)$ is a weak homotopy equivalence for any simplicial set $X$. [Kerodon, 3.5.4.1]
+\end{theorem}
+
+
+\begin{definition} Let $\mathscr{C}$ be a cat, and $W \subseteq \mathscr{C}$ a subcategory. A functor $F: \mathscr{C} \to \mathscr{D}$ is called the \textit{localization of $\mathscr{C}$ with respect to $W$} if:
+\begin{enumerate}
+    \item $F(f) \in \text{iso} \mathscr{D}$ if $f\in \mor W$
+    \item For any other $F'$ satisfying (1), we have
+\[ \begin{tikzcd}
+    \mathscr{C}\rar["F'"]\dar["F" left] & \mathscr{D}'\\
+    \mathscr{C}\ar[ur,"\exists!" below right] & 
+\end{tikzcd} \]
+\end{enumerate}
+We denote by $\mathscr{C} \to \mathscr{C}[W^{-1}]$ the localization.
+\end{definition}
+
+Here is a naive way to construct $\mathscr{C}[W^{-1}]$: we take the free category on $\mathscr{C}$ and ``$W^{-1}$.'' That is, we take the same objects, but allow morphisms to be ``zigzags'' of morphisms forward in $\mathscr{C}$ and morphisms backwards in $W$, and we mod out by the relation that things in $W$ become isomorphisms. There are size issues here.
+
+\begin{theorem} If $\mathcal{M}$ is a model category, then localization $\mathcal{M} \to \mathcal{M}[W^{-1}]$ exists. We denote by $\Ho(\mathcal{M}) = \mathcal{M}[W^{-1}]$ the homotopy category of $\mathcal{M}$.
+\end{theorem}
+
+Recall in $\Top$ that $f \simeq g : X \to Y$ if there is a map $H: X \times I \to Y$ so that $H(-,0) = f$ and $H(-,1) = g$. 
+
+\begin{definition} Le t$\mathcal{M}$ be a model category. A \textit{cylinder object} on $X\in \mathcal{M}$ is defined to be
+\[ \begin{tikzcd}
+    X\amalg X\ar[rr,"\nabla"]\ar[dr,hook] &  & Y\\
+     & \Cyl(X)\ar[ur,"\sim" below right] &
+\end{tikzcd} \]
+The construction of cylinder objects is \textit{not functorial}.
+\end{definition}
+
+A \textit{(left) homotopy} from $f$ to $g$ is a map $H: \Cyl(X) \to Y$ such that $H\circ i_0 = f$ and $H\circ i_1 = g$. We denote this by $f\simeq g$.
+
+\begin{proposition} We have that $i_0 : X \to \Cyl(X)$ is a weak equivalence (and same for $i_1$).
+\end{proposition}
+\begin{proof} We have
+\[\begin{tikzcd}
+    X\ar[rr,"\id", bend left=30]\ar[dr,dashed,"i_0" below left]\rar & X\amalg X\rar["\nabla"]\dar & Y\\
+     & \Cyl(X)\ar[ur,"\sim" below right] & \\
+\end{tikzcd} \]
+By 2-out-of-3 on the outside maps, the result follows.
+\end{proof}
+
+\begin{proposition} If $X$ is cofibrant, then $i_0,i_1: X \to \Cyl(X)$ are cofibrations.
+\end{proposition}
+\begin{proof} Since cofibrations are preserved under pushouts, we have that $i_0$ and $i_1$ are cofibrations:
+\[ \begin{tikzcd}
+    \emptyset\rar[hook]\dar[hook] & X\dar["i_0" right]\\
+    X\rar["i_1" below] & X \amalg X \po
+\end{tikzcd} \]
+\end{proof}
+
+\begin{theorem} (Exercise) If $X$ is cofibrant, then homotopy $\simeq$ gives an equivalence relation on $\Hom(X,Y)$ for any $Y$.
+\end{theorem}
+
+We can think of a map
+\begin{align*}
+    \Hom_\mathcal{M}(X,Y)/\simeq \times \Hom_\mathcal{M}(Y,Z)/\simeq &\to \Hom_\mathcal{M}(X,Z)/\simeq \\
+    (f,g) &\mapsto g\circ f.
+\end{align*}
+In order for this to be well-defined, we need $Z$ to be fibrant.
+
+\begin{lemma} If $Z$ is fibrant, and $f\simeq g: X \to Z$, then if $h: X' \to X$, we have that $fh\simeq gh$.
+\end{lemma}
+\begin{proof} We have $H: \Cyl(X) \to Y$ with $H_0 = f$ and $H_1 = g$. By lifting, we get
+\[ \begin{tikzcd}
+    X'\amalg X'\rar\dar[hook] & X\amalg X\rar & \Cyl(X)\dar[two heads,"\sim" right]\\
+    \Cyl(X')\rar\ar[urr,dashed] & X'\rar & X.
+\end{tikzcd} \]
+This gives the desired map. We used fibrancy of $Z$ to ensure that the map $\Cyl(X) \to X$ was a trivial fibration (or could be replaced with a better cylinder object using a map to $Z$).
+\end{proof}
+
+\begin{theorem} In $\mathcal{M}$, given $f: X \to Y$ with $X$ cofibrant and $Y$ fibrant, then $f\in W$ if and only if $f$ is a homotopy equivalence.\footnote{Meaning that there is some $g: Y \to X$ with $fg\simeq \id$ and $gf\simeq \id$.}
+\end{theorem}
+
+\begin{notation} $\mathcal{M}_c=$ cofibrant objects in $\mathcal{M}$, and $\mathcal{M}_f=$ fibrant objects in $\mathcal{M}$. We denote by $\mathcal{M}_{cf}=$ objects which are \textit{both} cofibrant and fibrant.
+\end{notation}
+
+Concretely, we can define $\Ho(\mathcal{M})$ as the objects in $\mathcal{M}$, but where
+\begin{align*}
+    \Hom_{\Ho(\mathcal{M})}(X,Y) = \Hom_{\mathcal{M}_{cf}/\simeq}(RQX,RQY),
+\end{align*}
+where $R$ is a fibrant replacement and $Q$ is a cofibrant replacement.
+
+\begin{exercise} Given $X \to Y$ in $\mathcal{M}$, there exists $QX \xto{\til{f}} QY$ such that
+\[ \begin{tikzcd}
+    QX\dar[two heads,"\sim"]\rar["\til{f}"] & QY\dar[two heads,"\sim"]\\
+    X\rar["f" below] & Y.
+\end{tikzcd} \]
+Here $\til{f}$ is well-defined up to left homotopy.
+\end{exercise}
+
+Given some $\mathcal{M} \to \Ho(\mathcal{M})$, we just need to check that $W \mapsto$ isos, and it is universal in that way.
+
+\section{Lecture 4: Tuesday, January 24th}
+
+\begin{definition} Suppose $\mathcal{M}$ and $\mathcal{N}$ are model categories, and take a functor $F: \mathcal{M} \to \mathcal{N}$. A \textit{left derived functor} of $F$ is an (absolute) right Kan extension of $F$ along $\gamma_\mathcal{M} : \mathcal{M} \to \Ho(\mathcal{M})$:
+% https://q.uiver.app/?q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7TX0iXSxbMSwwLCJcXG1hdGhjYWx7Tn0iXSxbMCwxLCJcXEhvKFxcbWF0aGNhbHtNfSkiXSxbMCwxLCJGIl0sWzAsMiwiXFxnYW1tYV9cXG1hdGhjYWx7TX0iLDJdLFsyLDEsIiIsMix7ImN1cnZlIjoyLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNSwwLCJcXGVsbCIsMix7InNob3J0ZW4iOnsic291cmNlIjoyMH19XV0=
+\[\begin{tikzcd}
+	{\mathcal{M}} & {\mathcal{N}} \\
+	{\Ho(\mathcal{M})}
+	\arrow["F", from=1-1, to=1-2]
+	\arrow["{\gamma_\mathcal{M}}"', from=1-1, to=2-1]
+	\arrow[""{name=0, anchor=center, inner sep=0}, curve={height=12pt}, dashed, from=2-1, to=1-2]
+	\arrow["\ell"', shorten <=5pt, Rightarrow, from=0, to=1-1]
+\end{tikzcd}\]
+if $G: \Ho(\mathcal{M}) \to \mathcal{N}$ and $s: G\circ \gamma_\mathcal{M} \Rightarrow F$, then there exists a unique $s': G\Rightarrow LF$ so that $\ell\circ (s'\circ \gamma_{\mathcal{M}}) = s$.
+% https://q.uiver.app/?q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7TX0iXSxbMSwwLCJcXG1hdGhjYWx7Tn0iXSxbMCwxLCJcXEhvKFxcbWF0aGNhbHtNfSkiXSxbMCwxLCJGIl0sWzAsMiwiXFxnYW1tYV9cXG1hdGhjYWx7TX0iLDJdLFsyLDEsIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDEsIiIsMSx7ImN1cnZlIjoyfV0sWzUsMCwiXFxlbGwiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjB9fV0sWzYsNSwicyciLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
+\[\begin{tikzcd}
+	{\mathcal{M}} & {\mathcal{N}} \\
+	{\Ho(\mathcal{M})}
+	\arrow["F", from=1-1, to=1-2]
+	\arrow["{\gamma_\mathcal{M}}"', from=1-1, to=2-1]
+	\arrow[""{name=0, anchor=center, inner sep=0}, dashed, from=2-1, to=1-2]
+	\arrow[""{name=1, anchor=center, inner sep=0}, curve={height=12pt}, from=2-1, to=1-2]
+	\arrow["\ell"', shorten <=3pt, Rightarrow, from=0, to=1-1]
+	\arrow["{s'}"', shorten <=2pt, shorten >=2pt, Rightarrow, from=1, to=0]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{definition} Let $F: \mathcal{M} \to \mathcal{N}$. A \textit{total left derived functor} $\mathbb{L}F: \Ho(\mathcal{M}) \to \Ho(\mathcal{N})$ is the left derived functor of $\mathcal{M} \xto{F} \mathcal{N} \xto{\gamma_\mathcal{N}} \Ho(\mathcal{N})$.
+\end{definition}
+
+
+\begin{example} If $\mathcal{F}: \mathcal{M} \to \mathcal{N}$ where if $f\in W$ between cofibrant objects then $Ff$ is a weak equivalence in $\mathcal{N}$, then $\mathbb{L}F$ exists:
+\[ \begin{tikzcd}
+    \mathcal{M}\rar["F"]\dar & \mathcal{N}\rar & \Ho(\mathcal{N})\\
+    \Ho(\mathcal{M})\ar[urr,bend right=10,dashed] &  & 
+\end{tikzcd} \]
+\end{example}
+
+We will have that $\mathbb{L}F(X) \xto{\sim} F(X)$ whenever $X$ is cofibrant. In general, $\mathbb{L}F(X) = F(Q(X))$.
+
+\begin{definition} Let $F: \mathcal{M} \to \mathcal{N}$. We say that $F$ is a \textit{left Quillen functor} if
+\begin{enumerate}[(i)]
+    \item $F$ is a left adjoint
+    \item $F$ preserves cofibrations and trivial cofibrations.
+\end{enumerate}
+In this case if $G$ is a right adjoint, then we say the adjunction is a \textit{Quillen adjunction / Quillen pair}.\footnote{There is a dual notion of right Quillen functor, meaning it is a right adjoint which preserves fibrations and trivial fibrations.}
+\end{definition}
+
+\begin{exercise} Show that $L$ is left Quillen if and only if $G$ is right Quillen.
+\end{exercise}
+
+\begin{lemma} (Ken Brown's Lemma) If $F: \mathcal{M} \to \mathcal{N}$ is any functor between model categories which sends trivial cofibrations between cofibrant objects to weak equivalences in $\mathcal{N}$, then $F$ sends any weak equivalence between cofibrant objects to weak equivalences.
+\end{lemma}
+\begin{proof} Let $f: A \xto{\sim} B$, where $A,B \in \mathcal{M}_c$. We need $F(f)$ to be a weak equivalence. Consider the factorization of the coproduct of $f$ and the identity on $B$:
+\[ \begin{tikzcd}
+    A\amalg B\ar[rr,"f\amalg \id_B"]\ar[dr,hook,"q" below left] &  & B\\
+     & C\ar[ur,"\sim" above left,"p" below right,two heads] &
+\end{tikzcd} \]
+Then consider the pushout:
+\[ \begin{tikzcd}
+    \emptyset\rar[hook]\dar[hook] & A\dar[hook,"i_A"]\rar["f"]\ar[ddr,"\sim"] & B & \\
+    B\rar[hook]\ar[drr,"q"]\ar[ddrr,equal] & A\amalg B\ar[dr,"q"] &  & \\
+     &  & C\dar["p"]\ar[uu,"p"] & \\
+     &  & B & \\
+\end{tikzcd} \]
+We have that
+\begin{align*}
+    B \xhookto{i_B} A\amalg B \xhookto{q} C \\
+    A \xhookto{i_A} A\amalg B \xhookto{q} C 
+\end{align*}
+are both trivial cofibrations, hence their images under $F$ are weak equivalences. We see that
+\begin{align*}
+    F(p)\circ F(q\circ \id_B) = F(p\circ q\circ \id_B) = F(\id_B).
+\end{align*}
+Therefore $F(p)$ is a weak equivalence by 2-out-of-3.
+\end{proof}
+
+\begin{theorem} Suppose that $F:\mathcal{M}\to \mathcal{M}$ is left Quillen. Then $\mathbb{L}F:\Ho(\mathcal{M})\to \Ho(\mathcal{N})$ exists and can be defined as
+\begin{align*}
+    \Ho(\mathcal{M})\xto{Q} \Ho(\mathcal{M}_c) \xto{F} \Ho(\mathcal{N}).
+\end{align*}
+Moreover, we obtain an adjunction on the homotopy categories:
+\begin{align*}
+    \mathbb{L}F: \Ho(\mathcal{M}) \leftrightarrows \Ho(\mathcal{N}): \mathbb{R}G.
+\end{align*}
+\end{theorem}
+\begin{proof}[Proof idea] We have a natural iso
+\begin{align*}
+    \Hom_\mathcal{M}(X,G(Y)) \cong \Hom_\mathcal{N}(F(X),Y),
+\end{align*}
+compatible with homotopy equivalence:
+\begin{align*}
+    \Hom_\mathcal{M}(X,G(Y))/\simeq \cong \Hom_\mathcal{N}(F(X),Y)/\simeq
+\end{align*}
+\end{proof}
+
+\textbf{Theorem/Definition:} Take a Quillen adjunction $F: \mathcal{M} \leftrightarrows \mathcal{N}: G$. Suppose that $f: X \xto{\sim} G(Y)$, with $X\in \mathcal{M}_c$ and $Y\in \mathcal{N}_f$ is a weak equivalence if and only if $f^\flat:F(X) \to Y$ is. Then $\mathbb{L}F$ and $\mathbb{R}G$ are equivalences of categories, we call this a \textit{Quillen equivalence}.
+
+\begin{example} We have that
+\begin{align*}
+    |-|:\sSet_\text{Kan} \leftrightarrows \Top_\text{Quillen}: \Sing(-)
+\end{align*}
+is a Quillen equivalence.
+\end{example}
+
+\begin{example} We have that
+\begin{align*}
+    \id: \Top_\text{Quillen} \leftrightarrows \Top_\text{Str{\o}m}:\id
+\end{align*}
+is a Quillen adjunction but not a Quillen equivalence.
+\end{example}
+
+\textbf{Q}: If $\mathcal{M}$ and $\mathcal{N}$ are model categories such that there is an equivalence of categories $\Ho(\mathcal{M}) \cong \Ho(\mathcal{N})$, is this always coming from a Quillen equivalence?
+
+\textbf{A}: No! Dugger--Shipley, 2009.
+
+This indicates that Quillen equivalence is a good notion but it is not a \textit{perfect} notion.
+
+\begin{center}
+    \textbf{Guided example: chain complexes}
+\end{center}
+
+Let's take $\Ch_\Z$ to be homologically graded unbounded chain complexes. There are three model structures of interest. We first start with the projective one:
+
+$\left( \Ch_\Z \right)_\text{projective}$:
+\begin{itemize}
+    \item weak equivalences are quasi-isomorphisms
+    \item fibrations are levelwise epimorphisms
+    \item cofibrations are levelwise monomorphisms such that the cokernel of each $f_n:X_n \to Y_n$ is free.
+\end{itemize}
+
+If $M \in \Ab$, we define $S^n(M)$ to be the chain complex $M[n]$ which is concentrated in $M$ at degree $n$. If $M=\Z$, we call it $S^n$. We define $D^n(M)$ to be a chain complex
+\begin{align*}
+    \cdots \to 0 \to M \xto{\id} M \to 0\to \cdots
+\end{align*}
+with two $M$'s concentrated in degrees $n$ and $n-1$. We call $D^n(\Z)=:D^n$.
+
+\begin{exercise} Show that fibrations are $\RLP(0\to D^n)$ for all $n$. That is,
+\[ \begin{tikzcd}
+    0\dar[hook]\rar & X\dar[two heads]\\
+    D^n\rar\ar[ur,dashed] & Y.
+\end{tikzcd} \]
+We claim this lifts iff $X \to Y$ is a levelwise epimorphism. We have that $\Hom_\Ch(D^n,Y) \cong Y_n$, so we are just asking if every element in $Y_n$ lifts to an element in $X_n$.
+\end{exercise}
+
+\begin{exercise} Show that $\til{\Fib} = \RLP \left( S^n \hookto D^{n+1} \right)$ for all $n$. Consider $\Hom_\Ch(S^n,Y)$. A map looks like
+\[ \begin{tikzcd}
+    \cdots\rar & \Z\rar\dar & 0\rar\dar & \cdots \\
+    \cdots\rar & Y_n\rar & Y_{n-1}\rar & \cdots
+\end{tikzcd} \]
+That is, it picks out a class in $Y_n$ which maps to zero under the differential. The data of a square
+\[ \begin{tikzcd}
+    S^{n-1}\dar[hook]\rar & X\dar["p" right]\\
+    D^n\rar & Y
+\end{tikzcd} \]
+is the data of $(y,x) \in Y_n \oplus Z_{n-1} X$ so that $p(x) = dy$. Show that a lift exists if and only if $p$ is a trivial fibration.
+\end{exercise}
+
+Other model structures.
+
+$\left( \Ch_R \right)_\text{injective}$:
+\begin{itemize}
+    \item $W=$ quasi-isomorphisms
+    \item $\Cof=$ fiberwise monomorphisms\footnote{Here we roughly have that $\Cof = \LLP(D^n \to 0)$ and $\til{\Fib} = \LLP(D^{n+1}\to S^n)$.}
+    \item $\Fib=$ fiberwise epimorphisms with fibrant kernel
+\end{itemize}
+
+We get a Quillen equivalence
+\begin{align*}
+    \id: \left( \Ch_R \right)_\text{projective} \leftrightarrows \left( \Ch_R \right)_\text{injective}: \id.
+\end{align*}
+
+We also have have a third one which is \textit{not} Quillen equivalent.
+
+$\left( \Ch_R \right)_\text{Hurewicz}$:
+\begin{itemize}
+    \item $W=$ homotopy equivalences of chain complexes
+    \item $\Cof=$ split levelwise monomorphisms
+    \item $\Fib=$ split levelwise epimorphisms
+\end{itemize}
+
+We denote by $\mathscr{D}(R) = \Ho \left( \left( \Ch_R \right)_\text{proj} \right)$ the \textit{derived category} of a ring $R$.
+
+We can also think about \textit{connective} chain complexes (which are zero in negative degrees). We have an adjunction
+\begin{align*}
+    \Ch_R \leftrightarrows \Ch_R^{>0}.
+\end{align*}
+This induces a model structure on $\Ch_R^{>0}$ making it into a Quillen adjunction but not a Quillen equivalence. We denote by $\Ho(\Ch_R^{\ge 0}) = \mathscr{D}^{\ge 0}(R)$.
+
+We get a model structure:
+$\left( \Ch_R^{>0} \right)_\text{proj}$
+\begin{itemize}
+    \item $W=$ quasi-isomorphisms
+    \item $\Fib=$ positive epimorphisms (may not be epi in degree 0)
+    \item $\Cof=$ monomorphisms with projective cokernel. The cofibrant objects here are levelwise projective $R$-modules.
+\end{itemize}
+
+
+If we take $M \in \Mod_R$, we can view $S^0(M) \in \Ch_R^{\ge 0}$, and take a cofibrant replacement of it $P \xtto{\sim} S^0(M)$. This is \textit{exactly} a projective resolution of $M$!
+\[ \begin{tikzcd}
+    \cdots\rar & P_2\dar\rar & P_1\dar\rar & P_0\dar\rar & 0\\
+    \cdots \rar & 0\rar & 0\rar & M\rar & 0.
+\end{tikzcd} \]
+%
+\begin{example} Let $M \in \Mod_R$. Then we can take
+\begin{align*}
+    S^0(M) \otimes_R - : \Ch_R^{\ge 0} \to \Ch_R^{\ge 0}.
+\end{align*}
+We can check that this is left Quillen. We can look at its total left derived functor $S^0(M) \otimes_R^{\mathbb{L}} -$. We can see that
+\begin{align*}
+    M \otimes_R^{\mathbb{L}} N := S^0(M) \otimes_R^{\mathbb{L}} S^0(N) \simeq S^0(M) \otimes_R P_\bullet,
+\end{align*}
+where $P_\bullet$ is a projective resolution of $N$. We have that
+\begin{align*}
+    H_i(M \otimes_R^{\mathbb{L}} N) = \Tor_i^R(M,N).
+\end{align*}
+\end{example}
+
+\begin{exercise} In the same way, if we want to derive hom, we can check that
+\begin{align*}
+    \Hom_{\mathscr{D}^{\ge 0}(R)}(S^m(M), S^n(N))\cong \Ext_R^{n-m}(M,N).
+\end{align*}
+\end{exercise}
+
+Via Dold-Kan, we have a Quillen adjunction
+\begin{align*}
+    R[-]:\sSet_\text{Kan} \leftrightarrows \sMod_R : U,
+\end{align*}
+with the model structure on $\sMod_R$ given by weak homotopy equivalences as underlying simplicial sets, and fibrations as underlying Kan fibrations.
+
+Then Dold-Kan takes the form of a Quillen equivalence
+\begin{align*}
+    N:\sMod_R_\text{Kan} \leftrightarrows (\Ch_R^{\ge 0})_\text{proj}: \Gamma.
+\end{align*}
+
+In general $N(X \otimes_R Y) \not\cong N(X) \otimes_R N(Y)$, however $N(X \otimes Y) \cong N(X) \otimes_R N(Y)$. They both describe $\mathscr{D}^{\ge 0}(R)$ in a monoidal way.
 
 
 \newpage
