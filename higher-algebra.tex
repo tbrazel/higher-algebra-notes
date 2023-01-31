@@ -172,6 +172,8 @@
 \let\emptyset\varnothing
 \providecommand{\Cyl}{\text{Cyl}}
 
+\providecommand{\Cell}{\text{Cell}}
+
 \title{Higher Algebra}
 
 \author{Maximilien P\'eroux}
@@ -899,7 +901,7 @@ with the model structure on $\sMod_R$ given by weak homotopy equivalences as und
 
 Then Dold-Kan takes the form of a Quillen equivalence
 \begin{align*}
-    N:\sMod_R_\text{Kan} \leftrightarrows (\Ch_R^{\ge 0})_\text{proj}: \Gamma.
+    N:(\sMod_R)_\text{Kan} \leftrightarrows (\Ch_R^{\ge 0})_\text{proj}: \Gamma.
 \end{align*}
 
 In general $N(X \otimes_R Y) \not\cong N(X) \otimes_R N(Y)$, however $N(X \otimes Y) \cong N(X) \otimes_R N(Y)$. They both describe $\mathscr{D}^{\ge 0}(R)$ in a monoidal way.
@@ -1076,6 +1078,203 @@ There is a third model structure on $\mathcal{M}^{\mathscr{C}}$ called the \text
     \hocolim_\mathscr{C}(F) \simeq \left| B_\bullet(\ast,\mathscr{C},F) \right|.
 \end{align*}
 \end{theorem}
+
+
+\section{Lecture 6: Tuesday, January 31st}
+
+\begin{center}
+    \textbf{Combinatorial model categories}
+\end{center}
+
+\begin{definition} A model category is \textit{combinatorial} if it is \textit{presentable}\footnote{By this we mean ``locally presentable.''} and \textit{cofibrantly generated}.
+\end{definition}
+
+To motivate presentability, let $X$ be a set. Then $X$ is determined by its elements, meaning that
+\begin{align*}
+    \Hom_\Set(\ast,X) \cong X.
+\end{align*}
+Then we can present $X$ as $X = \cup_{x\in X} \left\{ \ast \right\}$.
+
+\begin{definition} A colimit is \textit{filtered} if the diagram is filtered, meaning it is nonempty and every subdiagram has a cocone.
+\end{definition}
+
+\begin{theorem} (Exercise) In $\Set$, filtered colimits commute with finite limits. That is, if $F: I \times J \to \Set$ with $I$ finite and $J$ filtered, then
+\begin{align*}
+    \colim_J \left( \lim_I F_I \right) \xto{\sim} \lim_I \left( \colim_J F_J \right)
+\end{align*}
+is an isomorphism.
+\end{theorem}
+
+\begin{proposition} A set $X$ is finite if and only if
+\begin{align*}
+    \Hom_\Set(X,-) : \Set \to \Set
+\end{align*}
+preserves filtered colimits.
+\end{proposition}
+\begin{proof} For the backwards direction, let $I = \left\{ X_i \right\}$ be the collection of finite subsets of $X$. Then $X = \colim_I X_i$. In particular, we have that
+\begin{align*}
+    \colim_I \Hom(X,X_i) \cong \Hom(X,X) \\
+    (X \xto{f_i} X_i) \xto{\sim} \id_X?
+\end{align*}
+For the forwards direction, $\Hom_\Set(\ast,-) \cong \id_\Set$ so it preserves colimits. Since $X$ is finite, we have that $X = \left\{ x_1, \ldots, x_n \right\}$, hence
+\begin{align*}
+    \Hom(X,-) \cong \Hom(\cup_i \left\{ x_i \right\},-) \cong \lim_i \Hom \left( \left\{ x_i \right\},- \right).
+\end{align*}
+Then we use finite limits commuting with filtered colimits.
+\end{proof}
+
+\begin{definition} An object $X \in \mathscr{C}$ is \textit{compact} if $\Hom_\mathscr{C}(X,-): \mathscr{C} \to \Set$ preserves filtered colimits.
+\end{definition}
+
+Hence if $F: I \to \mathscr{C}$, with $I$ filtered, then a map $X \to \colim_I F$ factors through an $F(i)$.
+
+\begin{examples} Compact objects:
+\begin{itemize}
+    \item $\Set$, compact = finite set
+    \item $\Vect_F$, compact = finite dimensional
+    \item $\Mod_R$, compact = finitely presented
+    \item $\Grp$, compact = finitely presented
+    \item $\Top$, compact = finite sets with discrete topology
+    \item $\Ch$, compact = perfect chain complexes (bounded, levelwise finitely generated and projective)
+    \item $\sSet$, compact = finite simplicial sets ($X_n$ finite for each $n$, and there exists an $m$ so that all non-degenerate simplices have dimension $\le m$).
+\end{itemize}
+\end{examples}
+
+A topological space is (topologically) compact if and only if $X \in \O(X)$ is (categorically) compact.
+
+\begin{lemma} Finite colimits of compact objects are compact.
+\end{lemma}
+
+\begin{definition} A category $\mathscr{C}$ is \textit{presentable} if
+\begin{enumerate}
+    \item $\mathscr{C}$ is cocomplete
+    \item There exists a set $S$ of compact objects in $\mathscr{C}$ such that every object in $\mathscr{C}$ is a filtered colimit of objects in $S$.
+\end{enumerate}
+\end{definition}
+
+We also say the ``ind-completion'' of $S$ is $\mathscr{C}$, denoted $\Ind(S) = \mathscr{C}$.
+
+\begin{theorem} $\mathscr{C}$ is presentable if and only if there is an adjunction of the form
+\begin{align*}
+    \Fun(K^\op, \Set) \leftrightarrows \mathscr{C},
+\end{align*}
+where $K$ is some small category, and the right adjoint is fully faithful and preserves filtered colimits.
+\end{theorem}
+
+We might take $K$ for example to to be isomorphism classes of compact objects in $\mathscr{C}$, then we have
+\begin{align*}
+    \mathscr{C} &\to \Fun(K^\op,\Set) \\
+    X &\mapsto \left( K^\op \to \mathscr{C}\op \xto{\Hom(-,X)} \Set \right).
+\end{align*}
+\begin{theorem} Suppose $\mathscr{C}$ and $\mathscr{D}$ presentable. Then $L : \mathscr{C} \to \mathscr{D}$ preserves colimits if and only if $L$ is a left adjoint.
+\end{theorem}
+
+\begin{center}
+    \textbf{Cofibrantly generated model categories}
+\end{center}
+
+\begin{definition} Let $I$ be a set of maps in a cocomplete category, fix $\lambda$ to be an ordinal, and let $X: \lambda \to \mathscr{C}$ a functor, and suppose that $X(\alpha) \to X(\alpha+1)$ fits into
+\[ \begin{tikzcd}
+    A_\alpha\dar\rar & X(\alpha)\dar\\
+    B_\alpha\rar & X(\alpha+1),
+\end{tikzcd} \]
+where $A_\alpha \to B_\alpha$ is in $I$. Then we say that $X(0) \to \colim_\lambda X$ is a \textit{relative $I$-cell complex}. We say an object $Y\in \mathscr{C}$ is an \textit{$I$-cell complex} if $\emptyset \to Y$ is a relative $I$-cell complex.
+\end{definition}
+
+If $I = \left\{ S^n \hookto D^{n+1} \right\}_{n\ge 0}$, then we are recovering the idea of CW complexes in spaces.
+
+We denote by $\Cell_I(\mathscr{C})$ the class of relative $I$-cell complexes.
+
+\begin{exercise} We have that $\Cell_I(\mathscr{C})$ is the smallest class in $\mathscr{C}$ closed under composition, pushouts, and filtered colimits.
+\end{exercise}
+
+\begin{theorem} \textit{(Small object argument)} Let $\mathscr{C}$ be cocomplete, let $I$ a set of maps in $\mathscr{C}$, and suppose that for all $A\to B$ in $I$, we have that $A$ is compact with respect to the full subcategory of of $I$-cells in $\mathscr{C}$. Then there exists a functorial factorization of maps in $\mathscr{C}$:
+\[ \begin{tikzcd}
+    X\ar[rr,"f"]\ar[dr,"\gamma" below left] &  & Y\\
+     & C\ar[ur,"\delta" below right] & 
+\end{tikzcd} \]
+with $\gamma \in \Cell_I(\mathscr{C})$ and $\delta \in \RLP(I)$.
+\end{theorem}
+\begin{proof}[Proof idea] Start with $X(0) = X$, and take a map $X(0) \to Y$. Suppose $X(\beta) = \colim_{\alpha<\beta} X(\alpha)$ is constructed with $X(\beta) \to Y$. Look at the set\footnote{Note this set is nonempty because we can take $g$ to be $\id: X(\beta) \to X(\beta)$.}
+\begin{align*}
+    S = \left\{ 
+\begin{tikzcd}[ampersand replacement=\&]
+    A\rar\dar["g" left] \& X(\beta)\dar\\
+    B\rar \& Y
+\end{tikzcd} \colon g\in I
+    \right\}.
+\end{align*}
+Denote by $g_s$ the map $A \to B$ appearing in $s\in S$. Then we build
+\[ \begin{tikzcd}
+    \amalg_{s\in S} A_s\rar\dar["\amalg_s g_s" left] & X(\beta)\dar["\in\Cell_I(\mathscr{C})"]\\
+    \amalg_{s\in S} B_s \rar & X(\beta+1)\po
+\end{tikzcd} \]
+By UP of the pushout, there is an induced map $X(\beta+1) \to Y$. Then we claim that
+\begin{align*}
+    X(0) \to \colim_\beta X(\beta) =:C
+\end{align*}
+is in $\Cell_I(\mathscr{C})$. The only thing left to show is that $C \to Y$ is in $\RLP(I)$. Take
+\[ \begin{tikzcd}
+    A\rar\dar & C = \colim_\beta X(\beta)\dar\\
+    B\rar & Y.
+\end{tikzcd} \]
+Since $A$ is compact with respect to $I$-cells, the map $A \to C$ factors through some $X(\beta)$. Since $B \to Y$ factors through $X(\beta+1)$, we see that it lifts to $B \to C$.
+\end{proof}
+
+
+\begin{definition} A model category $\mathcal{M}$ is \textit{cofibrantly generated} if there exist sets of maps $I,J$ in $\mathcal{M}$ so that
+\begin{itemize}
+    \item $\Cof=$ retracts of $I$-cell complexes, denoted $\widehat{\Cell_I(\mathscr{C})}$\footnote{The hat $\widehat{-}$ means ``retracts of -''}
+    \item $\text{\Cof} = \widehat{\Cell_J(\mathscr{C})}$
+\end{itemize}
+and ``$I$ and $J$ permit the small object argument.''
+\end{definition}
+
+\begin{example} For $\Top_\text{Quillen}$, we can take
+\begin{align*}
+    I &=\left\{ S^n \hookto D^{n+1} \right\} \\
+    J &= \left\{ D^n \to D^n \times [0,1] \right\}.
+\end{align*}
+\end{example}
+
+\begin{example} For $\sSet_\text{Kan}$, we can take
+\begin{align*}
+    I &= \left\{ \del\Delta^n \to \Delta^n \right\} \\
+    J &= \left\{ \Lambda_n^k \to \Delta^n \right\}.
+\end{align*}
+\end{example}
+
+\begin{example} For $\left( \Ch_R \right)_\text{proj}$,
+\begin{align*}
+    I &= \left\{ S^n \to D^{n+1} \right\} \\
+    J &= \left\{ 0 \to D^n \right\}.
+\end{align*}
+\end{example}
+
+\begin{example} The Str{\o}m model structure is not cofibrantly generated in the definition above.
+\end{example}
+
+\begin{theorem} (Kan | Right transfer) Let $\mathcal{M}$ be a cofibrantly generated model category and $\mathscr{C}$ is any category where there is an adjunction
+\begin{align*}
+    F: \mathcal{M} \leftrightarrows \mathscr{C}: G.
+\end{align*}
+Then $\mathscr{C}$ has a model structure where $W$ and $\Fib$ are created by $G$. The model structure is cofibrantly generated by $F(I)$ and $F(J)$ if:
+\begin{enumerate}
+    \item $F(I)$ and $F(J)$ permit the small object argument
+    \item $G \left( \Cell_{F(J)} \right)$ are weak equivalences in $\mathcal{M}$.
+\end{enumerate}
+\end{theorem}
+
+For combinatorial model categories, we get an inductive argument for building cofibrant replacements.
+
+[Rezk-Schwede-Shipley] Combinatorial model categories are always simplicially enriched.
+
+[Dugger] Any combinatorial model category $\mathcal{M}$ is Quillen equivalent to a localization of a projective Kan one:
+\begin{align*}
+    L_\tau \Fun(K^\op, \sSet) \leftrightarrows \mathcal{M}.
+\end{align*}
+
+
 
 
 \newpage
