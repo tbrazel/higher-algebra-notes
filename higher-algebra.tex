@@ -173,6 +173,9 @@
 \providecommand{\Cyl}{\text{Cyl}}
 
 \providecommand{\Cell}{\text{Cell}}
+\providecommand{\SP}{\text{SP}}
+\providecommand{\Assoc}{\text{Assoc}}
+\providecommand{\Comm}{\text{Comm}}
 
 \title{Higher Algebra}
 
@@ -1273,6 +1276,181 @@ For combinatorial model categories, we get an inductive argument for building co
 \begin{align*}
     L_\tau \Fun(K^\op, \sSet) \leftrightarrows \mathcal{M}.
 \end{align*}
+
+\section{Lecture 7: Thursday, February 2nd}
+
+[missed]
+
+\section{Lecture 8: Tuesday, February 7th}
+
+\textbf{Last time}: We had $\mathcal{M}$ a model category, and $\otimes$ a monoidal structure. We used this to give a monoidal structure on $\Ho(\mathcal{M})$, given by $\otimes^{\mathbb{L}}$, the \textit{left derived tensor product}. We used this to give a homotopy theory on $\Alg(\mathcal{M})$, and $\Mod_R(\mathcal{M})$, etc.
+
+\textbf{Q}: What are algebras in the homotopy category of a model structure $\mathcal{M}$? An example of interest is $\mathcal{M} = \Top$.
+
+What are commutative algebras in $\Top$?
+
+\begin{theorem} (Moore) If $X\in\CAlg(\Top)$, then there is a weak equivalence
+\begin{align*}
+    \prod_{i=1}^\infty K(\pi_i(X),i) \to X.
+\end{align*}
+\end{theorem}
+\begin{proof} Let $G_n = \pi_n(X)$. Then we take
+\begin{align*}
+    0 \to F \to \Z[G_n] \to G_n \to 0.
+\end{align*}
+Then we get that $\til{H}_n(\vee_{g\in G_n}S^n) \cong \oplus_{g\in G_n} \til{H}_n(S^n) = \Z[G_n]$. Using the Hurewicz theorem, there is an isomorphism
+\begin{align*}
+    \pi_n(\vee S^n) \xto{\sim} \til{H}_n (\vee S^n),
+\end{align*}
+so we can pick $f_j \in \pi_n(S^n)$ for each $e_j$ in a basis of $F$. This gives us a pushout
+\[ \begin{tikzcd}
+    \vee_{j\in J} S^n\rar\dar & \vee_{g\in G_n}S^n\dar\\
+    \ast\rar & M(G_n,n)\po
+\end{tikzcd} \]
+This gives a map $\vee_{n\ge 1} M(G_n,n) \to X$. By universal property, we get an algebra homomorphism\footnote{Here $\SP(-)$ denotes the infinite symmetric product, i.e. the free commutative algebra in $\Top$.}\footnote{The infinite symmetric product is left adjoint to the forgetful functor, i.e. $\SP: \Top \leftrightarrows \CAlg(\Top) : U$.}
+\begin{align*}
+    \SP(\vee_{n\ge 1} M(G_n,n)) \to X
+\end{align*}
+The Dold--Thom theorem states that $\pi_\ast \SP(Y) \cong \til{H}_\ast(Y)$, given some connectedness hypothesis (path-connected?). We get that
+\begin{align*}
+    \SP(\vee_{n\ge 1} M(G_n,n)) \cong \prod_n \SP(M(G_n,n)) = \prod_n K(G_n,n).
+\end{align*}
+\end{proof}
+
+
+\begin{definition} We say that $X \in \Alg(\Ho(\Top))$ if and only if $X$ is a CW complex, with multiplication and unit
+\begin{align*}
+    X \times X &\to X \\
+    \ast &\to X
+\end{align*}
+which are associative and unital \textit{up to homotopy}.
+\end{definition}
+
+These are also called $H$\textit{-spaces}. The most prototypical example is a loop space.
+
+\begin{example} If $X$ is a based space, we can build $\Omega X$ as the homotopy pullback of the two maps from a point. Concatenation gives a map $\Omega X \times \Omega X \to \Omega X$.
+\end{example}
+
+\begin{example} Eilenberg-MacLane spaces $K(G,n)$ are uniquely determined up to homotopy. We have that
+\begin{align*}
+    \pi_k \left( \Omega K(G,n) \right) \cong \pi_{k+1}(K(G,n))
+\end{align*}
+therefore $\Omega K(G,n) = K(G,n-1)$.
+\end{example}
+
+\textbf{Q}: Given $X$ an $H$-space, such that $\pi_0 X$ is a group, is $X$ a loop space?
+
+\textbf{A}: No, there are many grouplike $H$-spaces that are not equivalent to $\Omega X$. For example $S^7 \subseteq \mathbb{O}$ the unit octonians.
+
+Loop spaces have an extra condition. Given $w,x,y,z \in \Omega X$, there is an association $(xy)z \simeq x(yz)$. There is a pentagon witnessing the different ways to associate four elements.
+
+We can keep going with 5 loops, 6 loops... and we get the Stasheff associahedra $K(n)$, which tell us how to concatenate $n$ loops. These give maps
+\begin{align*}
+    K(n) \times (\Omega X)^n \to \Omega X,
+\end{align*}
+witnessing the higher associativities of concatenation. We call this an $A_\infty$-algebra structure.
+
+\begin{theorem} (Stasheff) Given $X$ connected, we have that $X \simeq \Omega Y$ for some $Y$ if and only if $X$ is an $A_\infty$-algebra in spaces that is grouplike.
+\end{theorem}
+
+\textbf{Rigidification}: We have that $\Ho(\Alg(\sSet,\times)) \simeq \Alg_{A_\infty}(\Ho(\Top))$.
+
+\begin{center}
+    \textbf{Operads}
+\end{center}
+
+Let $\mathscr{C} = \left( \mathscr{C}, \otimes, I, [-,-] \right)$ be a closed monoidal category.
+
+\begin{definition} An \textit{operad} in $\mathscr{C}$ is a collection of objects $\left\{ \O(j) \right\}_{j\ge 0}$ in $\mathscr{C}$ such that
+\begin{enumerate}
+    \item there is a right action of $\Sigma_j$ on $\O(j)$
+    \item $\O(0) = I$
+    \item $I \to \O(1)$ exists in $\mathscr{C}$
+    \item composition
+    \begin{align*}
+        \O(k) \otimes\O(j_1) \otimes \cdots \otimes \O(j_k) \xto{\gamma} \O(j_1 + \ldots + j_k)
+    \end{align*}
+    for all $k \ge 0$ and $j_1, \ldots, j_k \ge 0$ such that they are equivariant, unital, and associative.
+\end{enumerate}
+\end{definition}
+
+We think about $\O(j)$ as an abstract way to compose $j$-ary operations.
+
+\begin{example}\label{ex:labelname} We let $\Assoc$ be the operad defined by
+\begin{align*}
+    \Assoc(j) = \amalg_{\sigma\in \Sigma_j} I.
+\end{align*}
+\end{example}
+
+We can define $\Comm(j) = I$.
+
+\begin{example} If $X \in \mathscr{C}$, the \textit{endomorphism operad} is given by
+\begin{align*}
+    \End_X(j) = [X^{\otimes j}, X].
+\end{align*}
+\end{example}
+
+\begin{definition} A \textit{morphism of operads} $\O \to \O'$ is a sequence of maps $\psi_j : \O(j) \to \O'(j)$ for $g\ge 0$ that are equivariant, associative, and unital.
+\end{definition}
+
+\begin{definition} Given $\O$ an operad in $\mathscr{C}$, an $\O$-algebra $(X,\theta)$ in $\mathscr{C}$ is $X\in \mathscr{C}$ together with a morphism of operads $\theta: \O \to \End_X$, sending $\O(j) \to \End_X(j)$. By adjointness, we think about this as $\O(j) \otimes X^{\otimes j} \to X$ which are associative and unital.
+\end{definition}
+
+This gives us a category of $\O$-algebras, denoted $\Alg_\O(\mathscr{C})$.
+
+\begin{example} We have that
+\begin{align*}
+    \Alg_\Assoc(\mathscr{C}) \cong \Alg(\mathscr{C}) \\
+    \Alg_\Comm(\mathscr{C}) \cong \CAlg(\mathscr{C}).
+\end{align*}
+We have that $\mathcal{M}$ is a monoidal model category if $\theta$ is nice enough, i.e. we get an adjunction
+\begin{align*}
+    \mathcal{M} \leftrightarrows \Alg_\O(\mathcal{M}).
+\end{align*}
+\end{example}
+
+\begin{definition} A \textit{monad} in $\mathscr{C}$ is an algebra in $\left( \Fun(\mathscr{C},\mathscr{C}), \circ, \id_\mathscr{C} \right)$. That is, $M \in \Alg(\Fun(\mathscr{C},\mathscr{C}))$ if we have $M: \mathscr{C} \to \mathscr{C}$ together with $\mu: M\circ M \Rightarrows M$, and $\eta: \id_\mathscr{C} \Rightarrow \mathscr{C}$ that are associative and unital.
+\end{definition}
+
+\begin{example} Every adjunction $L : \mathscr{C} \leftrightarrows \mathscr{D}: R$ defines a monad $RL$.
+\end{example}
+
+\begin{definition} An \textit{algebra} $(X,\theta)$ over a monad $(M,\mu,\eta)$ in $\mathscr{C}$ is $X\in \mathscr{C}$ together with maps $\theta : M(X) \to X$ such that they are associative and unital, meaning that the diagrams commute:
+\[ \begin{tikzcd}
+    X\rar["\eta"]\ar[dr,equal] & M(X)\dar["\theta" right]\\
+     & X
+\end{tikzcd} \quad\quad \begin{tikzcd}
+    M(M(X))\rar["\mu_{MX}"]\dar["M(\theta)" left] & M(X)\dar["\theta"]\\
+    M(X)\rar["\theta" below] & X.
+\end{tikzcd} \]
+\end{definition}
+
+\begin{definition} If $M$ is a monad, a \textit{morphism of $M$-algebras} $(X,\theta) \to (X',\theta')$ is a map $f:X\to X'$ in $\mathscr{C}$ so that the diagram commutes
+\[ \begin{tikzcd}
+    MX\rar["\theta"]\dar["Mf" left] & X\dar["f" right]\\
+    MX'\rar["\theta'" below] & X'.
+\end{tikzcd} \]
+\end{definition}
+
+\begin{example} Consider $R$ a commutative ring, and the adjunction
+\begin{align*}
+    - \otimes_\Z R: \Ab \leftrightarrows \Mod_R: U.
+\end{align*}
+This forms a monad $M:=- \otimes_\Z R : \Ab \to \Ab$. Then $\Alg_M(\Ab)$ is equivalent to $\Mod_R$.
+\end{example}
+
+This is not always true! When this happens we say the adjunction is \textit{monadic}.
+
+Given a monadic adjunction
+\begin{align*}
+    \mathscr{C} \leftrightarrows \mathscr{D} = \Alg_{RL}(\mathscr{C}),
+\end{align*}
+we get a ton of things for free:
+\begin{itemize}
+    \item $R$ will preserve colimits if $RL$ does
+    \item get things like free monadic resolutions, bar constructions, etc.
+\end{itemize}
+
 
 
 
