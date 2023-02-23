@@ -176,7 +176,7 @@
 \providecommand{\SP}{\text{SP}}
 \providecommand{\Assoc}{\text{Assoc}}
 \providecommand{\Comm}{\text{Comm}}
-
+\providecommand{\hQCat}{\texttt{hQCat}}
 \title{Higher Algebra}
 
 \author{Maximilien P\'eroux}
@@ -196,6 +196,7 @@
   % \label{fig:}
 \end{figure}
 
+\tableofcontents{}
 
 \section{Lecture 1: Thursday, January 12th}
 
@@ -310,7 +311,7 @@ where $(x,s)\sim (y,t)$ if and only if there is some $\alpha : [m] \to [n]$ so t
 \begin{exercise} $|X_\bullet|$ is always a CW complex for any $X_\bullet \in \sSet$.
 \end{exercise}
 
-\begin{exercise} We have an adjunction $|-| : \sSet \leftrightarrows \Top: \Sing(-)$
+\begin{exercise} We have an adjunction $|-| : \sSet \rightleftarrows \Top: \Sing(-)$
 \end{exercise}
 
 \begin{definition} $X_\bullet \to Y_\bullet$ is a \textit{weak homotopy equivalence} in $\sSet$ if $|X_\bullet| \xto{\sim} |Y_\bullet|$ is a weak homotopy equivalence of spaces.
@@ -755,7 +756,7 @@ Therefore $F(p)$ is a weak equivalence by 2-out-of-3.
 \end{align*}
 Moreover, we obtain an adjunction on the homotopy categories:
 \begin{align*}
-    \mathbb{L}F: \Ho(\mathcal{M}) \leftrightarrows \Ho(\mathcal{N}): \mathbb{R}G.
+    \mathbb{L}F: \Ho(\mathcal{M}) \rightleftarrows \Ho(\mathcal{N}): \mathbb{R}G.
 \end{align*}
 \end{theorem}
 \begin{proof}[Proof idea] We have a natural iso
@@ -768,18 +769,18 @@ compatible with homotopy equivalence:
 \end{align*}
 \end{proof}
 
-\textbf{Theorem/Definition:} Take a Quillen adjunction $F: \mathcal{M} \leftrightarrows \mathcal{N}: G$. Suppose that $f: X \xto{\sim} G(Y)$, with $X\in \mathcal{M}_c$ and $Y\in \mathcal{N}_f$ is a weak equivalence if and only if $f^\flat:F(X) \to Y$ is. Then $\mathbb{L}F$ and $\mathbb{R}G$ are equivalences of categories, we call this a \textit{Quillen equivalence}.
+\textbf{Theorem/Definition:} Take a Quillen adjunction $F: \mathcal{M} \rightleftarrows \mathcal{N}: G$. Suppose that $f: X \xto{\sim} G(Y)$, with $X\in \mathcal{M}_c$ and $Y\in \mathcal{N}_f$ is a weak equivalence if and only if $f^\flat:F(X) \to Y$ is. Then $\mathbb{L}F$ and $\mathbb{R}G$ are equivalences of categories, we call this a \textit{Quillen equivalence}.
 
 \begin{example} We have that
 \begin{align*}
-    |-|:\sSet_\text{Kan} \leftrightarrows \Top_\text{Quillen}: \Sing(-)
+    |-|:\sSet_\text{Kan} \rightleftarrows \Top_\text{Quillen}: \Sing(-)
 \end{align*}
 is a Quillen equivalence.
 \end{example}
 
 \begin{example} We have that
 \begin{align*}
-    \id: \Top_\text{Quillen} \leftrightarrows \Top_\text{Str{\o}m}:\id
+    \id: \Top_\text{Quillen} \rightleftarrows \Top_\text{Str{\o}m}:\id
 \end{align*}
 is a Quillen adjunction but not a Quillen equivalence.
 \end{example}
@@ -841,7 +842,7 @@ $\left( \Ch_R \right)_\text{injective}$:
 
 We get a Quillen equivalence
 \begin{align*}
-    \id: \left( \Ch_R \right)_\text{projective} \leftrightarrows \left( \Ch_R \right)_\text{injective}: \id.
+    \id: \left( \Ch_R \right)_\text{projective} \rightleftarrows \left( \Ch_R \right)_\text{injective}: \id.
 \end{align*}
 
 We also have have a third one which is \textit{not} Quillen equivalent.
@@ -857,7 +858,7 @@ We denote by $\mathscr{D}(R) = \Ho \left( \left( \Ch_R \right)_\text{proj} \righ
 
 We can also think about \textit{connective} chain complexes (which are zero in negative degrees). We have an adjunction
 \begin{align*}
-    \Ch_R \leftrightarrows \Ch_R^{>0}.
+    \Ch_R \rightleftarrows \Ch_R^{>0}.
 \end{align*}
 This induces a model structure on $\Ch_R^{>0}$ making it into a Quillen adjunction but not a Quillen equivalence. We denote by $\Ho(\Ch_R^{\ge 0}) = \mathscr{D}^{\ge 0}(R)$.
 
@@ -898,13 +899,13 @@ where $P_\bullet$ is a projective resolution of $N$. We have that
 
 Via Dold-Kan, we have a Quillen adjunction
 \begin{align*}
-    R[-]:\sSet_\text{Kan} \leftrightarrows \sMod_R : U,
+    R[-]:\sSet_\text{Kan} \rightleftarrows \sMod_R : U,
 \end{align*}
 with the model structure on $\sMod_R$ given by weak homotopy equivalences as underlying simplicial sets, and fibrations as underlying Kan fibrations.
 
 Then Dold-Kan takes the form of a Quillen equivalence
 \begin{align*}
-    N:(\sMod_R)_\text{Kan} \leftrightarrows (\Ch_R^{\ge 0})_\text{proj}: \Gamma.
+    N:(\sMod_R)_\text{Kan} \rightleftarrows (\Ch_R^{\ge 0})_\text{proj}: \Gamma.
 \end{align*}
 
 In general $N(X \otimes_R Y) \not\cong N(X) \otimes_R N(Y)$, however $N(X \otimes Y) \cong N(X) \otimes_R N(Y)$. They both describe $\mathscr{D}^{\ge 0}(R)$ in a monoidal way.
@@ -915,7 +916,7 @@ In general $N(X \otimes_R Y) \not\cong N(X) \otimes_R N(Y)$, however $N(X \otime
 
 For Dold--Kan $\Ch_{\ge 0} \cong \sMod_R$, we have
 \begin{align*}
-    M \otimes N \leftrightarrows M \otimes R \otimes N \leftrightarrows M \otimes R^{\otimes 2} N \cdots
+    M \otimes N \rightleftarrows M \otimes R \otimes N \rightleftarrows M \otimes R^{\otimes 2} N \cdots
 \end{align*}
 we denote this by $B_\bullet(M,R,N)$ and call it the \textit{bar construction}.
 
@@ -978,7 +979,7 @@ This is the \textit{free diagram of $X$ generated at $c$}.
 
 This gives an adjunction
 \begin{align*}
-    - \otimes \mathscr{C}(c,-) : \mathcal{M} \leftrightarrows \mathcal{M}^{\mathscr{C}}: \ev_c.
+    - \otimes \mathscr{C}(c,-) : \mathcal{M} \rightleftarrows \mathcal{M}^{\mathscr{C}}: \ev_c.
 \end{align*}
 In this case
 \begin{align*}
@@ -1006,7 +1007,7 @@ This admits adjoints
 
 \begin{proposition} The adjunction
 \begin{align*}
-    \colim:\left( \mathcal{M}^{\mathscr{C}} \right)_\text{proj} \leftrightarrows \mathcal{M}: \Delta
+    \colim:\left( \mathcal{M}^{\mathscr{C}} \right)_\text{proj} \rightleftarrows \mathcal{M}: \Delta
 \end{align*}
 is Quillen.
 \end{proposition}
@@ -1159,7 +1160,7 @@ We also say the ``ind-completion'' of $S$ is $\mathscr{C}$, denoted $\Ind(S) = \
 
 \begin{theorem} $\mathscr{C}$ is presentable if and only if there is an adjunction of the form
 \begin{align*}
-    \Fun(K^\op, \Set) \leftrightarrows \mathscr{C},
+    \Fun(K^\op, \Set) \rightleftarrows \mathscr{C},
 \end{align*}
 where $K$ is some small category, and the right adjoint is fully faithful and preserves filtered colimits.
 \end{theorem}
@@ -1259,7 +1260,7 @@ and ``$I$ and $J$ permit the small object argument.''
 
 \begin{theorem} (Kan | Right transfer) Let $\mathcal{M}$ be a cofibrantly generated model category and $\mathscr{C}$ is any category where there is an adjunction
 \begin{align*}
-    F: \mathcal{M} \leftrightarrows \mathscr{C}: G.
+    F: \mathcal{M} \rightleftarrows \mathscr{C}: G.
 \end{align*}
 Then $\mathscr{C}$ has a model structure where $W$ and $\Fib$ are created by $G$. The model structure is cofibrantly generated by $F(I)$ and $F(J)$ if:
 \begin{enumerate}
@@ -1274,7 +1275,7 @@ For combinatorial model categories, we get an inductive argument for building co
 
 [Dugger] Any combinatorial model category $\mathcal{M}$ is Quillen equivalent to a localization of a projective Kan one:
 \begin{align*}
-    L_\tau \Fun(K^\op, \sSet) \leftrightarrows \mathcal{M}.
+    L_\tau \Fun(K^\op, \sSet) \rightleftarrows \mathcal{M}.
 \end{align*}
 
 \section{Lecture 7: Thursday, February 2nd}
@@ -1307,7 +1308,7 @@ so we can pick $f_j \in \pi_n(S^n)$ for each $e_j$ in a basis of $F$. This gives
     \vee_{j\in J} S^n\rar\dar & \vee_{g\in G_n}S^n\dar\\
     \ast\rar & M(G_n,n)\po
 \end{tikzcd} \]
-This gives a map $\vee_{n\ge 1} M(G_n,n) \to X$. By universal property, we get an algebra homomorphism\footnote{Here $\SP(-)$ denotes the infinite symmetric product, i.e. the free commutative algebra in $\Top$.}\footnote{The infinite symmetric product is left adjoint to the forgetful functor, i.e. $\SP: \Top \leftrightarrows \CAlg(\Top) : U$.}
+This gives a map $\vee_{n\ge 1} M(G_n,n) \to X$. By universal property, we get an algebra homomorphism\footnote{Here $\SP(-)$ denotes the infinite symmetric product, i.e. the free commutative algebra in $\Top$.}\footnote{The infinite symmetric product is left adjoint to the forgetful functor, i.e. $\SP: \Top \rightleftarrows \CAlg(\Top) : U$.}
 \begin{align*}
     \SP(\vee_{n\ge 1} M(G_n,n)) \to X
 \end{align*}
@@ -1405,14 +1406,14 @@ This gives us a category of $\O$-algebras, denoted $\Alg_\O(\mathscr{C})$.
 \end{align*}
 We have that $\mathcal{M}$ is a monoidal model category if $\theta$ is nice enough, i.e. we get an adjunction
 \begin{align*}
-    \mathcal{M} \leftrightarrows \Alg_\O(\mathcal{M}).
+    \mathcal{M} \rightleftarrows \Alg_\O(\mathcal{M}).
 \end{align*}
 \end{example}
 
-\begin{definition} A \textit{monad} in $\mathscr{C}$ is an algebra in $\left( \Fun(\mathscr{C},\mathscr{C}), \circ, \id_\mathscr{C} \right)$. That is, $M \in \Alg(\Fun(\mathscr{C},\mathscr{C}))$ if we have $M: \mathscr{C} \to \mathscr{C}$ together with $\mu: M\circ M \Rightarrows M$, and $\eta: \id_\mathscr{C} \Rightarrow \mathscr{C}$ that are associative and unital.
+\begin{definition} A \textit{monad} in $\mathscr{C}$ is an algebra in $\left( \Fun(\mathscr{C},\mathscr{C}), \circ, \id_\mathscr{C} \right)$. That is, $M \in \Alg(\Fun(\mathscr{C},\mathscr{C}))$ if we have $M: \mathscr{C} \to \mathscr{C}$ together with $\mu: M\circ M \Rightarrow M$, and $\eta: \id_\mathscr{C} \Rightarrow \mathscr{C}$ that are associative and unital.
 \end{definition}
 
-\begin{example} Every adjunction $L : \mathscr{C} \leftrightarrows \mathscr{D}: R$ defines a monad $RL$.
+\begin{example} Every adjunction $L : \mathscr{C} \rightleftarrows \mathscr{D}: R$ defines a monad $RL$.
 \end{example}
 
 \begin{definition} An \textit{algebra} $(X,\theta)$ over a monad $(M,\mu,\eta)$ in $\mathscr{C}$ is $X\in \mathscr{C}$ together with maps $\theta : M(X) \to X$ such that they are associative and unital, meaning that the diagrams commute:
@@ -1434,7 +1435,7 @@ We have that $\mathcal{M}$ is a monoidal model category if $\theta$ is nice enou
 
 \begin{example} Consider $R$ a commutative ring, and the adjunction
 \begin{align*}
-    - \otimes_\Z R: \Ab \leftrightarrows \Mod_R: U.
+    - \otimes_\Z R: \Ab \rightleftarrows \Mod_R: U.
 \end{align*}
 This forms a monad $M:=- \otimes_\Z R : \Ab \to \Ab$. Then $\Alg_M(\Ab)$ is equivalent to $\Mod_R$.
 \end{example}
@@ -1443,7 +1444,7 @@ This is not always true! When this happens we say the adjunction is \textit{mona
 
 Given a monadic adjunction
 \begin{align*}
-    \mathscr{C} \leftrightarrows \mathscr{D} = \Alg_{RL}(\mathscr{C}),
+    \mathscr{C} \rightleftarrows \mathscr{D} = \Alg_{RL}(\mathscr{C}),
 \end{align*}
 we get a ton of things for free:
 \begin{itemize}
@@ -1451,7 +1452,317 @@ we get a ton of things for free:
     \item get things like free monadic resolutions, bar constructions, etc.
 \end{itemize}
 
+\section{Lecture 9: Thursday, February 9th}
 
+[missed]
+
+\section{Lecture 10: Thursday, February 16th}
+
+\begin{definition} A simplicial set $\mathscr{C}$ is an $\infty$\textit{-category} (or \textit{quasi-category}) if it has inner horn filling --- for all $0 < k < n$, we have
+\[ \begin{tikzcd}
+    \Lambda_n^k\rar\dar & \mathscr{C}\\
+    \Delta^n\ar[ur,dashed] & 
+\end{tikzcd} \]
+\end{definition}
+
+We shall see that $\infty$-categories are fibrant objects in $\sSet$ with the Joyal model structure.
+
+\begin{example} $\ $
+\begin{enumerate}
+    \item If $\mathscr{C}$ is a Kan complex, then it is an $\infty$-category
+    \item If $\mathscr{C}$ is a category, then $N\mathscr{C}$ is an $\infty$-category.
+\end{enumerate}
+\end{example}
+
+\begin{definition} Given an $\infty$-category $\mathscr{C}$, the \textit{objects} of $\mathscr{C}$ are the vertices,\footnote{$X\in \mathscr{C}$ means $X\in \mathscr{C}_0$} the \textit{morphisms} are 1-simplices. We have \textit{source} and \textit{target} maps $d^1,d^0: \mathscr{C}_1 \to \mathscr{C}_0$.\footnote{We write $f: X \to Y$ in $\mathscr{C}$ to mean $f\in \mathscr{C}_1$ with $s(f) = X$ and $t(f) = Y$.} We define the \textit{set of morphisms} from $X$ to $Y$ as the pullback
+\[ \begin{tikzcd}
+    \hom_\mathscr{C}(X,Y)\rar\dar\pb & \mathscr{C}_1\dar["{(s,t)}" right]\\
+    \mathscr{C}_1\rar["{(X,Y)}" below] & \mathscr{C}_0 \times\mathscr{C}_0.
+\end{tikzcd} \]
+\end{definition}
+We have that $\hom_\mathscr{C}(X,Y)$ is the set of vertices of a simplicial set $\Hom_\mathscr{C}(X,Y)$, which forms a Kan complex.
+
+\begin{definition} Given $X\in \mathscr{C}$ we define $\id_X \in \mathscr{C}_1$ by $s^0(X)$.
+\end{definition}
+
+How do we compose? Composition won't be unique, but it will be unique \textit{up to homotopy}.
+
+Given $f: X \to Y$ and $g: Y \to Z$ in $\mathscr{C}$, this determines a map of simplicial sets $\Lambda^2_1 \to \mathscr{C}$. By inner horn lifting, we have
+\[ \begin{tikzcd}
+    \Lambda^2_1\dar\rar & \mathscr{C}\\
+    \Delta^2\ar[ur,dashed] & 
+\end{tikzcd} \]
+We refer to the filling as a \textit{composition}:
+\[ \begin{tikzcd}
+     & Y\ar[dr,"g" above right] & \\
+    X\ar[ur,"f" above left]\ar[rr,"h" below] &  & Z.
+\end{tikzcd} \]
+
+\begin{exercise} Given an $\infty$-category $\mathscr{C}$, how can we define $\mathscr{C}^\op$? Would want that $N(\mathscr{C}^\op) \cong (N\mathscr{C})^\op$.\footnote{Every Kan complex has that $\mathscr{C}^\op \cong \mathscr{C}$.}
+\end{exercise}
+
+\textbf{Detour}: Let $A\in\Cat$, and let $\mathscr{C}$ be a cocomplete category. Recall that $\Fun(A^\op, \Set)$ is the free cocompletion. Given a functor $A \to \mathscr{C}$, by universal property there is a map
+\[ \begin{tikzcd}
+    A\rar["Q"]\dar[hook] & \mathscr{C}\\
+    \Fun(A^\op,\Set)\ar[ur,dashed,"|-|_Q" below right] & 
+\end{tikzcd} \]
+This gives us an adjunction
+\begin{align*}
+    |-|_Q: \Fun(A^\op, \Set) \rightleftarrows \mathscr{C}: \Sing_Q(-).
+\end{align*}
+Here $\Sing_Q(-) =\Hom_\mathscr{C}(Q(-),X)$.
+
+\begin{example} If $\mathscr{C} = \Top$, then we can take $\Delta_\Top: \Delta \to \Top$, sending $[n]$ to $\Delta^n_\Top$. In this case, we recover the usual $|-|$ and $\Sing(-)$ adjunction.
+\end{example}
+
+
+\begin{example} If $\mathscr{C} = \Cat$, there is a functor $\Delta \to \Cat$ sending $[n]$ to the associated poset category. We get an associated adjunction:
+\begin{align*}
+    \tau: \sSet \rightleftarrows \Cat: N,
+\end{align*}
+since $N = \Hom_\Cat([-],\mathscr{C})$.
+\end{example}
+
+\begin{exercise} Describe $\tau: \sSet \to \Cat$ explicitly.
+\end{exercise}
+
+We call $\tau$ the fundamental category functor, essentially it will produce the homotopy category of an $\infty$-category.
+
+\begin{definition} Given an $\infty$-category $\mathscr{C}$, two morphisms $f: X \to Y$ and $g: Y \to Z$ are \textit{homotopic}, written $f\simeq g$, if there exists a 2-simplex $\sigma: \Delta^2 \to \mathscr{C}$ with boundary $(g,f,\id_X)$:
+\[ \begin{tikzcd}
+     & X\ar[dr,"g" above right] & \\
+    X\ar[ur,"\id_X" above left]\ar[rr,"f" below] &  & Y.
+\end{tikzcd} \]
+\end{definition}
+
+\begin{example} If $\mathscr{C}$ is an ordinary category, then in $N\mathscr{C}$, we have that $f\simeq g$ if and only if $f=g$.
+\end{example}
+
+\begin{proposition} Given $\mathscr{C}$ an $\infty$-category, and $X,Y\in \mathscr{C}$, the homotopy relation provides an equivalence relation on $\hom_\mathscr{C}(X,Y)$.
+\end{proposition}
+
+\begin{definition} We denote by $[f]$ the homotopy class of $f$.
+\end{definition}
+
+\begin{proof}[Sketch] We first need to show reflexivity, so we want to find a 2-cell witnessing
+\[ \begin{tikzcd}
+     & X\ar[dr,"f" above right] & \\
+    X\ar[ur,equal]\ar[rr,"f" below] &  & Y.
+\end{tikzcd} \]
+We check that this is $s_0(f)$, where $f \in \mathscr{C}_1$, and $s_0 : \mathscr{C}_1 \to \mathscr{C}_2$.
+
+For symmetry, suppose we have $f\simeq g$. We want to show $g\simeq f$. We can fill a $\Lambda^3_2$ witnessing this.
+
+Transitivity is left as an exercise.
+\end{proof}
+
+\begin{definition} Given $\mathscr{C}$ an $\infty$-category, define the 1-category $\Ho(\mathscr{C})$ to be the \textit{homotopy category}, given by
+\begin{align*}
+    \ob \Ho(\mathscr{C}) &= \mathscr{C}_0 \\
+    \Hom_{\Ho(\mathscr{C})}(X,Y) &= \hom_\mathscr{C}(X,Y)/\simeq.
+\end{align*}
+In order to show this, we need to argue that composition is well-defined up to homotopy.
+\end{definition}
+
+Suppose we have two compositions
+\[ \begin{tikzcd}
+     & Y\ar[dr,"g" above right] & \\
+    X\ar[ur,"f" above left]\ar[rr,"h_1" below] &  & Z.
+\end{tikzcd} \quad\quad  \begin{tikzcd}
+     & Y\ar[dr,"g" above right] & \\
+    X\ar[ur,"f" above left]\ar[rr,"h_2" below] &  & Z.
+\end{tikzcd} \]
+We want to argue that $h_1 \simeq h_2$. This can be done by filling the horn of a 3-simplex.
+
+\begin{proposition} When we restrict the adjunction $\tau \dashv N$ to $\infty$-categories, we get an adjunction
+\begin{align*}
+    \Ho(-): \Cat_\infty \rightleftarrows \Cat: N.
+\end{align*}
+\end{proposition}
+
+The way to compose arrows is contractible.
+
+\begin{theorem} The inclusion $\Lambda^2_1 \hookto \Delta^2$ induces a map
+\begin{align*}
+    \Hom_\ast(\Delta^2, \mathscr{C}) \to \Hom_\ast(\Lambda^2_1, \mathscr{C})
+\end{align*}
+which is a trivial Kan fibration for any $\mathscr{C}\in \Cat_\infty$.
+\end{theorem}
+Here $\Hom_\ast$ is the \textit{internal hom}, where $\Hom_\ast(X,Y) := \Hom_\sSet(\Delta^\ast \times X, Y)$.
+\begin{proof} Exercise
+\end{proof}
+
+As a consequence, we can take a pullback diagram:
+\[ \begin{tikzcd}
+    P\pb\rar\dar & \Hom_\ast(\Delta^2,\mathscr{C})\dar\\
+    \Delta^0\rar & \Hom_\ast(\Lambda^2_1,\mathscr{C}).
+\end{tikzcd} \]
+Then the pullback $P \to \Delta^0$ should be a trivial fibration, meaning that $P$ is a contractible Kan complex.
+
+\begin{definition} Given $\mathscr{C}$ an $\infty$-category and $X,Y\in \mathscr{C}$, recall that a map $f: X \to Y$ corresponds to $\Delta^1 \to \mathscr{C}$ whose faces are $X$ and $Y$. An \textit{$n$-morphism} from $X$ to $Y$ is simply a map $\Delta^n \to \mathscr{C}$ such that $\Delta^{\left\{ 0, \ldots, n-1 \right\}} = X$ and $\Delta^{\{n\}} = Y$.
+\end{definition}
+
+For $n\ge 2$, all $n$-morphisms are invertible in some sense.
+
+\begin{definition} Two objects $X$ and $Y$ in $\mathscr{C}$ are \textit{equivalent}, written $X \simeq Y$, if there exists a 1-morphism $f: X \to Y$ in $\mathscr{C}$ such that $[f]$ in $\Ho(\mathscr{C})$ is an \textit{isomorphism}.
+\end{definition}
+
+\begin{definition} An $\infty$\textit{-groupoid} is an $\infty$-category for which $\Ho(\mathscr{C})$ is a groupoid, meaning all the 1-morphisms are equivalences.
+\end{definition}
+
+\begin{theorem} (Homotopy hypothesis) We get that $\mathscr{C}$ is an $\infty$-groupoid if and only if $\mathscr{C}$ is a Kan complex.
+\end{theorem}
+
+\section{Lecture 11: Tuesday, February 21st}
+
+[missed]
+
+\section{Lecture 12: Thursday, February 23rd}
+
+\begin{center}
+    \textbf{Adjoint functors and colimits}
+\end{center}
+
+\textbf{Last time}: Recall that a 1-morphism in $\Fun(\mathscr{C},\mathscr{D})$\footnote{The simplicial set $\Fun(\Delta^\bullet \times \mathscr{C}, \mathscr{D})$} is precisely a natural transformation $\eta: F \to G$, where $F,G: \mathscr{C} \to \mathscr{D}$. In other words, it is $\eta: \Delta^1 \times \mathscr{C} \to \mathscr{D}$.
+
+We have $\hQCat = \Ho(\Cat_\infty)$, where objects are infinity categories, and the morphisms are
+\begin{align*}
+    \Hom_\hQCat(\mathscr{C},\mathscr{D}) = \Pi_0 \left( \Fun(\mathscr{C},\mathscr{D})^\simeq \right).
+\end{align*}
+That is, it is the set of equivalence classes of functors $\mathscr{C} \to \mathscr{D}$.
+
+If $\mathscr{C}$ is an $\infty$-category, and $X,Y\in \mathscr{C}$, we defined $\Hom_\mathscr{C}(X,Y)_\bullet$ to be the simplicial set given by the pullback
+\[ \begin{tikzcd}
+    \Hom_\mathscr{C}(X,Y)_\bullet\rar\dar\pb & \Fun(\Delta^1,\mathscr{C})\dar\\
+    \Delta^0\rar & \Fun(\left\{ 0 \right\}, \mathscr{C})_\bullet \times \Fun(\left\{ 1 \right\}, \mathscr{C}).
+\end{tikzcd} \]
+
+\begin{proposition} We have that $\Hom_\mathscr{C}(X,Y) \in \Kan$.
+\end{proposition}
+\begin{proof}[Sketch] This follows from a more general fact that for $A \hookto B$ a subsimplicial set with $A_0 = B_0$, and $\mathscr{C}$ an $\infty$-category, then $P$ is always a Kan complex
+\[ \begin{tikzcd}
+    P\rar\dar\pb & \Fun(B,\mathscr{C})\dar\\
+    \Delta^0\rar["f" below] & \Fun(A,\mathscr{C}).
+\end{tikzcd} \]
+Need to show that every $u$ in $\Fun(B, \mathscr{C})_1$ \textit{in the pullback} is a weak equivalence. We have an evaluation map for every $b\in B_0 = A_0$, given by $\ev_b: \Fun(B,\mathscr{C}) \to \Fun(\left\{ b \right\}, \mathscr{C})$, mapping $u$ to $u_{f(b)}$. We claim that $u_{f(b)} = \id_{f(b)}$, since the diagram commutes
+\[ \begin{tikzcd}
+    \Fun(B,\mathscr{C})\ar[rr]\ar[dr] &  & \Fun(\left\{ b \right\},\mathscr{C})\\
+     & \Fun(A,\mathscr{C})\ar[ur] & 
+\end{tikzcd} \]
+\end{proof}
+
+\begin{center}
+    \textbf{Adjoint functors}
+\end{center}
+\begin{definition} Let $F:\mathscr{C} \to \mathscr{D}$, and $G: \mathscr{D}\to \mathscr{C}$ be functors of $\infty$-categories. We say that $F\dashv G$ if there exist natural transformations $\eta: \id_\mathscr{C} \to GF$ ad $\epsilon: FG \to \id_\mathscr{D}$ so that:
+\begin{enumerate}
+    \item there exists $\Delta^2 \to \Fun(\mathscr{C},\mathscr{D})$ witnessing
+\[ \begin{tikzcd}
+    & FGF\ar[dr,"\epsilon\id_F" above right] & \\
+    F\id_\mathscr{C}\ar[ur,"\id_\mathscr{C}\eta" above left]\ar[rr,"\id" below] &  & \id_\mathscr{C} F.
+\end{tikzcd} \]
+    \item there exists $\Delta^2 \to \Fun(\mathscr{D},\mathscr{C})$ witnessing
+    \[ \begin{tikzcd}
+    & GFG\ar[dr,"\id \epsilon" above right] & \\
+    \id_\mathscr{C}G\ar[ur,"\eta\id" above left]\ar[rr,"\id" below] &  & G\id_\mathscr{C}.
+\end{tikzcd} \]
+\end{enumerate}
+\end{definition}
+
+\begin{remark} We have that $\eta : \id \to GF$ depends only on $[\eta]$ in $\Ho(\Fun(\mathscr{C},\mathscr{D}))$. If $\eta$ is given, then $\epsilon$ is unique up to homotopy.
+\end{remark}
+
+\begin{example} If $\mathscr{C}$ and $\mathscr{D}$ are ordinary categories, then we have a 1-categorical adjunction
+\begin{align*}
+    F: \mathscr{C} \rightleftarrows \mathscr{D}: G
+\end{align*}
+if and only if we have an $\infty$-categorical adjunction
+\begin{align*}
+    NF: N\mathscr{C} \rightleftarrows N\mathscr{D}: NG.
+\end{align*}
+\end{example}
+
+\begin{example} If $X,Y\in\Kan$, then $F: X \to Y$ is an adjoint if and only if $F$ is a homotopy equivalence of simplicial sets. The unit and counit become the witnesses of homotopy equivalence.
+\end{example}
+
+\begin{remark} If we have an adjunction $F: \mathscr{C} \rightleftarrows \mathscr{D}:G$ of $\infty$-categories, then $F$ and $G$ are homotopy equivalences of simplicial sets. The converse is not true in general.
+\end{remark}
+
+\begin{exercise} If $F: \mathscr{C} \to \mathscr{D}$ is an equivalence of $\infty$-categories, then it is both a left and right adjoint functor.
+\end{exercise}
+
+\begin{proposition} Given $F: \mathscr{C} \rightleftarrows\mathscr{D}:G$ of $\infty$-categories, then
+\begin{align*}
+    \Ho(F): \Ho(\mathscr{C}) \rightleftarrows \Ho(\mathscr{D}): \Ho(G)
+\end{align*}
+is an adjunction of 1-categories. That is, \textbf{if} we know $F\dashv G$ in $\infty$-categories, then to check if $\eta: \id_\mathscr{C} \to GF$ is a unit, it is enough to check that $\Ho(\eta)$ is the unit.
+\end{proposition}
+
+However the converse is not true!
+
+\textbf{Warning}: Suppose we take $F:\Delta^0 \to X$ with $X\in \Kan$ simply connected, and $F$ picks $x\in X_0$. Then $\Ho(F) \dashv \Ho(G)$ because $\Ho(X)$ will be simply connected. But it does not imply that $F\dashv G$ unless $X$ is contractible.
+
+There $\Hom_{\Ho(\mathscr{D})}(FC,D) \cong \Hom_{\Ho(\mathscr{C})}(C,GD)$ for any $C\in\mathscr{C}$ and $D\in\mathscr{D}$.
+
+\begin{theorem} Take $F:\mathscr{C}\to\mathscr{D}$ and $G:\mathscr{D}\to\mathscr{C}$ functors of $\infty$-categories. Then $F\dashv G$ with unit $\eta$ if and only if the composite
+\begin{align*}
+    \Hom_\mathscr{D}(FC,D) \xto{G} \Hom_\mathscr{C}(GFC,GD) \xto{\eta^\ast} \Hom_\mathscr{C}(C,GD)
+\end{align*}
+is a weak homotopy equivalence between Kan complexes (aka a homotopy equivalence) for all $C,D$.
+\end{theorem}
+The forward direction is straightforward, but the backwards direction uses (co)cartesian fibration stuff.
+
+\begin{center}
+    \textbf{Limits and colimits}
+\end{center}
+
+Recall that if $\mathscr{C}$ is an ordinary category, then $i\in \mathscr{C}$ is \textit{initial} if for all $X\in \mathscr{C}$, there is a unique $i \xto{!} X$. That is, $\Hom_\mathscr{C}(i,X) = \ast$.
+
+\begin{definition} In an $\infty$-category $\mathscr{C}$, we have that $i\in \mathscr{C}$ is \textit{initial} if $\Hom_\mathscr{C}(i,X) \simeq \ast$ is contractible for all $X\in \mathscr{C}$.
+\end{definition}
+
+\begin{definition} Let $\mathscr{C}$ be an $\infty$-category, and $K_\bullet\in\sSet$. Then for any $X\in \mathscr{C}$, denote by $\underline{X}\in\Fun(K,\mathscr{C})$ the constant functor valued at $X$. The assignment $X \mapsto \underline{X}$ defines a diagonal map
+\begin{align*}
+    \Delta: \mathscr{C} &\to \Fun(K,\mathscr{C}).
+\end{align*}
+This is defined by precomposing with $K\to \Delta^0$, and looking at $\mathscr{C} \simeq \Fun(\Delta^0,\mathscr{C}) \to \Fun(K,\mathscr{C})$.
+\end{definition}
+
+\begin{definition} Let $u:K\to \mathscr{C}$ be a diagram. We say a natural transformation $\alpha: \underline{L}\to u$ exhibits $L\in \mathscr{C}$ as \textit{a limit of} $u$ if for all $X\in \mathscr{C}$, we have that the composite
+\begin{align*}
+    \Hom_\mathscr{C}(X,L) \xto{\Delta} \Hom_{\Fun(K,\mathscr{C})}(\underline{X}, \underline{L}) \xto{\alpha_\ast} \Hom_{\Fun(K,\mathscr{C})}(\underline{X}, u)
+\end{align*}
+is a (weak) homotopy equivalence of Kan complexes.
+\end{definition}
+
+\begin{definition} We say that $\beta: u \to \underline{C}$ exhibits $C$ as a \textit{colimit of $u$} if, for all $Y\in \mathscr{C}$, the composite
+\begin{align*}
+    \Hom_\mathscr{C}(C,Y) \xto{\Delta} \Hom_{\Fun(K,\mathscr{C})}(\underline{C}, \underline{Y}) \xto{\beta^\ast} \Hom_{\Fun(K,\mathscr{C})}(u,\underline{C})
+\end{align*}
+is a (weak) homotopy equivalence.
+\end{definition}
+Note that if $\alpha$ or $\beta$ exist, they are unique up to equivalence.
+
+\begin{example} If $\mathscr{C}$ is an ordinary category, then $u: K \to N\mathscr{C}$ is equivalent to a map $\tau(u): \tau K \to \mathscr{C}$. We can check that $L\in \mathscr{C}$ is $\lim(\tau u)$ in a 1-categorical sense if and only if $L\in \mathscr{C}$ is a limit of $u$ in an $\infty$-categorical sense.
+\end{example}
+
+\begin{example} Let $f: X \to Y$ in an $\infty$-cat $\mathscr{C}$. Then $f$ is an equivalence if and only if $f$ exhibits $Y$ as a colimit $\left\{ X \right\} \to \mathscr{C}$, if and only if $f$ exhibits $X$ as a limit $\left\{ Y \right\}\to \mathscr{C}$.
+\end{example}
+
+\begin{example} Taking the identity diagram $\emptyset \to \mathscr{C}$, the notion of limit/colimit matches the notion of terminal/initial object.
+\end{example}
+
+\begin{proposition} A limit $L\in \mathscr{C}$ is unique up to homotopy. Therefore we usually define it as $\lim_K(u)$.
+\end{proposition}
+
+\begin{proposition} We have that $\mathscr{C}$ admits all $K$-indexed limits if and only if
+\begin{align*}
+    \Delta: \mathscr{C} \to \Fun(K,\mathscr{C})
+\end{align*}
+is a left adjoint. The right adjoint is given by $\lim_K(-)$.
+\end{proposition}
+
+Equalizers are limits along $\Delta^1 \amalg_{\del\Delta^1}\Delta^1$, pullbacks are limits along $\Delta^1 \times \Delta^1 - (0,0)$, etc.
 
 
 
