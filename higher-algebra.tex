@@ -177,6 +177,13 @@
 \providecommand{\Assoc}{\text{Assoc}}
 \providecommand{\Comm}{\text{Comm}}
 \providecommand{\hQCat}{\texttt{hQCat}}
+\providecommand{\St}{\text{St}}
+\providecommand{\Unst}{\text{Unst}}
+\providecommand{\coCart}{\text{coCart}}
+\providecommand{\Tw}{\text{Tw}}
+\providecommand{\Ev}{\text{Ev}}
+\providecommand{\LFib}{\text{LFib}}
+\providecommand{\lax}{\text{lax}}
 \title{Higher Algebra}
 
 \author{Maximilien P\'eroux}
@@ -1763,6 +1770,403 @@ is a left adjoint. The right adjoint is given by $\lim_K(-)$.
 \end{proposition}
 
 Equalizers are limits along $\Delta^1 \amalg_{\del\Delta^1}\Delta^1$, pullbacks are limits along $\Delta^1 \times \Delta^1 - (0,0)$, etc.
+
+
+\section{Lecture 13: February 28th}
+
+[missed]
+
+\section{Lecture 14: March 21st}
+
+\begin{center}
+    \textbf{Straightening/unstraightening}\footnote{Also called the \textit{Grothendieck construction} or the $\infty$\textit{-category of elements}.}
+\end{center}
+
+\textbf{Motivation}: Let $X$ be a space, and let $\Cov(X)$ denote the 1-category of covering spaces of $X$, so that in particular the fibers $f^{-1}$ of $f: E \to X$ are discrete sets. This defines a map in $\Top$ from
+\begin{align*}
+    X \to \Set^{\cong},
+\end{align*}
+to sets with the discrete topology. Another way to think about this is as a functor
+\begin{align*}
+    \St:\Cov(X) &\to \Fun(\Pi_1(X), \Set) \\
+    (E \xto{p} X) &\mapsto \left[ x \mapsto f^{-1}(x) \right].
+\end{align*}
+A path from $x$ to $y$ (a morphism in $\Pi_1(X)$) induces a set map $f^{-1}(x) \to f^{-1}(y)$.
+
+This is an equivalence of categories! This is called the \textit{fundamental theorem of covering spaces}.
+
+This is a first instance of \textit{straightening}.
+
+If we view $X$ as an $\infty$-groupoid, then $\Pi_1(X) = \Ho(X)$ is its homotopy category, and we have that
+\begin{align*}
+    \Fun(\Pi_1(X),\Set) \cong \Fun(X,N(\Set)),
+\end{align*}
+since nerve is right adjoint to the homotopy category.
+
+We can denote by $\Cov_X \subseteq \mathcal{S}/X$ to be the full subcategory of the infinity category of spaces over $X$ spanned by covering spaces. Then we want to show that
+\begin{align*}
+    \Cov_X \simeq \Fun(X,N(\Set)).
+\end{align*}
+We have an unstraightening functor
+\begin{align*}
+    \Unst: \Fun(X,N(\Set)) \to \Cov_X,
+\end{align*}
+given by sending some $F: X \to N(\Set)$ to the pullback\footnote{Note that $N(\Set^\simeq) = N(\Set)^\simeq$.}
+\[ \begin{tikzcd}
+    E\rar\dar & N(\Set_\ast)^\simeq\dar\\
+    X\rar["F" below] & N(\Set)^\simeq
+\end{tikzcd} \]
+
+More generally, if we don't require the fibers to be discrete, then we can take $f: E \to X$ to be any continuous map. Then we get a functor\footnote{By $\Fun(X,\mathcal{S})$ we might mean $\Fun(\Sing(X),N_\Delta(\Kan))$.}
+\begin{align*}
+    \St:\mathcal{S}/X &\to \Fun(X,\mathcal{S}) \\
+    (E \xto{f} X) &\mapsto \left[ x \mapsto f^{-1}(x) \right].
+\end{align*}
+Unstraightening is of the form
+\begin{align*}
+    \Unst: \Fun(X,\mathcal{S}) &\to \mathcal{S}/X \\
+    F &\mapsto \hocolim_X F = \cup_{x\in X} F^{-1}(x) / \sim.
+\end{align*}
+
+Let $X$ be connected and suppose $X \simeq BG$. Then we define $G$\textit{-modules in spaces} to be
+\begin{align*}
+    \Mod_G(\mathcal{S}) := \Fun(BG,\mathcal{S}) \xto{\sim} \mathcal{S}/BG.
+\end{align*}
+If we take some $M: BG \to \mathcal{S}$, and we post-compose with sections $\mathcal{S}/BG \to \mathcal{S}$, then $M$ maps to $M^{hG}$.
+
+More generally, given $F: X \to \mathcal{S}$, the limit $\lim_X \mathcal{S}$ is given by
+\begin{align*}
+    \Fun(X,\mathcal{S}) \xto{\Unst} \mathcal{S}/X \xto{\text{sections}} \mathcal{S}.
+\end{align*}
+
+\textbf{Goal}: Generalize this approach where $X$ is replaced by an $\infty$-category $\mathscr{C}$ and $\mathcal{S}$ is replaced by $\Cat_\infty$. That is, we want to relate $\Fun(\mathscr{C},\Cat_\infty)$ with some subcategory of $\Cat_\infty/\mathscr{C}$.
+
+If $f: \mathcal{E} \to \mathscr{C}$, what requirement do we need to make sense of an associated functor
+\begin{align*}
+    F: \mathscr{C} &\to \Cat_\infty \\
+    X &\mapsto f^{-1}(X).
+\end{align*}
+That is, how can we coherently choose our fibers.
+
+Given $X \in \mathscr{C}$, we could take a pullback in $\Cat_\infty$:
+\[ \begin{tikzcd}
+    f^{-1}(X)\rar\dar\pb & \mathcal{E}\dar\\
+    \Delta^0\rar["X" below] & \mathscr{C}.
+\end{tikzcd} \]
+
+If we choose $\sSet_{\text{Joyal}}$ as our model, we would need $\mathcal{E} \to \mathscr{C}$ to be an inner fibration (RLP wrto inner horns) to get the pullback $f^{-1}(X)$ to be a quasi-category. If we instead say ``pullback in quasi-categories,'' this requirement goes away.
+
+Given $f: \mathcal{E} \to \mathscr{C}$ and $X \to Y$ in $\mathscr{C}$, how can we define $f^{-1}(X) \to f^{-1}(Y)$ in $\Cat_\infty$?
+
+\textbf{Need}: If $\phi: X \to Y$ in $\mathscr{C}$ and $E_X \in \mathcal{E}$ such that $f(E_X) = X$, then there exists some $E_Y\in \mathcal{E}$ and $\phi_!: E_X \to E_Y$ in $\mathcal{E}$ so that $f(\phi_!) = \phi$, and that is universal in the following sense: for all $Z\in \mathscr{C}$ and for all $\psi: X \to Z$ in $\mathscr{C}$ for all $\bar{\psi}: E_X \to E_Z$ in $\mathcal{E}$ where $f(\bar{\psi}) = \psi$, if there exists $\gamma: Y \to Z$ then there exists a unique map $\bar{\gamma}: E_Y \to E_Z$ in $\mathcal{E}$ so that $f(\bar{\gamma}) = \gamma$ and $\bar{\gamma} \circ \phi_! = \bar{\psi}$.
+
+We say that $\phi_!: E_X \to E_Y$ is a \textit{cocartesian lift} of $\phi$.
+
+
+\begin{definition} We say that $f: \mathcal{E} \to \mathscr{C}$ is a \textit{cocartesian fibration} if for all $E_X \in \mathcal{E}$, for all $\phi: X \to Y$ with $f(E_X) = X$, there exists a cocartesian lift of $\phi$.
+\end{definition}
+
+Two cocartesian lifts over the same map are equivalent.
+
+Given $f: \mathcal{E} \to \mathscr{C}$, $X\in \mathscr{C}$, $\phi: X \to Y$ in $\mathscr{C}$, we say $\phi_!: E_X \to E_Y$ is a cocartesian lift if the following is a pullback diagram in spaces:
+\[ \begin{tikzcd}
+    \Hom_\mathcal{E}(E_Y,E_Z)\rar["(\phi_!)^\ast" above]\dar["f" left]\pb & \Hom_\mathscr{C}(E_X,E_Z)\dar["f" right]\\
+    \Hom_\mathscr{C}(Y,Z)\rar["\phi^\ast" below] & \Hom_\mathscr{C}(X,Z),
+\end{tikzcd} \]
+for any $Z\in \mathscr{C}$. In particular, taking maps from $\Delta^0$ to the top right and bottom left picks out $\bar{\psi}$ and $\gamma$, respectively, so that $\gamma\circ \phi = \psi$, and the universal property of the pullback says that there exists $\bar{\gamma}: E_Y \to E_Z$ so that $\bar{\gamma}\phi_! = \bar{\psi}$ and $f(\bar{\gamma}) = \gamma$.
+
+\begin{definition} We define $\coCart(\mathscr{C}) \subseteq \Cat_\infty/\mathscr{C}$ to be the subcategory of cocartesian fibrations $\mathcal{E} \to \mathscr{C}$, with morphisms
+\[ \begin{tikzcd}
+    \mathcal{E}\ar[rr,"G" above]\ar[dr,"f" below left] &  & \mathcal{E}'\ar[dl,"f'" below right]\\
+     & \mathscr{C}, & 
+\end{tikzcd} \]
+so that $G$ sends $f$-cocartesian lifts to $f'$-cocartesian lifts.
+\end{definition}
+
+In this case, straightening defines a functor
+\begin{align*}
+    \St: \coCart(\mathscr{C}) &\to \Fun(\mathscr{C},\Cat_\infty),
+\end{align*}
+sending $f: \mathcal{E} \to \mathscr{C}$ to the functor
+\begin{align*}
+    \mathscr{C} &\to \Cat_\infty \\
+    X &\mapsto f^{-1}(X) \\
+    (X\xto{\phi} Y) &\mapsto \left[ f^{-1}(X) \xto{\phi_!} f^{-1}(Y) \right].
+\end{align*}
+
+\begin{example} Let $f: X \to Y$ in $\mathcal{S}$. All lifts are cocartesian lifts. We say that a \textit{left fibration} is a cocartesian fibration where every lift is cocartesian.
+\end{example}
+
+\begin{example} Suppose $\mathscr{C}$ is an ordinary category. Then we can define a new category whose objects are $f: X \to Y$ in $\mathscr{C}$, and whose morphisms are
+\[ \begin{tikzcd}
+    X\rar["f"] & Y\dar["v"]\\
+    X'\uar["u" left]\rar["f'" below] & Y'.
+\end{tikzcd} \]
+This defines what we call the \textit{twisted arrow category} $\Tw(\mathscr{C})$. There is a natural functor
+\begin{align*}
+    \Tw(\mathscr{C}) &\xto{\Ev} \mathscr{C}^\op \times \mathscr{C} \\
+    (X \xto{f} Y) &\mapsto (X,Y).
+\end{align*}
+This is a left fibration, by composition. Straightening this, we get
+\begin{align*}
+    \St(\Ev): \mathscr{C}^\op \times \mathscr{C} &\to \Set \\
+    (X,Y) &\mapsto \Ev^{-1}(X,Y) = \Hom_\mathscr{C}(X,Y).
+\end{align*}
+\end{example}
+
+\begin{example} If $\mathscr{C}$ is an $\infty$-category, we can define a twisted arrow category in a similar way
+\begin{align*}
+    \Tw(\mathscr{C}): \Delta^\op &\to \Set \\
+    [n] &\mapsto \Hom_{\sSet}(\Delta^{2n+1},\mathscr{C}),
+\end{align*}
+where the $n$-simplices of $\Tw(\mathscr{C})$ should be thought of as
+\[ \begin{tikzcd}
+    X_0\dar & X_1\dar\lar & X_2\dar\lar & \cdots\lar & X_n\dar\lar\\
+    Y_0\rar & Y_1\rar & Y_2\rar & \cdots\rar & Y_n.
+\end{tikzcd} \]
+We can define
+\begin{align*}
+    \ell: \Tw(\mathscr{C}) &\to \mathscr{C}^\op \\
+    r: \Tw(\mathscr{C}) &\to \mathscr{C},
+\end{align*}
+by precomposition with $\Delta^n \hookto \Delta^{2n+1}$. These assemble to give
+\begin{align*}
+    \Tw(\mathscr{C}) \xto{\Ev} \mathscr{C}^\op \times \mathscr{C},
+\end{align*}
+and we have $\Hom_\mathscr{C}(X,Y) = \Ev^{-1}(X,Y) \in \mathcal{S}$. This evaluation map is a left fibration, left fibrations are preserved under pullback, and left fibrations over $\Delta^0$ are Kan complexes. Therefore $\Ev^{-1}(X)$ is a space.
+\end{example}
+
+\begin{example} Let $X \in \mathscr{C}$. Then we can take
+\[ \begin{tikzcd}
+    \ell^{-1}(X)\rar\dar\pb & \Tw(\mathscr{C})\dar["\ell" right]\\
+    \Delta^0\rar["X" below] & \mathscr{C}^\op.
+\end{tikzcd} \]
+We define $\mathscr{C}_{X/} := \ell^{-1}(X)$, and $r^{-1}(Y):=\mathscr{C}_{/Y}$.
+\end{example}
+
+\begin{theorem} \textit{(Straightening/unstraightening)} If $\mathscr{C}$ is an $\infty$-category, we can define its \textit{unstraightening} as
+\begin{align*}
+    \Unst: \Fun(\mathscr{C}, \Cat_\infty) &\to \coCart(\mathscr{C}) \\
+    F &\mapsto \colim \left( \Tw(\mathscr{C}) \xto{\Ev} \mathscr{C}^\op \times \mathscr{C} \xto{\mathscr{C}_{/\cdot} \times F} \Cat_\infty \right).
+\end{align*}
+That composite sends
+\begin{align*}
+    \Tw(\mathscr{C}) \xto{\Ev} \mathscr{C}^\op \times \mathscr{C} \xto{\mathscr{C}_{/\cdot} \times F} \Cat_\infty \\
+    (X\xto{f} Y) &\mapsto \mathscr{C}_{X/} \times F(Y).
+\end{align*}
+This forms an equivalence with $\St$.
+\end{theorem}
+
+There is an equivalence
+\begin{align*}
+    \St: \LFib(\mathscr{C}) \leftrightarrows \Fun(\mathscr{C},\mathcal{S}): \Unst.
+\end{align*}
+
+If $\mathscr{C} = X \in \mathcal{S}$, then $\coCart(X) = \Cat_\infty/X$.
+
+If $\mathscr{C} = N(\mathscr{D})$, this recovers the usual Grothendieck construction.
+
+If $F: \mathscr{C}\to \Cat_\infty$, then
+\begin{align*}
+    \colim F &= \Unst(\mathscr{C})[\text{cocart. edges}^{-1}] \\
+\end{align*}
+
+\section{Lecture 15: March 23rd}
+
+\begin{center}
+    \textbf{Unstraightening monoidal structures}    
+\end{center}
+
+Recall $\mathcal{S} \simeq N(\sSet)[W_{\text{Kan}}^{-1}]$ the $\infty$-category of spaces. If $X \to Y$ is a map in $\mathcal{S}$ we are meaning that $X \to Y$ is a map in $\Ho(\sSet)$ \textit{not} that $X \to Y$ is any map in $\sSet$.
+
+\begin{example} If we have $X \to Y$ in $\mathcal{S}$, then $X \to Y$ is a left fibration. If $X$ and $Y$ are in $\Kan$ and $X \to Y$ this \textit{does not imply} that $X \to Y$ must be a left fibration. What is true is that if $X \to Y$ is a Kan fibration, then $X \to Y$ is a left fibration.
+\end{example}
+
+We have $\Cat_\infty\simeq N(\sSet)[W_{\text{Joyal}}^{-1}]$, so $f: \mathscr{C} \to \mathscr{D}$ in $\Cat_\infty$ means
+\[ \begin{tikzcd}
+    f^{-1}(X)\rar\dar\pb & \mathscr{C}\dar\\
+    \Delta^0\rar["X" below] & \mathscr{D}.
+\end{tikzcd} \]
+So we always want it to be a fibration.
+
+That is, a map $f: \mathscr{C} \to \mathscr{D}$ in $\Cat_\infty$ is not the same as $\mathscr{C} \to \mathscr{D}$ of quasi-categories in $\sSet$.
+
+In $\Cat_\infty$, $\mathscr{C} \to \mathscr{D}$ is a cocartesian fibration if there exists a cocartesian lift on any fiber.
+
+If $\mathscr{C},\mathscr{D}$ are quasi-categories in $\sSet_\text{Joyal}$, then $f: \mathscr{C} \to \mathscr{D}$ is a cocartesian fibration if $f$ is an \textit{inner fibration} (RLP inner horns) AND there is a cocartesian lift of any fiber. The inner fibration condition guarantees that the fibers are also infinity categories.
+
+Straightening definition last time was wrong. Last time, we had
+\begin{align*}
+    \Unst: \Fun(\mathscr{C}, \Cat_\infty) &\xto{\sim} \coCart(\mathscr{C}) \\
+    F &\mapsto \left( \mathcal{E} \xto{\Unst(F)} \mathscr{C} \right).
+\end{align*}
+is an equivalence of categories, where
+\begin{align*}
+    \mathcal{E} = \colim \left( \Tw(\mathscr{C})^\op \to \mathscr{C} \times \mathscr{C}^\op \xto{F \times \mathscr{C}_{\bullet/}} \Cat_\infty \right).
+\end{align*}
+
+\begin{example} Take $\mathscr{C} = \ast$. Then $\Fun(\ast,\Cat_\infty)=\Cat_\infty$. We have that $\coCart(\ast)=\Cat_\infty$, and that $\Tw(\ast) = \ast^\op = \ast$. The composite sends
+\begin{align*}
+    \Tw(\ast)^\op \to \ast \times \ast^\op \to \Cat_\infty \\
+    \ast &\mapsto (\ast,\ast) \mapsto \ast A \times \ast = A.
+\end{align*}
+\end{example}
+
+\begin{example} Take $\mathscr{C} = 1 = 0\to 1$. A functor $F:1 \to \Cat_\infty$ is exactly a functor $F: \mathscr{A} \to \mathscr{D}$ in $\Cat_\infty$. We see that $\Tw(1)$ has three objects, being $0 =0$, $0\to 1$ and $1=1$. The identity ones both map to $0\to 1$ so it is a span-op category. When we op $\Tw(1)^\op$ we get the span category, so a colimit becomes a pushout. We see that $1_{0/} = 1$ and $1_{1/} = \ast$. Then
+\begin{align*}
+    \mathcal{E} &= \colim \left(
+\begin{tikzcd}[ampersand replacement=\&]
+    \mathcal{A} \times 1_{1/}\rar["\id \times (0\to 1)" above]\dar["F \times\id" left] \& \mathcal{A} \times 1_{0/}\\
+    \mathcal{B} \times 1_{1/} \& \\
+\end{tikzcd}
+    \right)
+    \\
+    &= \colim\left(
+\begin{tikzcd}[ampersand replacement=\&]
+    \mathcal{A}\rar["\id \times 1"]\dar \& \mathcal{A} \times 1\\
+    \mathcal{B} \& \\
+\end{tikzcd}
+    \right)
+\end{align*}
+Then $\mathcal{E}$ is a cocartesian fibration over $1$, whose fiber over 0 is $\mathcal{A}$, whose fiber over 1 is $\mathcal{B}$, and with maps $F(A) \to B$ over $0\to 1$.
+\end{example}
+
+\textbf{Goal}: Redefine a symmetric monoidal category $\left( \mathscr{C},\otimes,I \right)$ as a cocartesian fibration $\mathscr{C}^\otimes \to \Fin_\ast$ as certain ``pseudo''functors $\Fin_\ast \to \Cat$. We could take $\Fin_\ast \to \Cat$ sending $\left\langle n \right\rangle$ to $\mathscr{C}^{\times n}$.
+
+\textbf{Q}: Given a psuedofunctor $F: \Fin_\ast \to \Cat$, when is it defining a symmetric monoidal category?
+
+We would need $F(\left\langle n \right\rangle) \cong F(\left\langle 1 \right\rangle)^{\times n}$ with Segal's condition $F(\left\langle 0 \right\rangle) = 0$.
+
+\begin{theorem} Symmetric monoidal categories are pseudofunctors $\Fin_\ast \to \Cat$ with the Segal condition.
+\end{theorem}
+
+
+\section{Lecture 16: March 28th}
+
+\begin{center}
+    \textbf{Monoidal functors and algebra objects}
+\end{center}
+
+Last time we defined a symmetric monoidal infinity category to be a cocartesian fibration over $\Fin_\ast$ with a Segal condition. Here $\mathscr{C} = f^{-1}(\left\langle 1 \right\rangle)$. We got this by straightening $N(\Fin_\ast) \to \Cat_\infty$, with $\left\langle n \right\rangle \mapsto \mathscr{C}^{\otimes n}$.
+
+Suppose we had a natural transformation $\eta$ between functors
+\begin{align*}
+    \mathscr{C},\mathscr{D}: N(\Fin_\ast) \to \Cat_\infty.
+\end{align*}
+This corresponds to a map $\mathscr{C}^\otimes \to \mathscr{D}^\otimes$ over $\Fin_\ast$ sending $p$-cocartesian lifts to $q$-cocartesian lifts:
+\[ \begin{tikzcd}
+    \mathscr{C}^{\otimes}\ar[dr,"p" below left]\ar[rr] &  & \mathscr{D}^{\otimes}\ar[dl,"q" below right]\\
+     & N(\Fin_\ast). & \\
+\end{tikzcd} \]
+Think about this as $F(X) \otimes F(Y) \xto{\sim} F(X \otimes Y)$.
+
+Now suppose we have $F^\otimes : \mathscr{C}^\otimes \to \mathscr{D}^\otimes$ between symmetric monoidal $\infty$-categories. Then we know the fiber over $\left\langle 1 \right\rangle$ must be sent to the fiber over $\left\langle 1 \right\rangle$. Then we get $F^{\otimes}_{\left\langle n \right\rangle}: \mathscr{C}^{\otimes}_{\left\langle n \right\rangle} \to \mathscr{D}^{\otimes}_{\left\langle n \right\rangle}$ for all $n$.
+
+Denote $F = F^{\otimes}_{\left\langle 1 \right\rangle}$. Then $F^{\otimes}_{\left\langle n \right\rangle} \simeq F^{\times n}$.
+
+Let $\rho^i_! : \left\langle n \right\rangle \to \left\langle 1 \right\rangle$ send everything to 0 except $i$ to 1.
+\[ \begin{tikzcd}
+    \mathscr{C}^{\otimes}_{\left\langle 2 \right\rangle}\rar["F^{\otimes}_{\left\langle 2 \right\rangle}" above]\dar["{(\rho^1_!,\rho^2_!)}" left]  & \mathscr{D}^{\otimes}_{\left\langle 2 \right\rangle}\dar["{(\rho^1_!,\rho^2_!)}" right] \\
+    \mathscr{C} \times \mathscr{C}\rar["F \times F" below] & \mathscr{D} \times \mathscr{D}.
+\end{tikzcd} \]
+
+$F(\rho^1_!) \simeq \rho^1_!$ and $F(\rho^2_!) \simeq \rho^2_!$. For all $i$ we need that $F(\rho_!^i)$ is a $q$-cocartesian lift of $\rho^i$. This means that for all $n$, $F^{\otimes}_{\left\langle n \right\rangle}(X_1, \ldots, X_n) \simeq \left( F(X_1), \ldots, F(X_n) \right)$.
+
+\begin{definition} A map $\alpha: \left\langle n \right\rangle \to \left\langle k \right\rangle$ in $\Fin_\ast$ is \textit{inert} if $\alpha^{-1}(i)$ is precisely a singleton for $1\le i\le n$.
+\end{definition}
+
+\begin{fact} Inert morphisms are generated by $\rho^i$ and $\tau$ (here $\tau$ is the swap of 1 and 2 on $\left\langle 2 \right\rangle$).
+\end{fact}
+
+Let $F^{\otimes}: \mathscr{C}^\otimes \to \mathscr{D}^{\otimes}$ that sends $p$-cocartesian lifts of inert maps to $q$-cocartesian lifts. We claim this already gives a lax monoidal structure. Consider $m : \left\langle 2  \right\rangle\to \left\langle 1 \right\rangle$ the multiplication, and consider $(X,Y) \in \mathscr{C}^{\times 2}$. There is a map $m_!: \mathscr{C} \times \mathscr{C} \to \mathscr{C}$ sending $(X,Y) \mapsto X \otimes Y$.
+
+\[ \begin{tikzcd}
+     & F(X) \otimes F(Y)\ar[dr,dashed] & \\
+    {(F(X),F(Y))}\ar[ur,"m_!" above left]\ar[rr,"F(m_!)" below] &  & F(X \otimes Y).
+\end{tikzcd} \]
+
+Note we're not saying that $F(m_!)$ is a cocartesian lift, we're saying that $m_!$ is. If $F(m_!)$ was a cocartesian lift, then this would give $F(X) \otimes F(Y) \to F(X \otimes Y)$ is an equivalence.
+
+\begin{exercise} Show that $\iota: \left\langle 0 \right\rangle \to \left\langle 1 \right\rangle$ induces $I_\mathscr{D} \to F(I_\mathscr{C})$.
+\end{exercise}
+
+
+\begin{definition} For $\mathscr{C}^{\otimes}$ and $\mathscr{D}^{\otimes}$ symmetric monoidal $\infty$-categories, a \textit{lax symmetric monoidal functor} $F^{\otimes} : \mathscr{C}^{\otimes} \to \mathscr{D}^{\otimes}$ is a functor that sends lifts of $p$-cocartesian inert maps in $\Fin_\ast$ to $q$-cocartesian lifts.
+\end{definition}
+
+
+\begin{definition} We say $F^{\otimes}$ is strong symmetric monoidal if it sends \textit{all} $p$-cocartesian lifts to $q$-cocartesian lifts.
+\end{definition}
+
+We can define
+\[ \begin{tikzcd}
+    \Fun_{N(\Fin_\ast)}(\mathscr{C}^{\otimes}, \mathscr{D}^{\otimes})\rar\dar\pb & \Fun(\mathscr{C}^{\otimes},\mathscr{D}^{\otimes})\dar["q^\ast" right] \\
+    \Delta^0\rar["p" below] & \Fun(\mathscr{C}^{\otimes},\Fin_\ast).
+\end{tikzcd} \]
+Define $\Fun^{\otimes, \text{lax}}(\mathscr{C}^{\otimes}, \mathscr{D}^{\otimes})$ to be the full subcategory of lax monoidal functors, and just $\Fun^{\otimes}(\mathscr{C}^{\otimes}, \mathscr{D}^{\otimes})$ the full subcategory of strong monoidal functors.
+
+
+\begin{example} Commutative algebras. We have that $\Delta^0$ is a symmetric monoidal $\infty$-category with trivial structure, then we have
+\begin{align*}
+    N(\Fin_\ast) \to \Cat_\infty
+\end{align*}
+sending everything to $\Delta^0$. The associated cocartesian fibration is $N(\Fin_\ast) \to N(\Fin_\ast)$.
+\end{example}
+
+We define $\Alg_\infty (\mathscr{C})$ to be $\Fun^{\otimes,\lax}(N(\Fin_\ast),\mathscr{C})$. That is,
+\[ \begin{tikzcd}
+    N(\Fin_\ast)\ar[dr,equal]\ar[rr,"A^{\otimes}" above] &  & \mathscr{C}^{\otimes}\ar[dl,"p" below right]\\
+     & N(\Fin_\ast) & 
+\end{tikzcd} \]
+That is, $A^\otimes$ is a section of $p$ that sends inert maps in $\Fin_\ast$ to $p$-cocartesian lifts. We have that $A^\otimes(\left\langle 1 \right\rangle) \in \mathscr{C}^\otimes_{\left\langle 1 \right\rangle} = \mathscr{C}$, and $A \otimes A \to A$. We have that $A^\otimes(\left\langle 0 \right\rangle) = I$.
+
+\textbf{Q}: Can we localize a symmetric monoidal category in such a way that it preserves the symmetric monoidal structure?
+
+\begin{definition} (HA 4.1.7.4) Given $\mathscr{C}^\otimes$ a symmetric monoidal $\infty$-category, let $W \subseteq \mathscr{C}$ a collection of edges. Assume $W$ is closed under $\otimes$ (meaning that if $Y \to Y'$ is in $W$, and $X$ is arbitrary, then $X \otimes Y \to X \otimes Y'$ and $Y \otimes X \to Y' \otimes X$ are in $W$ as well). The \textit{symmetric monoidal localization} of $\mathscr{C}^\otimes$ with $W$ is a symmetric monoidal $\infty$-category $\mathscr{C}[W^{-1}]^\otimes$ together with a strong symmetric monoidal functor
+\begin{align*}
+    \ell:\mathscr{C}^\otimes \to \mathscr{C}[W^{-1}]^\otimes
+\end{align*}
+with the following universal property: for any symmetric monoidal $\infty$-category $\mathscr{D}^\otimes$, we get an equivalence of $\infty$-categories:
+\begin{align*}
+    \Fun^\otimes(\mathscr{C}[W^{-1}]^\otimes, \mathscr{D}^\otimes) \xto{\sim} \Fun^\otimes_W(\mathscr{C}^\otimes,\mathscr{D}^\otimes),
+\end{align*}
+where $\Fun_W(-)$ means sending $W$ to equivalences.
+\end{definition}
+
+This always exists. We have that $\mathscr{C}[W^{-1}]_{\left\langle 1 \right\rangle} \simeq \mathscr{C}[W^{-1}]$. In terms of cocartesian fibrations it is maybe(?) some kind of Kan extension
+\[ \begin{tikzcd}
+    \mathscr{C}\dar\rar & \Fin_\ast\\
+    \mathscr{C}[W^{-1}]\ar[ur,dashed,"?"] & 
+\end{tikzcd} \]
+
+\begin{definition} Let $(M,\otimes,I)$ be a symm mon model category (with functorial cofibrant replacement). Suppose $I$ is cofibrant. Then the Dwyer-Kan localization $N(M)[W^{-1}]$ can be given a symmetric monoidal $\infty$-structure as follows:
+\begin{itemize}
+    \item Take the cofibrant objects $M_c$
+    \item Take the category of operators $M_c^\otimes$ as an ordinary category (objects are pairs $\left\langle n \right\rangle, c_1, \ldots, c_n$) and morphisms are $\otimes_i c_i \to c_j'$ over $\Fin_\ast$
+    \item $N(M_c^\otimes)$ is a symmetric monoidal $\infty$-category, with class $W$ of edges in $N(M_c)$
+    \item Recall that $X \otimes -: M_c \to M_c$ preserves weak equivalences between cofibrant objects, under the hypothesis that $X$ is cofibrant.
+    \item Thus $N(M_c^\otimes) \to N(M_c)[W^{-1}]^\otimes$ is called the \textit{symmetric monoidal Dwyer-Kan localization}.
+\end{itemize}
+This gives a sym mon structure on the $\infty$-category $N(M)[W^{-1}]\simeq N(M_c)[W^{-1}]$.
+\end{definition}
+
+This shows that the derived tensor product $\otimes$ of a monoidal model category $M$ endows $N(M)[W^{-1}]$ with a monoidal structure.
+
+\begin{example} Spaces $\mathcal{S}$ have a symmetric monoidal $\infty$-category structure, since we can view them as $N(\sSet)[W_{\text{Kan}}^{-1}]$ with the cartesian product. Here $\Alg_E_\infty(\mathcal{S})$ are equivalent to $E_\infty$-algebras in spaces.
+\end{example}
+
+\begin{example} We have that $\Cat_\infty\simeq N(\sSet)[W_\text{Joyal}^{-1}]$ with the cartesian product. Then $\Alg_{E_\infty}(\Cat_\infty)$ are symmetric monoidal $\infty$-categories. This is exactly because $\Alg_{E_\infty}(\Cat_\infty) = \Fun^{\otimes,\lax}(N(\Fin_\ast),\Cat_\infty)$ which guarantees the Segal condition.
+\end{example}
+
+\begin{example} If $R$ is a commutative ring, then $D(R)\simeq \Ch_R[W_\text{proj}^{-1}]$ is a symmetric monoidal $\infty$-category. The injective model structure does not give you a monoidal model category.
+
+We also have the connective case with two models
+\begin{align*}
+    D^{\ge 0}(R) \simeq N(s\Mod_R)[W^{-1}] \simeq N(\Ch_R^{\ge 0})[W^{-1}].
+\end{align*}
+\end{example}
+
+Every symmetric monoidal $\infty$-category $\mathscr{C}^\otimes$ which is presentable and for which $\otimes$ preserves colimits is the symmetric monoidal DK localization of a combinatorial monoidal model category (Lurie-Sagave).
 
 
 
