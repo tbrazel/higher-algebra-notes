@@ -187,7 +187,15 @@
 
 \providecommand{\Sp}{\text{Sp}}
 \providecommand{\PSp}{\text{PSp}}
-
+\providecommand{\st}{\text{st}}
+\providecommand{\Pr}{\text{Pr}}
+\providecommand{\CW}{\text{CW}}
+\providecommand{\Exc}{\text{Exc}}
+\providecommand{\Idem}{\text{Idem}}
+\providecommand{\Nat}{\text{Nat}}
+\providecommand{\Wh}{\text{Wh}}
+\providecommand{\LMod}{\mathcal{L}\Mod}
+\providecommand{\add}{\text{add}}
 \title{Higher Algebra}
 
 \author{Maximilien P\'eroux}
@@ -2606,6 +2614,685 @@ So the construction we just did argues that $\Pr^L \hookto \Cat_\infty$ is a lax
     \Alg_{E_\infty}(\Pr^L) = \left\{ \text{presentably symmetric monoidal } \infty\text{-cats} \right\},
 \end{align*}
 and $\mathcal{S}$ is the initial object. This provides the universal property of spaces with its monoidal structure $\mathcal{S} \times \mathcal{S} \to \mathcal{S}$, colimit-preserving in each variable, with the point as the unit.
+
+
+\section{Lecture 19: Thursday, April 6th}
+
+\begin{center}
+    \textbf{Brown representability}
+\end{center}
+
+We've seen that the monoidal product on spectra has two intuitions:
+\begin{enumerate}
+    \item $\Sp^{\ge 0} \simeq \Alg_{E_\infty}^\text{gplike}(\mathcal{S}_\ast)$
+    \item $\Sp^\text{Wh} = \colim \left( \mathcal{S}_\ast^\fin \xto{\Sigma} \cdots \right)$.\footnote{We have that $\mathcal{S}_\ast^\fin$ is finite CW complexes, \textit{not} the compact objects in $\mathcal{S}_\ast$.} This had a smash product.
+\end{enumerate}
+
+Recall $\left( \mathcal{S}, \times, \ast \right)$ was the initial object in $\Alg_{E_\infty}\left( \Pr^L \right)$. We saw we had
+\begin{align*}
+    \left( \Pr^L, \otimes \mathcal{S} \right) \to \left( \Cat_\infty, \times, \Delta^0 \right),
+\end{align*}
+with tensor $\mathscr{C} \otimes \mathscr{D} = \Fun^R(\mathscr{C}^\op, \mathscr{D})$ and internal hom $\Fun^L(\mathscr{C},\mathscr{D})$.
+
+We have $\Cat_\infty^\st \subseteq \Cat_\infty$ on stable $\infty$-categories and exact functors, and a corresponding $\Pr^L_\st \subseteq \Pr^L$ spanned by stable $\infty$-categories.
+
+The stabilization functor $\mathscr{C} \mapsto \Sp(\mathscr{C})$ can be viewed as left adjoint to the inclusion
+\begin{align*}
+    \Sp: \Pr^L \leftrightarrows \Pr^L_\st
+\end{align*}
+Tensoring with spectra, we get
+\begin{align*}
+    \mathscr{C} \otimes \Sp &= \Fun^R(\mathscr{C}^\op, \Sp) \\
+    &= \Fun^R(\mathscr{C}^\op, \lim \left( \mathcal{S}_\ast \from \cdots \right)) \\
+    &= \lim \left( \Fun^R(\mathscr{C}^\op, \mathcal{S}_\ast) \from \cdots \right) \\
+    &= \lim \left( \mathscr{C}_\ast \from \cdots \right) \\
+    &= \Sp(\mathscr{C}).
+\end{align*}
+
+\textbf{Fact}: If $\mathscr{C},\mathscr{D}$ stable then $\Fun^L(\mathscr{C},\mathscr{D})\in \Pr^L_\st$.
+
+We can think of stabilization as ``extension of scalars'' along $\mathcal{S}_\ast \xto{\Sigma^\infty} \Sp$. We have a monoidal adjunction
+\begin{align*}
+    \left( \Pr^L, \otimes, \mathcal{S} \right) \leftrightarrows \left( \Pr^L_\st, \otimes, \Sp \right).
+\end{align*}
+Recall $\Sp$ is the initial object in $\Pr^L_\st$. This characterizes spectra together with
+\begin{align*}
+    \Sp \times \Sp \xto{\smashprod} \Sp
+\end{align*}
+monoidal and bicolimit preserving so that $\mathbb{S}$ is the unit.
+
+We have that $\Sigma_+^\infty: \mathcal{S} \to \Sp$ is strong monoidal, and $\Omega^\infty: \Sp \to \mathcal{S}$ is lax monoidal, implying that
+\begin{align*}
+    \Sigma^\infty_+ X \smashprod \Sigma^\infty_+ Y \simeq \Sigma_+^\infty (X \times Y).
+\end{align*}
+We can also shift
+\begin{align*}
+    \Sigma^{\infty-k}: \mathcal{S}_\ast \leftrightarrows \Sp : \Omega^{\infty-k}.
+\end{align*}
+We call $E_k = \Omega^{\infty-k} E$.
+
+\textbf{Formula}: For any $E \in \Sp$, we have that
+\begin{align*}
+    E &\simeq \colim_k \Sigma^{\infty-k} \Omega^{\infty-k} E \\
+    &\simeq \colim_k \Sigma^{\infty-k} E_k.
+\end{align*}
+For $E,F\in\Sp$
+\begin{align*}
+    E \smashprod F &= (\colim_a \Sigma^{\infty-a} E_a ) \smashprod \left( \colim_b \Sigma^{\infty-b} F_b \right) \\
+    &= \colim_{a,b} \Sigma^{\infty-a-b} E_a \smashprod F_b.
+\end{align*}
+
+\begin{example} Recall Mayer-Vietoris: for $U,V \subseteq X$ open, we have an LES
+\begin{align*}
+    \cdots \to H_\ast(U\cap V) \to H_\ast(U) \oplus H_\ast(V) \to H_\ast(U\cup V) \to H_{\ast-1}(U\cap V) \to \cdots
+\end{align*}
+Recall that $H_\ast(X) = H_\ast(C_\ast(X))$, and by Dold-Kan, we have that $C_\ast(X) = \pi_\ast \Z[\Sing(X)]$. Let's reinterpret Mayer-Vietoris in this setting. It is saying that there is a homotopy pullback in $\sSet$ of the form
+\[ \begin{tikzcd}
+    \Z\Sing_\ast(U\cap V)\rar\dar\pb & \Z\Sing_\ast U\dar\\
+    \Z\Sing_\ast V\rar & \Z\Sing_\ast U\cup V.
+\end{tikzcd} \]
+We can view homology as
+\begin{align*}
+    \CW_\ast^\fin &\to \Kan \\
+    X &\mapsto \Z\Sing_\ast X.
+\end{align*}
+Mayer-Vietoris is the statement that this sends homotopy pushouts to homotopy pullbacks. We can view this functor as $\mathcal{S}_\ast^\fin \to \mathcal{S}$.
+\end{example}
+
+\textbf{Q}: Can we do this for all homology theories?
+
+\begin{definition} (Eilenberg-Steenrod) A (reduced) homology theory is $\left\{ \til{E}_n: \CW_\ast^\fin \to \Ab \right\}$ such that
+\begin{enumerate}
+    \item $\til{E}_n$ invariant under homotopy
+    \item Excision: $\til{E}^{i+1}(\Sigma X) \cong \til{E}_i(X)$
+    \item Additivity: $\til{E}_i(X\vee Y) \cong \til{E}_i(X) \oplus \til{E}_i(Y)$
+    \item Exactness: if $f: X \to Y$ then
+    \begin{align*}
+        \til{E}_n(X) \to \til{E}_n(Y) \to \til{E}_n(Cf).
+    \end{align*}
+\end{enumerate}
+\end{definition}
+
+\textbf{Goal}: We can view $\til{E}_\ast : \CW_\ast \to \Ab$ as a certain $\til{E}: \mathcal{S}_\ast^\fin \to \mathcal{S}$.
+
+Axiom (1) allows us to extend $\til{E}_\ast$ to $\Ho(\mathcal{S}_\ast^\fin)$. Axiom (2) comes from
+\begin{align*}
+    C_\ast(\Sigma X)[-1]\simeq_{\text{qiso}} C_\ast(X).
+\end{align*}
+If and only if $\Omega \Z \Sing \Sigma X \simeq \Z \Sing X$. So we're rephrasing that
+\begin{align*}
+    \Omega \til{E}(\Sigma X) \simeq \til{E}(X).
+\end{align*}
+Axiom (3) comes from $C_\ast(X\vee Y) \simeq C_\ast(X) \oplus C_\ast(Y)$. Translating this over to simplicial sets via Dold-Kan, we get
+\begin{align*}
+    \Z\Sing X \vee Y \simeq \Z\Sing X \times \Z \Sing Y.
+\end{align*}
+This gives $\til{E}(X \vee Y) \cong \til{E}(X) \oplus \til{E}(Y)$ and hence $\pi_\ast(X \times Y) \cong \pi_\ast(X) \oplus \pi_\ast(Y)$.
+
+(4) Says $\pi_i(\fib(f)) = \ker(\pi_i(f))$. We have that $C_\ast(X) \simeq \ker \left( C_\ast(Y) \to C_\ast(f) \right)$. Then
+\begin{align*}
+    \Z\Sing_\ast(X) \xto{\sim} \fib \left( \Z\Sing Y \to \Z \Sing Cf \right).
+\end{align*}
+Hence
+\begin{align*}
+    \til{E}(X) \simeq \fib \left( \til{E}(Y) \to \til{E}(Cf) \right).
+\end{align*}
+That is,
+\[ \begin{tikzcd}
+    X\rar\dar & Y\dar\\
+    \ast\rar & Cf\po
+\end{tikzcd} \]
+is sent to
+\[ \begin{tikzcd}
+    \til{E}(X)\rar\dar\pb & \til{E}(Y)\dar\\
+    \ast\rar & \til{E}(Cf).
+\end{tikzcd} \]
+
+\begin{definition} Let $\mathscr{C}$ be an $\infty$-category. We say a functor $F: \mathcal{S}_\ast^\fin \to \mathscr{C}$ is
+\begin{enumerate}
+    \item \textit{excisive} if $F$ sends pushouts to pullbacks
+    \item \textit{reduced/pointed} if $F(\ast) = \ast$.
+\end{enumerate}
+\end{definition}
+
+We write $\Exc_\ast(\mathcal{S}_\ast^\fin,\mathscr{C}) \subseteq \Fun(\mathcal{S}_\ast^\fin, \mathscr{C})$ for excisive and reduced functors.
+
+Given any $\mathcal{S}_\ast^\fin \xto{\til{E}} \mathcal{S}$ excisive, we obtain a reduced homology theory
+\begin{align*}
+    \mathcal{S}_\ast^\fin \xto{\til{E}} \mathcal{S} \xto{\pi_\ast^s} \Ab.
+\end{align*}
+
+\begin{theorem} There is an equivalence
+\begin{align*}
+    \Sp(\mathscr{C}) \simeq \Exc_\ast(\mathcal{S}_\ast^\fin, \mathscr{C}).
+\end{align*}
+\end{theorem}
+\begin{proof} For some $\til{E} \in \Exc_\ast(\mathcal{S}_\ast^\fin, \mathcal{S})$, we want to define $E \in \Sp$. We define $E_0 = \til{E}(S^0)$, and $E_1 = \til{E}(S^1)$, etc. We can define $E_{-n} = \Omega^n E_0$. This works because
+\[ \begin{tikzcd}
+    S^n\rar\dar & \ast\dar\\
+    \ast\rar & S^{n+1}\po
+\end{tikzcd} \]
+is sent to
+\[ \begin{tikzcd}
+    \til{E}(S^n)\rar\dar\pb & \ast\dar\\
+    \ast\rar & \til{E}(S^{n+1}).
+\end{tikzcd} \]
+This gives maps $\til{E}(S^n) \xto{\sim} \Omega \til{E}(S^{n+1})$.
+
+For the other direction, given $E \in \Sp$, we can get an excisive functor sending
+\begin{align*}
+    X \mapsto X \smashprod E_0.
+\end{align*}
+
+We can reinterpet
+\begin{align*}
+    \Omega^\infty : \Exc_\ast(\mathcal{S}_\ast^\fin, \mathcal{S}) &\to \mathcal{S} \\
+    \til{E} &\mapsto \til{E}(S^0).
+\end{align*}
+We can show this is universal.
+\end{proof}
+
+Given $E$ a spectrum, we have an associated reduced homology theory where $\til{E}_\ast(X) := \pi_\ast^s X \smashprod E_0$.
+
+We have that
+\begin{align*}
+    \Sigma^\infty_+ X \smashprod E = \colim_k \Sigma^{\infty-k} X \smashprod E_k.
+\end{align*}
+We have that
+\begin{align*}
+    \Pi_\ast (\Sigma^\infty X \smashprod E) &= \pi_\ast \left( \colim_k \Sigma^{\infty-k} X \smashprod E_k \right) \\
+    &= \colim_k \pi_\ast \left( \Sigma^{\infty-k} X \smashprod E_k \right) \\
+    &= \colim_k \pi_{\ast+k}(X \smashprod E_k).
+\end{align*}
+This is exactly the definition of $\pi_\ast^s(X\smashprod E_0)$.
+
+Thus
+\begin{align*}
+    \til{E}_\ast(X) = \pi_\ast \Sigma^\infty X \smashprod E.
+\end{align*}
+
+\begin{example} Sphere spectrum $\mathbb{S} \in \Sp$ gives the functor
+\begin{align*}
+    \mathcal{S}_\ast^\fin &\to \mathcal{S} \\
+    X &\mapsto X \smashprod QS^0,
+\end{align*}
+where $Q(-) = \Omega^\infty \Sigma^\infty(-) = \colim_k \Omega^k \Sigma^k(-)$. Model categorically they think of this as just the natural inclusion $\mathcal{S}_\ast^\fin \to \mathcal{S}$ because they derive after including. The homology theory is $\widetilde{\mathcal{S}}_\ast = \pi_\ast^s(-)$.
+\end{example}
+
+\begin{example} We have that $\widetilde{H\Z}_\ast(X) = H_\ast(X;\Z)$. Dold-Thom lets us relate $\Sigma^\infty X \smashprod H\Z$ with $\Z\Sing(X)$ somehow.
+\end{example}
+
+\begin{definition} For $F$ a spectrum, we can define
+\begin{align*}
+    \til{E}_\ast(F) = \pi_\ast(E \smashprod F).
+\end{align*}
+\end{definition}
+
+\begin{theorem} (Brown representability) If $\til{E}_\ast(-): \CW_\ast^\fin \to \Ab$ is a reduced homology theory, then there exists $E\in \Sp$ such that $\til{E}_n(X) = \pi_n^s^\ast(X \smashprod E_0)$.
+\end{theorem}
+
+We looked at $\pi_\ast$ of $E \smashprod -$. Taking the same thing for its adjoint, we call $F(E,-)$ the right adjoint to $E \smashprod -$ (this exists because colimit-preserving + presentable). Can take the internal hom to be
+\begin{align*}
+    F(E,E')_n = \Hom_\Sp(E, \Sigma^n E').
+\end{align*}
+Can define $\til{E}^n(X) = [X,E_n] = [\Sigma^{\infty-n} X,E]$.
+
+\section{Lecture 20: Tuesday April 11th}
+
+From last time: $F(E,E')_n = \Hom_\Sp(E, \Sigma^n E')$. This is because
+\begin{align*}
+    \Hom_\Sp(E \smashprod \mathbb{S}, F) &\simeq \Hom_\Sp(\mathbb{S},F(E,F)).
+\end{align*}
+
+Think $\Hom_R(R,M) = M$ and $\Hom_{\Ch_R}(R,M_\ast) = M_0$. Then $\Hom_\Sp(\mathbb{S},E) \simeq E_0$. This follows from the loops suspension adjunction:
+\begin{align*}
+    \Hom(\Sigma^\infty_+ \ast, E) = \Hom(\mathbb{S},E) = \Hom(\ast, \Omega^\infty E) = E_0.
+\end{align*}
+
+For $E\in \Sp$ can define reduced associated cohomology theory for $X \in \mathcal{S}_\ast$
+\begin{align*}
+    \til{E}^n(X) = \left[ X, E_n \right] = \pi_n F(\Sigma^\infty X, E).
+\end{align*}
+
+\textbf{Monoidal categories which are not symmetric}:
+\begin{itemize}
+    \item Let $\mathscr{C}$ be any category, and look at $\End(\mathscr{C})$ with composition and the identity
+    \item $G$ any non-abelian monoid, defines a discrete monoidal category.
+    \item Bimodules over any non-commutative ring
+\end{itemize}
+
+Recall a sm $\infty$-cat was $\mathscr{C}^\otimes \to N(\Fin_\ast)$ a cocartesian fibration + Segal condition. This gave $N(\Fin_\ast) \to \Cat_\infty$.
+
+We had $\tau: \left\langle 2 \right\rangle \to \left\langle 2 \right\rangle$, sending $0\mapsto 0$ and swapping 1,2. This alone gave a symmetric structure on $\otimes$. We want to restrict from $\Fin_\ast$ to throw out $\tau$ and its friends.
+
+There are multiple ways to do this: can view $\Delta^\op \subseteq \Fin_\ast$ sending $[n]\mapsto \left\langle n \right\rangle$. Given $\alpha: [k] \to [n]$ we send it to a map
+\begin{align*}
+    \left\langle n \right\rangle &\to \left\langle k \right\rangle \\
+    j &\mapsto \begin{cases} i & \exists i \colon j\in [\alpha(i-1)+1,\alpha(i)] \\ \ast & \text{else} \end{cases}
+\end{align*}
+The composite
+\begin{align*}
+    \Delta^\op \to \Fin_\ast \subseteq \Set_\ast
+\end{align*}
+defines the pointed simplicial set $S^1 = \Delta^1/\del \Delta^1 \in \sSet_\ast$.
+
+
+\begin{definition} A monoidal $\infty$-cat is a cocart fibration $\mathscr{C}^\otimes \to N(\Delta^\op)$ with the Segal condition $\mathscr{C}^\otimes_{[n]} \to \left( \mathscr{C}^\otimes_{[1]} \right)^{\times n}$ given by cocartesian lifts of $p^i : [1] \to [n]$, $0\mapsto i-1$, $1\mapsto i$.
+\end{definition}
+
+By straightening we get $N(\Delta^\op) \to \Cat_\infty$ sending $[n] \to \mathscr{C}^{\times n}$. This is some kind of bar construction.
+
+\begin{definition} $\alpha \in \Delta$ is inert if $\alpha:[n] \to [k]$ is injective, and $\im(\alpha) \subseteq [k]$ is convex. Inert things in $\Delta^\op$ map to inert things in $\Fin_\ast$ under the map defined above.
+\end{definition}
+
+\begin{definition} A \textit{lax monoidal functor} $F^\otimes: \mathscr{C}^\otimes \to \mathscr{D}^\otimes$ is a functor
+\[ \begin{tikzcd}
+    \mathscr{C}^\otimes\ar[rr,"F^\otimes" above]\ar[dr] &  & \mathscr{D}^\otimes\ar[dl]\\
+     & N(\Delta^\op), & 
+\end{tikzcd} \]
+so that $F^\otimes$ sends cocart lifts of inert to cocart lifts.
+\end{definition}
+
+A lax monoidal functor $F^\otimes$ is one that sends \textit{all} cocartesian lifts to cocartesian lifts.
+
+Given $\mathscr{C}$ a monoidal $\infty$-cat, we have that
+\begin{align*}
+    \Alg_{E_1}(\mathscr{C}) = \Fun_{E_1}^{\text{lax}}(N(\Delta^\op),\mathscr{C}^\otimes).
+\end{align*}
+
+Every symmetric monoidal $\infty$-cat can be viewed as a monoidal $\infty$-cat via
+\[ \begin{tikzcd}
+    \widetilde{\mathscr{C}}^\otimes\rar\dar\pb & \mathscr{C}^\otimes\dar\\
+    N(\Delta^\op)\rar & N(\Fin_\ast).
+\end{tikzcd} \]
+We could also straighten then precompose with $N(\Delta^\op) \to N(\Fin_\ast)$.
+
+To define modules over a ring, we will use the bar construction $[n] \mapsto N \otimes R^{\otimes n} \otimes M$.
+
+\begin{definition} Let $p: \mathscr{C}^\otimes\to N(\Delta^\op)$ be a monoidal $\infty$-cat. An $\infty$-cat $\mathcal{M}$ is said to be \textit{left tensored over} $\mathscr{C}$ if there is a cocart $q: \mathcal{E} \to N(\Delta^\op)$ so that
+\[ \begin{tikzcd}
+    \mathcal{E}\ar[dr,"q" below left]\ar[rr,"f"] &  & \mathscr{C}^\otimes\ar[dl,"p" below right]\\
+     & N(\Delta^\op). & 
+\end{tikzcd} \]
+that sends cocart lifts to cocart lifts, such that
+\begin{align*}
+    \mathcal{E}_{[n]} \xto{\sim} \mathscr{C}_{[n]}^\otimes \times \mathcal{E}^\otimes_{\{n\}}
+\end{align*}
+for $\{n\} \subseteq [n]$, with $\mathcal{M} = \mathcal{E}_{[0]}$, and $\mathcal{E}_{[1]} \simeq \mathscr{C} \times \mathcal{M}$. This is formalizing a functor $\mathcal{C} \times \mathcal{M} \to \mathcal{M}$ compatible with monoidal structure on $\mathscr{C}$.
+\end{definition}
+
+\begin{example} $\mathscr{C}$ is left tensored over itself. Then $\mathcal{E} = \widetilde{\mathscr{C}}^\otimes$ with $\mathcal{E}_{[n]} = \mathscr{C}^{\times(n+1)}$.
+\end{example}
+
+\begin{definition} Given $\mathcal{M}$ left tensored over $\mathscr{C}$, a left module of $\mathcal{M}$ is a map $s: N(\Delta^\op) \to \mathcal{M}^\otimes$ such that
+\begin{align*}
+    N(\Delta^\op) \xto{s} \mathcal{M}^\otimes \xto{f} \mathscr{C}^\otimes
+\end{align*}
+is a lax monoidal functor (if $\alpha:[k]\to [n]$ is inert in $\Delta$ then $f(\alpha)$ is a cocart fib of $\mathscr{C}^\otimes$).
+\end{definition}
+
+We write $\LMod(\mathcal{M}) \subseteq \Fun_{N(\Delta^\op)}(N(\Delta^\op), \mathcal{M}^\otimes)$ spanned by left modules. We are interested in when $\mathcal{M} = \mathscr{C}$. In that case
+\begin{align*}
+    \LMod(\mathscr{C}) &\to \Alg_{E_1}(\mathscr{C}) \\
+    (\mathcal{M},\mathcal{A}) &\mapsto \mathcal{A}.
+\end{align*}
+
+Given $A\in \Alg_{E_1}(\mathscr{C})$, we can define $A$-modules as
+\[ \begin{tikzcd}
+    {}_A \Mod(\mathscr{C})\rar\dar\pb & \LMod(\mathscr{C})\dar\\
+    \ast\rar["A" below] & \Alg_{E_1}(\mathscr{C}).
+\end{tikzcd} \]
+Can define left $A$-modules and $(A,A)$-bimodules in a similar way.
+
+Can defgine left modules in a sym mon $\infty$-cat
+\[ \begin{tikzcd}
+    \LMod_{E_\infty}(\mathscr{C})\rar\dar\pb & \LMod(\mathscr{C}) = \LMod_{E_1}(\mathscr{C})\dar\\
+    \Alg_{E_\infty}(\mathscr{C})\rar & \Alg_{E_1}(\mathscr{C}).
+\end{tikzcd} \]
+Can check that if $A\in \Alg_{E_\infty}(\mathscr{C})$ then ${}_A\Mod(\mathscr{C}) \cong \Mod_A(\mathscr{C})$.
+
+
+
+\section{Lecture 21: Thursday, April 13th}
+
+\begin{center}
+    \textbf{Schwede-Shipley theorem}
+\end{center}
+
+Goal: generalize the Freyd-Mitchell and Gabriel theeorems.
+
+Given a lax monoidal functor $F: \mathscr{C} \to \mathscr{D}$ between (symmetric) monoidal $\infty$-cats, it induces a functor
+\begin{align*}
+    \Alg_{E_1}(\mathscr{C}) &\to \Alg_{E_1}(\mathscr{D}) \\
+    A &\mapsto F(A).
+\end{align*}
+1-categorically if $A\in \mathscr{C}$ is an associative algebra, then $F(A)$ is an associative algebra.
+
+So lax monoidal is the correct notion needed to lift algebras.
+
+$\infty$-categorically, $\Alg_{E_1}(\mathscr{C})$ are lax monoidal functors $\ast \to \mathscr{C}$. The statement follows from the fact that composition of lax monoidal functors is lax monoidal.
+
+If $F$ is lax \textit{symmetric} monoidal, then we can lift
+\begin{align*}
+    F: \Alg_{E_\infty}(\mathscr{C}) \to \Alg_{E_\infty}(\mathscr{D}).
+\end{align*}
+We also have, for all $A\in \Alg_{E_1}(\mathscr{C})$,
+\begin{align*}
+    F: \Mod_A(\mathscr{C}) \to \Mod_{F(A)}(\mathscr{D}).
+\end{align*}
+
+Recall
+\begin{align*}
+    N(\Ab) &\to \Sp \\
+    A &\mapsto HA.
+\end{align*}
+Here
+\begin{enumerate}
+    \item $(HA)_n = K(A,n)$ for $n>0$ and $\ast$ for $n<0$
+    \item $HA : \mathcal{S}_\ast^\fin \to \mathcal{S}$ sends $X \mapsto X \smashprod K(A,0)$
+    \item By Brown representability, $\til{H}^n(X,A) \cong \left[ X,K(A,n) \right]$.
+    \item $\pi_n(HA) = A$ if $n=0$ and $0$ otherwise
+\end{enumerate}
+
+$HA \in \Sp^{\ge 0}$ then the associated element in $\Alg_{E_\infty}^\text{gplike}(\mathcal{S}_\ast)$ is $A$ as a discrete pointed space.
+
+Given $A,B\in \Ab$ we can compare $HA \smashprod HB$ with $A \otimes_\Z B$. These are not the same.
+\begin{align*}
+    \pi_0 HA \smashprod HB \cong A \otimes_\Z B \\
+    \pi_n HA \smashprod HB \ne 0 \quad\quad n>0.
+\end{align*}
+If $A=B=\F_2$, then
+\begin{align*}
+    \pi_\ast \left( H\F_2 \smashprod H\F_2 \right) &= \F_2[\xi_1,\xi_2,\ldots]
+\end{align*}
+with $|\xi_i|=2^i-1$. This is the \textit{dual Steenrod algebra}.
+
+We can get a map $HA \smashprod HB \to H(A \otimes_\Z B)$ by adjunction
+\begin{align*}
+    \pi_0 : \Sp^{\ge 0} \leftrightarrows N(\Ab): H(-).
+\end{align*}
+Then
+\begin{align*}
+    \pi_0(E\smashprod F) \cong \pi_0(E) \otimes_\Z \pi_0(F).
+\end{align*}
+Thus $\pi_0$ is strong symmetric monoidal.
+
+\begin{exercise} If $L: \mathscr{C} \leftrightarrows \mathscr{D}: R$ is an adjunction between symmetric monoidal categories, if $L$ is strong monoidal then $R$ is lax monoidal.
+\end{exercise}
+
+\textbf{Warning}: $\pi_0: \Sp \to N(\Ab)$ is not strong monoidal on the entire category of spectra.
+
+Since the inclusion $\Sp^{\ge 0} \hookto \Sp$ is lax symmetric monoidal, we have the composite $N(\Ab) \xto{H} \Sp^{\ge 0} \to \Sp$ is, hence we get
+\begin{align*}
+    N(\Ring) = \Alg_{E_1}(N(\Ab)) &\to \Alg_{E_1}(\Sp) \\
+    R &\mapsto HR.
+\end{align*}
+We call $\Alg_{E_1}(\Sp)$ \textit{ring spectra}.
+
+Can we compare with $\Ab = \Mod_\Z \to D(\Z)$? Yes we can view $D(\Z)$ as $\Mod_{\HZ}(\Sp)$ in a monoidal way.
+
+Recall that for $R\in \CRing$, we get $D(R) = N(\Ch_R)[W_\text{proj}^{-1}]$, which is symmetric monoidal $\infty$-cat with $\otimes_R^\mathbb{L}$. We want a monoidal structure on $\Mod_{HR}(\Sp)$ that mimics the derived tensor product.
+
+Recall 1-categorically that $R\in \Alg(\mathscr{C},\otimes,I)$ and $M\in\Mod_R(\mathscr{C})$ and $N \in {}_R\Mod(\mathscr{C})$, we define $\otimes_R$ by the coequalizer
+\begin{align*}
+    M \otimes R \otimes N \rightrightarrows M \otimes N \to M \otimes_R N.
+\end{align*}
+So on spectra we want a \textit{relative smash product}.
+
+We have to kill off much higher terms
+\begin{align*}
+    M \smashprod_{HR} N := \colim \left( \cdots \rightrightarrows M \smashprod HR^{\smashprod 2} \smashprod N  \rightrightarrows M \smashprod HR \smashprod N \rightrightarrows M \smashprod N\right)
+\end{align*}
+More generally, given $R \in \Alg_{E_1}(\mathscr{C})$, we can define $M \otimes_R N$ as the colimit of a bar construction. In a 1-category the higher maps don't matter and we just recover the coequalizer definition.
+
+We have
+\begin{align*}
+    N(\Delta^\op) \to N(\Fin_\ast) \to \mathscr{C} \hookto \Cat_\infty, \\
+    [n] \mapsto M \otimes R^{\otimes n} \otimes N.
+\end{align*}
+
+For $\mathscr{C} = \Sp$, this defines $\left( \Mod_R(\Sp), \smashprod_R, R \right)$. We can also define $F_R(M,-): \Mod_R(\Sp) \to \Mod_R(\Sp)$ to be the right adjoint of
+\begin{align*}
+    M \smashprod_R - : \Mod_R \to \Mod_R.
+\end{align*}
+
+\begin{notation} If $R\in \Alg_{E_\infty}(\Sp)$, and $M,N\in \Mod_R(\Sp)$, we can define
+\begin{align*}
+    \Tor_\ast^R(M,N) &:= \pi_\ast \left( M \smashprod_R N \right) \\
+    \Ext_R^\ast(M,N) &:= \pi_{- \ast} F_R(M,N).
+\end{align*}
+\end{notation}
+
+We shall see that
+\begin{align*}
+    \pi_\ast \left( HM \smashprod_{HR} HN \right) \cong \Tor_\ast^R(M,N),
+\end{align*}
+where $R\in \CAlg(\Ab)$ and $M,N\in \Mod_R(\Ab)$.
+
+We have \textit{change of algebras}: if $f: A \to B$ in $\Alg_{E_\infty}(\mathscr{C})$, we get a monoidal adjunction
+\begin{align*}
+    - \otimes_A B : \Mod_A \leftrightarrows \Mod_B : f^\ast,
+\end{align*}
+where extension is strong monoidal and restriction $f^\ast$ is lax.
+
+In spectra this becomes
+\begin{align*}
+    - \smashprod R : \Mod_\mathbb{S} = \Sp \leftrightarrows \Mod_R : U.
+\end{align*}
+
+\begin{theorem} \textit{(Schwede-Shipley)} Let $\mathscr{C}$ be a stable $\infty$-category. Then $\mathscr{C}\simeq \Mod_R \Sp$ if and only if $\mathscr{C}$ is presentable, and there exists $C\in \mathscr{C}$ compact generator such that if $D\in \mathscr{C}$ and $\Ext^n_\mathscr{C}(C,D) \cong 0$ then $D\simeq 0$.
+\end{theorem}
+
+\begin{lemma} If $\mathscr{C}$ is a stable $\infty$-category, and $X,Y\in \mathscr{C}$, then $\Hom_\mathscr{C}(X,Y) \in \Sp$.
+\end{lemma}
+\begin{proof} We have that $\Hom_\mathscr{C}(X,Y) \in \mathcal{S}_\ast$, so
+\begin{align*}
+    \Omega\Hom_\mathscr{C}(X,Y) &\simeq \Hom_\mathscr{C}(\Sigma X,Y) \simeq \Hom_\mathscr{C}(X,Y).
+\end{align*}
+So these are infinite loop spaces.
+\end{proof}
+
+Proof of theorem: if $\mathscr{C} \simeq \Mod_R(\Sp)$, then $\mathscr{C}$ is presentable. Take $C = R$, then $\Ext_\mathscr{C}^n(R,D) \cong \pi_n D$. Then $D\simeq 0$ if and only if $\pi_{-n} D = 0$ for all $n$.
+
+For the other direction, if $\mathscr{C}\in \Pr^L$, then as $\mathscr{C}$ is stable, there is a map
+\begin{align*}
+    \Sp \otimes \mathscr{C} &\to \mathscr{C} \\
+    (E, C) &\mapsto E \otimes C,
+\end{align*}
+adjoint to $\Hom_\mathscr{C}(C,-)$ valued in $\Sp$. That is, $\mathscr{C}$ is tensored and cotensored over spectra.
+
+We have
+\begin{align*}
+    - \otimes C: \Sp \leftrightarrows \mathscr{C} : \Hom_\mathscr{C}(C,-).  
+\end{align*}
+
+Let $G = \Hom_\mathscr{C}(C,-)$, then the idea is that this is monadic and the monad is equivalent to $- \smashprod_{\mathbb{S}} R$ for some $R$.
+
+Let $\alpha: D \to D'$ in $\mathscr{C}$ such that $G(\alpha)$ is an equivalence in $\Sp$. Then $G(C\alpha) \simeq 0$.
+\begin{align*}
+    \pi_n C\alpha \simeq \Ext_\mathscr{C}^{-n}(C,G\alpha) = 0,
+\end{align*}
+so $C\alpha\simeq 0$, so $\alpha$ equivalence in $\mathscr{C}$.
+
+Then $R:= G(C) = \Hom_\mathscr{C}(C,C) = \End_\mathscr{C}(C) \in \Alg_{E_1}(\Sp)$.
+
+With $E\in \Sp$ and $D\in \mathscr{C}$, get $E \smashprod G(D) \simeq G(E \otimes D)$. This is true as $G$ preserves all colimits, suffices to check for $E = \mathbb{S}$ then obvious. $R = G(C)$, $E \smashprod R = G(X \otimes C)$, Barr Beck Lurie monadicity.
+
+If $R = \End_\mathscr{C}(C)$ get an monoidal variant
+\begin{align*}
+    \Alg_{E_\infty}(\Sp) &\to \Alg_{E_\infty}(\Pr^L) \\
+    R &\mapsto \Mod_R.
+\end{align*}
+So we can say that $\mathscr{C}\in \Alg_{E_\infty}(\Pr^L)$ belongs to the image above if and only if there is some $I \in \mathscr{C}$ a compact generator.
+
+\begin{theorem} \textit{(Stable Dold Kan)} Let $R$ be a commutative ring. Then
+\begin{align*}
+    \left( \Mod_{HR}(\Sp), \smashprod_R, HR \right)\simeq \left( D(R), \otimes_R^{\mathbb{L}}, R \right).
+\end{align*}
+\end{theorem}
+\begin{proof}[Proof sketch] Take $D_\ast \in \Ch_R$, then $H_n(D_\ast) = \Ext^{-n}_R(R,D_\ast) \cong \Ext_{D(R)}^{-n}(R,D_\ast)$. Thus $R$ is a compact generator.
+
+Thus $D(R) \simeq \Mod_A(\Sp)$, where $A = \End_{D(R)}(R)$, but we check
+\begin{align*}
+    \pi_n(A) \cong \Ext_{D(R)}^{-n}(R,R) \\
+    &= \begin{cases} R & n=0 \\ 0 & \text{else}, \end{cases}
+\end{align*}
+so $A \simeq HR$.
+\end{proof}
+
+Shipley proved this in model categories in early 2000's.
+
+\section{Lecture 22: Tuesday, April 18th}
+
+\begin{center}
+    \textbf{Universal trace methods for algebraic $K$-theory}
+\end{center}
+
+\textbf{Recall}: for $R\in\Ring$, we can define $K_0(R) = K_0(\mathcal{P}(R))$. The latter $K_0$ is Grothendieck group completion of commutative monoids, and here $\mathcal{P}(R)$ is iso classes of finitely generated projective (right) $R$-modules.
+
+If $M \oplus N \cong R^n$, then $[M] + [N] = [R^n]$ in $K_0(R)$. That is, exact sequences split in $K_0(R)$.
+
+\textbf{Eilenberg swindle}: If we just did projective, not also finitely generated, we would get 0 because any projective $M$ has $M \oplus N \cong R^n$ for some $N,n$, hence we could take
+\begin{align*}
+    R^\infty = M \oplus N \oplus M \oplus N \oplus \cdots
+\end{align*}
+Since $M \oplus R^\infty \cong R^\infty$, this would imply $[M]=0$.
+
+\begin{definition} $K_n(R) = \pi_n(\BGL(R)^+ \times K_0(R))$.
+\end{definition}
+
+Here $\GL(R) = \colim_n \GL_n(R)$, and the plus construction is the universal $H$-space receiving a map from $\BGL(R)$, abelianizing $\pi_1$, ...
+
+Note that $\BGL(R)^+ \times K_0(R)$ is an infinite loop space. It admits a Gersten-Wagoner delooping.
+
+$K$-theory can be generalized to a much wider context, e.g. exact categories, and stable $\infty$-categories.
+
+For example $R$ corresponds to the stable $\infty$-category $\Mod_{HR}^\text{cpct}(\Sp)$. Taking compact objects is again to avoid size issues.
+
+\textbf{Blumberg-Gepner-Tabuada}: Define connective $K$-theory as a functor
+\begin{align*}
+    \Cat_\infty^\st \to \Sp^{\ge 0},
+\end{align*}
+where $\Cat_\infty^\st$ is the category of stable $\infty$-categories and exact functors (preserves finite limits and colimits).
+
+\begin{definition} Let $\Cat_\infty^\perf \subseteq \Cat_\infty^\st$ be the full subcategory spanned by idempotent-complete categories.
+\end{definition}
+
+We have that $\mathscr{C}$ is idempotent complete if for all $X\in \mathscr{C}$, and any $e: X \to X$ in $\mathscr{C}$ such that $e^2 \simeq e$, we have a splitting onto its image.
+
+F.g. projective modules are idempotent complete, free modules are not. 
+
+Idempotent completion is a left adjoint to the inclusion:
+\begin{align*}
+    \Idem: \Cat_\infty^\st \leftrightarrows \Cat_\infty^\perf : i.
+\end{align*}
+We have that $\Idem(\mathscr{C}) = \Ind(\mathscr{C})^\omega$ (BGT 2.20).
+
+Think of an idempotent complete stable $\infty$-category as the compact objects of a presentable stable $\infty$-category.
+
+To define $K(\mathscr{C})$ for $\mathscr{C} \in \Cat_\infty^\perf$, we can take
+\begin{align*}
+    K(\mathscr{C}) = \left| S_\bullet \mathscr{C}^\simeq \right|.
+\end{align*}
+
+$K$-theory is comprised of two concepts:
+\begin{itemize}
+    \item abelian group completion
+    \item splitting exact sequences
+\end{itemize}
+
+\begin{definition} Let $\mathcal{A} \xto{F} \mathcal{B} \xto{G} \mathcal{C}$ be exact functors btw stable $\infty$-categories.
+\begin{enumerate}
+    \item Say $F$ is a \textit{Morita equivalence} if $\Idem(F)$ is an equivalence of $\infty$-categories
+    \item The sequence is \textit{exact} if $F$ is fully faithful, $G\circ F \simeq 0$, and $\mathcal{C} \simeq \mathcal{B}/\mathcal{A}$ in $\Cat_\infty^\perf$.
+    \item The sequence is \textit{split exact} if there exist right adjoint functors $F',G'$ to $F,G$, respectively, so that $F'F = \id$ and $GG' = \id$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition} Let $E: \Cat_\infty^\st \to \mathscr{D}$ where $\mathscr{D}\in \Pr^L_\st$. We say $E$ is \textit{additive} if it:
+\begin{enumerate}
+    \item inverts Morita equivalences
+    \item preserves filtered colimits
+    \item sends split exact sequences to split (co)fiber sequences in $\mathscr{D}$, i.e. $E(\mathcal{B})\simeq E(\mathcal{A})\vee E(\mathcal{B})$.
+\end{enumerate}
+\end{definition}
+
+Take
+\begin{align*}
+    \Cat_\infty^\st \xto{\Idem}\Cat_\infty^\perf \hookto \Fun \left( \left( \Cat_\infty^\perf \right)^\op, \mathcal{S} \right) \xto{\Sp} \Fun(\left( \Cat_\infty^\perf \right)^\op, \Sp) \to \Fun(\left( \Cat_\infty^\perf \right)^\op, \Sp)/\sim
+\end{align*}
+where we mod out by split exact sequences.
+
+We call the resulting object $\mathcal{M}_\add$, and the composition
+\begin{align*}
+    \mathcal{U}_\add: \Cat_\infty^\st \to \mathcal{M}_\add.
+\end{align*}
+This functor is the universal additive invariant, in the sends that
+\begin{align*}
+    \Fun^L(\mathcal{M}_\add, \mathscr{D}) \xto{\mathcal{U}_\add^\ast}\Fun_\add (\Cat_\infty^\st, \mathscr{D})
+\end{align*}
+for all $\mathscr{D}\in \Pr^L_\st$.
+
+\begin{definition} For $\mathscr{C}\in \Cat_\infty^\perf$, we define
+\begin{align*}
+    K(\mathscr{C}) = \Hom_{\mathcal{M}_\add}(\mathcal{U}_\add(\Sp^\Wh), \mathcal{U}_\add(\mathscr{C})) \in \Sp^{\ge 0}.
+\end{align*}
+\end{definition}
+
+We can make this universal property monoidal: if $\mathscr{C}$ is a symmetric monoidal $\infty$-category, then $K(\mathscr{C})$ is an $E_\infty$ ring spectrum.
+
+Can construct $\otimes$ in $\Cat_\infty^\perf$ similar to $\Pr^L$. This induces a monoidal structure on $\Fun_\add(\Cat_\infty^\perf, \Sp)$ by Day convolution.
+
+Here $\mathcal{U}_\add$ is strong monoidal. Then for all $\mathscr{D}\in \Alg_{E_\infty}(\Pr^L)$, we get
+\begin{align*}
+    \Fun^{L,lax}(\mathcal{M}_\add, \mathscr{D})\simeq \Fun_\add^{lax}(\Cat_\infty^\perf, \mathscr{D}).
+\end{align*}
+
+\textbf{Application}: Dennis trace $K(R) \to \THH(R)$. Here $\THH(R) = R \smashprod_{R \smashprod R^\op} R$. If $R$ is a $k$-algebra, get
+\begin{align*}
+    \HH_\ast(R) = H_\ast(R \otimes_{R \otimes R^\op}^{\mathbb{L}} R) = \Tor_\ast^{R \otimes R^\op}(R,R).
+\end{align*}
+
+Can replace $R$ by any stable $\infty$-cat $\mathscr{C}$. Here
+\begin{align*}
+    \THH(\mathscr{C}) = \colim \left( \cdots \amalg_{(c_0, \ldots, c_n)} \mathscr{C}(c_{n-1},c_n) \smashprod \cdots \smashprod \mathscr{C}(c_n,c_0) \right).
+\end{align*}
+
+Here $\THH(\Mod_R^\perf) = \THH(R)$.
+
+We have $\THH: \Cat_\infty^\st \to \Sp^{\ge 0}$. It is an additive invariant (clearly preserves Morita equivalence and filtered colimits). Can use Dennis-Waldhausen-Morita argument to show it sends split exact sequences to cofiber sequences.
+
+
+\begin{theorem} Let $E$ be any additive invariant, i.e. $E\in \Fun_\add(\Cat_\infty^\st, \Sp)$. Then $\Nat(K,E) \simeq E(\Sp^\Wh)$.
+\end{theorem}
+
+We see that
+\begin{align*}
+    \Nat(K(-),\THH(-)) \cong \THH(\Sp^\Wh) \simeq \THH(\mathbb{S}) \simeq \mathbb{S}.
+\end{align*}
+Applying $\pi_0$, we get that
+\begin{align*}
+    \left[ K(\mathscr{C}), \THH(\mathscr{C}) \right] \cong \pi_0 \mathbb{S} \cong \Z.
+\end{align*}
+Given $F: K(\mathscr{C}) \to \THH(\mathscr{C})$, we get
+\begin{align*}
+    \mathbb{S} \to \Map(\mathcal{U}_\add(\Sp^\Wh), \mathcal{U}_\add(\Sp^\Wh)) \simeq K(\mathbb{S}) \xto{F} \THH(\mathbb{S}) \simeq \mathbb{S}.
+\end{align*}
+The Dennis trace picks up $1\in \Z$.
+
+We can view $K(R) \to \THH(R)$ via
+\begin{align*}
+    \BGL_n(R) \to B^\cyc \GL_n(R) \to B^\cyc M_n(R) \to B^\cyc R.
+\end{align*}
+On $\pi_0$, we get
+\begin{align*}
+    K_0(R) \to HH_0(R).
+\end{align*}
+For $R\in \Ring$, we send $[P]\mapsto \tr(\id_P \oplus 0)$. 
+
+
+
+
 
 \newpage
 \bibliographystyle{amsalpha}
